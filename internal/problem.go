@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"github.com/rs/zerolog/log"
 	"io"
@@ -42,6 +44,16 @@ func fetchAndSaveAnswer(dir string, groupId int, problemId int) (bool, error) {
 	body, err := get(url)
 	if err != nil {
 		return true, err
+	}
+
+	var resp Response
+	if err = json.NewDecoder(bytes.NewReader(body)).Decode(&resp); err != nil {
+		log.Error().Msgf("json.NewDecoder error: %v", err)
+		return true, err
+	}
+	if resp.Data.EmptyReason != "" {
+		log.Warn().Msgf("empty reason: %s", resp.Data.EmptyReason)
+		return true, nil
 	}
 
 	// 保存 answer
