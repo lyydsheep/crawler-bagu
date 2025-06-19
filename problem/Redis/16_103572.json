@@ -1,1 +1,33 @@
-{"success":true,"data":{"id":103572,"name":"<p>Redis 的基本命令有哪些？Redis 并发度达到多少才考虑集群？</p>","options":null,"type":6,"level":1,"freq":0.001730603,"group_id":16,"kps":["基础知识"],"years":[2024,2023,2022],"corps":["字节跳动","快手","讯飞","好未来","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 103572,
+    "name": "<p>Redis 的基本命令有哪些？Redis 并发度达到多少才考虑集群？</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.001730603,
+    "group_id": 16,
+    "kps": [
+      "基础知识"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "字节跳动",
+      "快手",
+      "讯飞",
+      "好未来",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

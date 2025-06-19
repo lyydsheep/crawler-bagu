@@ -1,1 +1,32 @@
-{"success":true,"data":{"id":130955,"name":"<p>请说明Redis哨兵节点怎么感知其他节点的存在</p>","options":null,"type":6,"level":2,"freq":0.002019037,"group_id":16,"kps":["基础知识","集群与部署"],"years":[2025,2024,2022],"corps":["腾讯音乐","科大讯飞","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 130955,
+    "name": "<p>请说明Redis哨兵节点怎么感知其他节点的存在</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.002019037,
+    "group_id": 16,
+    "kps": [
+      "基础知识",
+      "集群与部署"
+    ],
+    "years": [
+      2025,
+      2024,
+      2022
+    ],
+    "corps": [
+      "腾讯音乐",
+      "科大讯飞",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

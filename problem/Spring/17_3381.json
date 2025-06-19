@@ -1,1 +1,42 @@
-{"success":true,"data":{"id":3381,"name":"<p>解释一下Spring 循环依赖?</p>","options":null,"type":6,"level":2,"freq":0.0156128,"group_id":17,"kps":["控制反转（IoC）与依赖注入（DI）"],"years":[2025,2024,2023,2022],"corps":["小红书","京东","腾讯云智","美团","南昌龙孚信息技术","数禾科技","快手","科大讯飞","猿辅导","贝壳","用友","滴滴","字节跳动"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 3381,
+    "name": "<p>解释一下Spring 循环依赖?</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0156128,
+    "group_id": 17,
+    "kps": [
+      "控制反转（IoC）与依赖注入（DI）"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "小红书",
+      "京东",
+      "腾讯云智",
+      "美团",
+      "南昌龙孚信息技术",
+      "数禾科技",
+      "快手",
+      "科大讯飞",
+      "猿辅导",
+      "贝壳",
+      "用友",
+      "滴滴",
+      "字节跳动"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

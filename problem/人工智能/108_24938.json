@@ -1,1 +1,39 @@
-{"success":true,"data":{"id":24938,"name":"<p>请阐述视觉Transformer（ViT）比卷积神经网络（CNN）好的原因</p>","options":null,"type":6,"level":2,"freq":0.003739094,"group_id":108,"kps":["深度学习","计算机视觉","神经网络"],"years":[2025,2024,2023],"corps":["Shopee虾皮","Cariad","高德地图","荣耀","诚迈科技","深信服","商汤科技","字节跳动","深睿医疗"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 24938,
+    "name": "<p>请阐述视觉Transformer（ViT）比卷积神经网络（CNN）好的原因</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.003739094,
+    "group_id": 108,
+    "kps": [
+      "深度学习",
+      "计算机视觉",
+      "神经网络"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023
+    ],
+    "corps": [
+      "Shopee虾皮",
+      "Cariad",
+      "高德地图",
+      "荣耀",
+      "诚迈科技",
+      "深信服",
+      "商汤科技",
+      "字节跳动",
+      "深睿医疗"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

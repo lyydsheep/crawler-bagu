@@ -1,1 +1,29 @@
-{"success":true,"data":{"id":119201,"name":"<p>Spring Boot工程打包的jar包和普通工程打包的jar包有什么不同</p>","options":null,"type":6,"level":1,"freq":0.002670227,"group_id":7,"kps":["基础知识"],"years":[2024,2023],"corps":["百度","京东"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 119201,
+    "name": "<p>Spring Boot工程打包的jar包和普通工程打包的jar包有什么不同</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.002670227,
+    "group_id": 7,
+    "kps": [
+      "基础知识"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "百度",
+      "京东"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

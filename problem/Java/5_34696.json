@@ -1,1 +1,31 @@
-{"success":true,"data":{"id":34696,"name":"<p>如何理解反射，反射有什么缺点，为什么反射运行慢</p>","options":null,"type":6,"level":2,"freq":0.0005267779,"group_id":5,"kps":["高级特性"],"years":[2025,2024,2023],"corps":["Xtransfer","联想集团","快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 34696,
+    "name": "<p>如何理解反射，反射有什么缺点，为什么反射运行慢</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0005267779,
+    "group_id": 5,
+    "kps": [
+      "高级特性"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023
+    ],
+    "corps": [
+      "Xtransfer",
+      "联想集团",
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

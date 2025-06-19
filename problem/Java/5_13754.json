@@ -1,1 +1,55 @@
-{"success":true,"data":{"id":13754,"name":"<p>简述 AQS（AbstractQueuedSynchronizer）</p>","options":null,"type":6,"level":3,"freq":0.006831319,"group_id":5,"kps":["高级特性"],"years":[2025,2024,2023,2022],"corps":["小红书","运去哪","百度","得物","4399","用友","首约科技","货拉拉","小米","武汉某小厂","阿里国际","曹操出行","58同城","美团","阿里巴巴","奈雪的茶","京东","快手","OPPO","Shopee虾皮","携程","贝壳","欢聚集团","同程旅行","帆软","腾讯"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 13754,
+    "name": "<p>简述 AQS（AbstractQueuedSynchronizer）</p>",
+    "options": null,
+    "type": 6,
+    "level": 3,
+    "freq": 0.006831319,
+    "group_id": 5,
+    "kps": [
+      "高级特性"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "小红书",
+      "运去哪",
+      "百度",
+      "得物",
+      "4399",
+      "用友",
+      "首约科技",
+      "货拉拉",
+      "小米",
+      "武汉某小厂",
+      "阿里国际",
+      "曹操出行",
+      "58同城",
+      "美团",
+      "阿里巴巴",
+      "奈雪的茶",
+      "京东",
+      "快手",
+      "OPPO",
+      "Shopee虾皮",
+      "携程",
+      "贝壳",
+      "欢聚集团",
+      "同程旅行",
+      "帆软",
+      "腾讯"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

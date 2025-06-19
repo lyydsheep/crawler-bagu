@@ -1,1 +1,27 @@
-{"success":true,"data":{"id":63195,"name":"<p>Spring中@Component注解与@Service注解有什么区别，可以将@Service注解换成@Component注解吗</p>","options":null,"type":6,"level":1,"freq":0.0007806401,"group_id":17,"kps":["基础知识"],"years":[2024],"corps":["数字马力"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 63195,
+    "name": "<p>Spring中@Component注解与@Service注解有什么区别，可以将@Service注解换成@Component注解吗</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.0007806401,
+    "group_id": 17,
+    "kps": [
+      "基础知识"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "数字马力"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

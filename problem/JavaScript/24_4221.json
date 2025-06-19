@@ -1,1 +1,39 @@
-{"success":true,"data":{"id":4221,"name":"<p>简述ES6 Generator函数的作用？</p>","options":null,"type":6,"level":2,"freq":0.004037685,"group_id":24,"kps":["ES6"],"years":[2024,2023,2022],"corps":["Shopee虾皮","携程","B站","广联达","酷家乐","神策数据","字节跳动","百度","网易","完美世界","京东"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 4221,
+    "name": "<p>简述ES6 Generator函数的作用？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.004037685,
+    "group_id": 24,
+    "kps": [
+      "ES6"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "Shopee虾皮",
+      "携程",
+      "B站",
+      "广联达",
+      "酷家乐",
+      "神策数据",
+      "字节跳动",
+      "百度",
+      "网易",
+      "完美世界",
+      "京东"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

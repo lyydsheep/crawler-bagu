@@ -1,1 +1,53 @@
-{"success":true,"data":{"id":13430,"name":"<p>执行一条SQL的流程是什么</p>","options":null,"type":6,"level":1,"freq":0.01171486,"group_id":4,"kps":["基础理论"],"years":[2025,2024,2023,2022],"corps":["字节跳动","收钱吧","深圳众云网","影石","腾讯","TP-LINK","北京小厂","好未来","携程","京东","小米","美团","滴滴","钉钉","百度","Shopee虾皮","拼多多","蚂蚁集团","微众银行","同程旅行","帆软","OPPO","快手","杭州公交云"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 13430,
+    "name": "<p>执行一条SQL的流程是什么</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.01171486,
+    "group_id": 4,
+    "kps": [
+      "基础理论"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "字节跳动",
+      "收钱吧",
+      "深圳众云网",
+      "影石",
+      "腾讯",
+      "TP-LINK",
+      "北京小厂",
+      "好未来",
+      "携程",
+      "京东",
+      "小米",
+      "美团",
+      "滴滴",
+      "钉钉",
+      "百度",
+      "Shopee虾皮",
+      "拼多多",
+      "蚂蚁集团",
+      "微众银行",
+      "同程旅行",
+      "帆软",
+      "OPPO",
+      "快手",
+      "杭州公交云"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

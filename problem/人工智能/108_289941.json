@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":289941,"name":"<p>请介绍LLAMA结构的演化改进</p>","options":null,"type":6,"level":2,"freq":0.0004154549,"group_id":108,"kps":["架构设计","大模型"],"years":[2024],"corps":["快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 289941,
+    "name": "<p>请介绍LLAMA结构的演化改进</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0004154549,
+    "group_id": 108,
+    "kps": [
+      "架构设计",
+      "大模型"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

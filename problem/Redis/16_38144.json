@@ -1,1 +1,38 @@
-{"success":true,"data":{"id":38144,"name":"<p>请介绍优惠价秒杀项目，判断库存时是否直接查询数据库，如何看待使用Redis缓存库存数量，以及如何保证数据库和Redis数据的一致性</p>","options":null,"type":6,"level":2,"freq":0.003749639,"group_id":16,"kps":["数据结构","性能与优化","常见问题与解决方案"],"years":[2024,2023,2022],"corps":["瑞幸","长沙用友","美团","滴滴","阿里巴巴","快手","字节跳动","美团优选"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 38144,
+    "name": "<p>请介绍优惠价秒杀项目，判断库存时是否直接查询数据库，如何看待使用Redis缓存库存数量，以及如何保证数据库和Redis数据的一致性</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.003749639,
+    "group_id": 16,
+    "kps": [
+      "数据结构",
+      "性能与优化",
+      "常见问题与解决方案"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "瑞幸",
+      "长沙用友",
+      "美团",
+      "滴滴",
+      "阿里巴巴",
+      "快手",
+      "字节跳动",
+      "美团优选"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

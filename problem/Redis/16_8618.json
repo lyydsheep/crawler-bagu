@@ -1,1 +1,34 @@
-{"success":true,"data":{"id":8618,"name":"<p>Redis 的持久化机制是什么？各自的优缺点？</p>","options":null,"type":6,"level":2,"freq":0.001730603,"group_id":16,"kps":["持久化"],"years":[2024,2023,2022],"corps":["小西科技","小米","知乎","金山","顺丰","懂车帝"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 8618,
+    "name": "<p>Redis 的持久化机制是什么？各自的优缺点？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001730603,
+    "group_id": 16,
+    "kps": [
+      "持久化"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "小西科技",
+      "小米",
+      "知乎",
+      "金山",
+      "顺丰",
+      "懂车帝"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

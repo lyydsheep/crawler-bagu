@@ -1,1 +1,27 @@
-{"success":true,"data":{"id":7581,"name":"<p>React 设计思路，它的理念是什么？</p>","options":null,"type":6,"level":1,"freq":0.001204819,"group_id":44,"kps":["基础与概念"],"years":[2022],"corps":["网易"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 7581,
+    "name": "<p>React 设计思路，它的理念是什么？</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.001204819,
+    "group_id": 44,
+    "kps": [
+      "基础与概念"
+    ],
+    "years": [
+      2022
+    ],
+    "corps": [
+      "网易"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

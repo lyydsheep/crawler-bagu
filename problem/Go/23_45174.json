@@ -1,1 +1,32 @@
-{"success":true,"data":{"id":45174,"name":"<p>请阐述Go语言中channel通信的基本原理</p>","options":null,"type":6,"level":2,"freq":0.008319467,"group_id":23,"kps":["并发编程"],"years":[2024,2023],"corps":["阿里云","字节跳动","滴滴","深信服","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 45174,
+    "name": "<p>请阐述Go语言中channel通信的基本原理</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.008319467,
+    "group_id": 23,
+    "kps": [
+      "并发编程"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "阿里云",
+      "字节跳动",
+      "滴滴",
+      "深信服",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

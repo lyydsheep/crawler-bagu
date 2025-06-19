@@ -1,1 +1,31 @@
-{"success":true,"data":{"id":51445,"name":"<p>Go语言中哪些panic场景可以配合recover使用，使其结合达到最完美效果？</p>","options":null,"type":6,"level":2,"freq":0.008319467,"group_id":23,"kps":["并发编程","错误处理"],"years":[2024,2022],"corps":["北京枫悦，Crazy Maple Studio枫叶互动","深圳某不知名小厂","滴滴"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 51445,
+    "name": "<p>Go语言中哪些panic场景可以配合recover使用，使其结合达到最完美效果？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.008319467,
+    "group_id": 23,
+    "kps": [
+      "并发编程",
+      "错误处理"
+    ],
+    "years": [
+      2024,
+      2022
+    ],
+    "corps": [
+      "北京枫悦，Crazy Maple Studio枫叶互动",
+      "深圳某不知名小厂",
+      "滴滴"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

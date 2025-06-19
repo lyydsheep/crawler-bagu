@@ -1,1 +1,27 @@
-{"success":true,"data":{"id":231549,"name":"<p>请说明多屏适配、媒体查询、自适应布局和响应式布局的区别</p>","options":null,"type":6,"level":2,"freq":0.002617801,"group_id":26,"kps":["响应式设计"],"years":[2023],"corps":["阿里巴巴"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 231549,
+    "name": "<p>请说明多屏适配、媒体查询、自适应布局和响应式布局的区别</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.002617801,
+    "group_id": 26,
+    "kps": [
+      "响应式设计"
+    ],
+    "years": [
+      2023
+    ],
+    "corps": [
+      "阿里巴巴"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

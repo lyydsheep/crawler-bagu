@@ -1,1 +1,51 @@
-{"success":true,"data":{"id":14664,"name":"<p>你了解Go语言中的sync.map吗，它的底层数据结构是怎样的</p>","options":null,"type":6,"level":2,"freq":0.06489184,"group_id":23,"kps":["并发编程","标准库"],"years":[2025,2024,2023,2022],"corps":["Momenta","百度","PPIO派欧云","商汤科技","得物","快手","松鼠AI","深信服","滴滴","CmsTop","58同城","腾讯","京东","螣龙安科","联想集团","B站","小红书","知乎","金山","美图","字节飞书"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 14664,
+    "name": "<p>你了解Go语言中的sync.map吗，它的底层数据结构是怎样的</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.06489184,
+    "group_id": 23,
+    "kps": [
+      "并发编程",
+      "标准库"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "Momenta",
+      "百度",
+      "PPIO派欧云",
+      "商汤科技",
+      "得物",
+      "快手",
+      "松鼠AI",
+      "深信服",
+      "滴滴",
+      "CmsTop",
+      "58同城",
+      "腾讯",
+      "京东",
+      "螣龙安科",
+      "联想集团",
+      "B站",
+      "小红书",
+      "知乎",
+      "金山",
+      "美图",
+      "字节飞书"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

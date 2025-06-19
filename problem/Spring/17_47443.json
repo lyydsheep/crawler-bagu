@@ -1,1 +1,36 @@
-{"success":true,"data":{"id":47443,"name":"<p>简述 Spring 框架的 IOC 和 AOP 原理</p>","options":null,"type":6,"level":2,"freq":0.004683841,"group_id":17,"kps":["控制反转（IoC）与依赖注入（DI）","面向切面编程（AOP）"],"years":[2025,2024,2023,2022],"corps":["华为OD","西安明朝万达","小米","阿里巴巴","网易有道","知乎"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 47443,
+    "name": "<p>简述 Spring 框架的 IOC 和 AOP 原理</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.004683841,
+    "group_id": 17,
+    "kps": [
+      "控制反转（IoC）与依赖注入（DI）",
+      "面向切面编程（AOP）"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "华为OD",
+      "西安明朝万达",
+      "小米",
+      "阿里巴巴",
+      "网易有道",
+      "知乎"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

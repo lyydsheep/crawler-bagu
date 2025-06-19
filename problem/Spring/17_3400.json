@@ -1,1 +1,49 @@
-{"success":true,"data":{"id":3400,"name":"<p>说一下Spring 事务的传播机制有哪些?</p>","options":null,"type":6,"level":2,"freq":0.02029664,"group_id":17,"kps":["事务管理"],"years":[2025,2024,2023,2022],"corps":["蚂蚁集团","和赛","用友","来未来","货拉拉","中科全安","小米","招银网络科技","腾讯","美团","饿了么","高德地图","京东","OPPO","腾讯音乐","途虎养车","滴滴","CVTE视源股份","同程旅行","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 3400,
+    "name": "<p>说一下Spring 事务的传播机制有哪些?</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.02029664,
+    "group_id": 17,
+    "kps": [
+      "事务管理"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "蚂蚁集团",
+      "和赛",
+      "用友",
+      "来未来",
+      "货拉拉",
+      "中科全安",
+      "小米",
+      "招银网络科技",
+      "腾讯",
+      "美团",
+      "饿了么",
+      "高德地图",
+      "京东",
+      "OPPO",
+      "腾讯音乐",
+      "途虎养车",
+      "滴滴",
+      "CVTE视源股份",
+      "同程旅行",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

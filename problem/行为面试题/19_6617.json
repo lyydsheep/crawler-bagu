@@ -1,1 +1,37 @@
-{"success":true,"data":{"id":6617,"name":"<p>谈谈你的理想职业？</p>","options":null,"type":6,"level":1,"freq":0.0006715353,"group_id":19,"kps":["自我认知","个性和生活态度"],"years":[2024,2023,2022],"corps":["瑞幸","字节跳动","京东","用友","携程","浙江大华","58同城","美团"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 6617,
+    "name": "<p>谈谈你的理想职业？</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.0006715353,
+    "group_id": 19,
+    "kps": [
+      "自我认知",
+      "个性和生活态度"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "瑞幸",
+      "字节跳动",
+      "京东",
+      "用友",
+      "携程",
+      "浙江大华",
+      "58同城",
+      "美团"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

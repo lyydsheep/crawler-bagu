@@ -1,1 +1,35 @@
-{"success":true,"data":{"id":13382,"name":"<p>在项目中如何使用Go语言的Channel，以及在什么情况下会发生panic、可以关闭Channel，还有在何种情况下使用有缓存或无缓存的Channel</p>","options":null,"type":6,"level":2,"freq":0.009983361,"group_id":23,"kps":["并发编程","错误处理"],"years":[2025,2024,2022],"corps":["百度","腾讯云","科大讯飞","深信服","B站","快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 13382,
+    "name": "<p>在项目中如何使用Go语言的Channel，以及在什么情况下会发生panic、可以关闭Channel，还有在何种情况下使用有缓存或无缓存的Channel</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.009983361,
+    "group_id": 23,
+    "kps": [
+      "并发编程",
+      "错误处理"
+    ],
+    "years": [
+      2025,
+      2024,
+      2022
+    ],
+    "corps": [
+      "百度",
+      "腾讯云",
+      "科大讯飞",
+      "深信服",
+      "B站",
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

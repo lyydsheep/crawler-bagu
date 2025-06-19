@@ -1,1 +1,31 @@
-{"success":true,"data":{"id":14863,"name":"<p>三级缓存无法解决哪种循环依赖</p>","options":null,"type":6,"level":3,"freq":0.00234192,"group_id":17,"kps":["控制反转（IoC）与依赖注入（DI）"],"years":[2025,2024,2023],"corps":["百联全渠道","美团","快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 14863,
+    "name": "<p>三级缓存无法解决哪种循环依赖</p>",
+    "options": null,
+    "type": 6,
+    "level": 3,
+    "freq": 0.00234192,
+    "group_id": 17,
+    "kps": [
+      "控制反转（IoC）与依赖注入（DI）"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023
+    ],
+    "corps": [
+      "百联全渠道",
+      "美团",
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

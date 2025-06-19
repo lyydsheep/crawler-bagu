@@ -1,1 +1,32 @@
-{"success":true,"data":{"id":9521,"name":"<p>如何优化HTML以提高SEO效果？</p>","options":null,"type":6,"level":2,"freq":0.005235602,"group_id":26,"kps":["概述","HTML基础","元素与属性","安全性与最佳实践"],"years":[2024,2023],"corps":["派诺科技","美团"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 9521,
+    "name": "<p>如何优化HTML以提高SEO效果？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.005235602,
+    "group_id": 26,
+    "kps": [
+      "概述",
+      "HTML基础",
+      "元素与属性",
+      "安全性与最佳实践"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "派诺科技",
+      "美团"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

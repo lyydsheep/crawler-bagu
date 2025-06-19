@@ -1,1 +1,31 @@
-{"success":true,"data":{"id":6731,"name":"<p>JDK动态代理与CGLIB实现的区别</p>","options":null,"type":6,"level":3,"freq":0.0005267779,"group_id":5,"kps":["设计模式","Java API与常用库"],"years":[2024,2023],"corps":["卓望","字节跳动","淘天集团"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 6731,
+    "name": "<p>JDK动态代理与CGLIB实现的区别</p>",
+    "options": null,
+    "type": 6,
+    "level": 3,
+    "freq": 0.0005267779,
+    "group_id": 5,
+    "kps": [
+      "设计模式",
+      "Java API与常用库"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "卓望",
+      "字节跳动",
+      "淘天集团"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

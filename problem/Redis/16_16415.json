@@ -1,1 +1,33 @@
-{"success":true,"data":{"id":16415,"name":"<p>请说明Redis的AOF和RDB持久化机制的具体使用方法</p>","options":null,"type":6,"level":2,"freq":0.001442169,"group_id":16,"kps":["持久化"],"years":[2024,2023,2022],"corps":["众合科技","BOSS直聘","字节跳动","美团","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 16415,
+    "name": "<p>请说明Redis的AOF和RDB持久化机制的具体使用方法</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001442169,
+    "group_id": 16,
+    "kps": [
+      "持久化"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "众合科技",
+      "BOSS直聘",
+      "字节跳动",
+      "美团",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

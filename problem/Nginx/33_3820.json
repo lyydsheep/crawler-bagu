@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":3820,"name":"<p>简述Nginx配置Https ？</p>","options":null,"type":6,"level":2,"freq":0.005291005,"group_id":33,"kps":["安全性","配置与管理"],"years":[2022],"corps":["神策数据"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 3820,
+    "name": "<p>简述Nginx配置Https ？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.005291005,
+    "group_id": 33,
+    "kps": [
+      "安全性",
+      "配置与管理"
+    ],
+    "years": [
+      2022
+    ],
+    "corps": [
+      "神策数据"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

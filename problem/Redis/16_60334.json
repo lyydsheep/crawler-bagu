@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":60334,"name":"<p>如果要进行主动的缓存淘汰，你会怎么做</p>","options":null,"type":6,"level":2,"freq":0.0002884338,"group_id":16,"kps":["性能与优化","常见问题与解决方案"],"years":[2024],"corps":["Shopee虾皮"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 60334,
+    "name": "<p>如果要进行主动的缓存淘汰，你会怎么做</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0002884338,
+    "group_id": 16,
+    "kps": [
+      "性能与优化",
+      "常见问题与解决方案"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "Shopee虾皮"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

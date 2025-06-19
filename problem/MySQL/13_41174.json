@@ -1,1 +1,30 @@
-{"success":true,"data":{"id":41174,"name":"<p>索引是否越多越好，解释索引失效的情况</p>","options":null,"type":6,"level":2,"freq":0.0007376444,"group_id":13,"kps":["基础概念","索引与查询优化"],"years":[2024],"corps":["TP-LINK","用友","深圳某医疗公司"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 41174,
+    "name": "<p>索引是否越多越好，解释索引失效的情况</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0007376444,
+    "group_id": 13,
+    "kps": [
+      "基础概念",
+      "索引与查询优化"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "TP-LINK",
+      "用友",
+      "深圳某医疗公司"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

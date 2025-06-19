@@ -1,1 +1,52 @@
-{"success":true,"data":{"id":22492,"name":"<p>Transformer的流程是什么</p>","options":null,"type":6,"level":2,"freq":0.0128791,"group_id":108,"kps":["人工智能基础","深度学习","神经网络"],"years":[2024,2023,2022],"corps":["比亚迪","杭州小影","4399","Cariad","科大讯飞","小鹏汽车","零跑汽车","国网信通产业集团","饿了么","高德地图","百度","滴滴","蔚来","荣耀","小米","拼多多","CVTE视源股份","蚂蚁集团","英特尔","出门问问","腾讯","快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 22492,
+    "name": "<p>Transformer的流程是什么</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0128791,
+    "group_id": 108,
+    "kps": [
+      "人工智能基础",
+      "深度学习",
+      "神经网络"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "比亚迪",
+      "杭州小影",
+      "4399",
+      "Cariad",
+      "科大讯飞",
+      "小鹏汽车",
+      "零跑汽车",
+      "国网信通产业集团",
+      "饿了么",
+      "高德地图",
+      "百度",
+      "滴滴",
+      "蔚来",
+      "荣耀",
+      "小米",
+      "拼多多",
+      "CVTE视源股份",
+      "蚂蚁集团",
+      "英特尔",
+      "出门问问",
+      "腾讯",
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

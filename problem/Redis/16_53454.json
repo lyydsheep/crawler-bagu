@@ -1,1 +1,36 @@
-{"success":true,"data":{"id":53454,"name":"<p>Redis哨兵的作用是什么，如何进行故障转移</p>","options":null,"type":6,"level":2,"freq":0.002884338,"group_id":16,"kps":["集群与部署","常见问题与解决方案"],"years":[2025,2024,2023,2022],"corps":["腾讯音乐","海兴电力","腾讯","美团","度小满","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 53454,
+    "name": "<p>Redis哨兵的作用是什么，如何进行故障转移</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.002884338,
+    "group_id": 16,
+    "kps": [
+      "集群与部署",
+      "常见问题与解决方案"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "腾讯音乐",
+      "海兴电力",
+      "腾讯",
+      "美团",
+      "度小满",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

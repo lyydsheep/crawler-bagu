@@ -1,1 +1,35 @@
-{"success":true,"data":{"id":105757,"name":"<p>Go 语言在什么时候进行垃圾回收，如何主动进行垃圾回收？</p>","options":null,"type":6,"level":2,"freq":0.01164725,"group_id":23,"kps":["标准库","编译和运行时"],"years":[2024,2023,2022],"corps":["字节跳动","腾讯","Shopee虾皮","360","小红书","Momenta"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 105757,
+    "name": "<p>Go 语言在什么时候进行垃圾回收，如何主动进行垃圾回收？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.01164725,
+    "group_id": 23,
+    "kps": [
+      "标准库",
+      "编译和运行时"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "字节跳动",
+      "腾讯",
+      "Shopee虾皮",
+      "360",
+      "小红书",
+      "Momenta"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

@@ -1,1 +1,32 @@
-{"success":true,"data":{"id":57974,"name":"<p>Redis主从同步的流程是什么，什么时候会进行全量复制</p>","options":null,"type":6,"level":2,"freq":0.001153735,"group_id":16,"kps":["基础知识","常见问题与解决方案"],"years":[2024,2022],"corps":["科大讯飞","快手","百度","字节跳动"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 57974,
+    "name": "<p>Redis主从同步的流程是什么，什么时候会进行全量复制</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001153735,
+    "group_id": 16,
+    "kps": [
+      "基础知识",
+      "常见问题与解决方案"
+    ],
+    "years": [
+      2024,
+      2022
+    ],
+    "corps": [
+      "科大讯飞",
+      "快手",
+      "百度",
+      "字节跳动"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

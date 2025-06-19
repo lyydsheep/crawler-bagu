@@ -1,1 +1,29 @@
-{"success":true,"data":{"id":7694,"name":"<p>线程池中的线程是怎么创建的？是一开始就随着线程池的启动创建好的吗？</p>","options":null,"type":6,"level":2,"freq":0.0003511852,"group_id":5,"kps":["多线程","Java API与常用库"],"years":[2024],"corps":["小米","淘天集团"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 7694,
+    "name": "<p>线程池中的线程是怎么创建的？是一开始就随着线程池的启动创建好的吗？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0003511852,
+    "group_id": 5,
+    "kps": [
+      "多线程",
+      "Java API与常用库"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "小米",
+      "淘天集团"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

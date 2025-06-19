@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":107024,"name":"<p>是否了解Gorm的实现原理</p>","options":null,"type":6,"level":3,"freq":0.001663893,"group_id":23,"kps":["标准库","代码组织和结构"],"years":[2024],"corps":["腾讯微信"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 107024,
+    "name": "<p>是否了解Gorm的实现原理</p>",
+    "options": null,
+    "type": 6,
+    "level": 3,
+    "freq": 0.001663893,
+    "group_id": 23,
+    "kps": [
+      "标准库",
+      "代码组织和结构"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "腾讯微信"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

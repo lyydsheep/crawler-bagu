@@ -1,1 +1,36 @@
-{"success":true,"data":{"id":187024,"name":"<p>闭包滥用会有什么后果</p>","options":null,"type":6,"level":2,"freq":0.003701211,"group_id":24,"kps":["闭包"],"years":[2024,2023,2022],"corps":["网易","金山","第四范式","Momenta","美团","阿里大文娱","百度","腾讯音乐"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 187024,
+    "name": "<p>闭包滥用会有什么后果</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.003701211,
+    "group_id": 24,
+    "kps": [
+      "闭包"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "网易",
+      "金山",
+      "第四范式",
+      "Momenta",
+      "美团",
+      "阿里大文娱",
+      "百度",
+      "腾讯音乐"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

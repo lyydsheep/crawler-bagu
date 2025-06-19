@@ -1,1 +1,47 @@
-{"success":true,"data":{"id":3395,"name":"<p>解释一下Spring 事务的实现原理?</p>","options":null,"type":6,"level":2,"freq":0.01873536,"group_id":17,"kps":["事务管理"],"years":[2025,2024,2023,2022],"corps":["杭州中小厂","瑞幸","用友","小米","华为OD","快手","信也科技","淘天集团","58同城","美团","京东","OPPO","中电十所","途虎养车","滴滴","闪送科技","字节跳动","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 3395,
+    "name": "<p>解释一下Spring 事务的实现原理?</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.01873536,
+    "group_id": 17,
+    "kps": [
+      "事务管理"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "杭州中小厂",
+      "瑞幸",
+      "用友",
+      "小米",
+      "华为OD",
+      "快手",
+      "信也科技",
+      "淘天集团",
+      "58同城",
+      "美团",
+      "京东",
+      "OPPO",
+      "中电十所",
+      "途虎养车",
+      "滴滴",
+      "闪送科技",
+      "字节跳动",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

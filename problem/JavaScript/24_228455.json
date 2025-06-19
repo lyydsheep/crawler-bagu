@@ -1,1 +1,29 @@
-{"success":true,"data":{"id":228455,"name":"<p>请简述Reflect和Proxy的联系</p>","options":null,"type":6,"level":2,"freq":0.0006729475,"group_id":24,"kps":["ES6"],"years":[2025,2023],"corps":["美团","货拉拉"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 228455,
+    "name": "<p>请简述Reflect和Proxy的联系</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0006729475,
+    "group_id": 24,
+    "kps": [
+      "ES6"
+    ],
+    "years": [
+      2025,
+      2023
+    ],
+    "corps": [
+      "美团",
+      "货拉拉"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

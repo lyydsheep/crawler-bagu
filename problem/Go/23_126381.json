@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":126381,"name":"<p>请阐述 GMP 原理，若一个 P 上的 G 阻塞了，M 会阻塞吗？P 和 M 是一一对应吗？</p>","options":null,"type":6,"level":3,"freq":0.001663893,"group_id":23,"kps":["并发编程","编译和运行时"],"years":[2024],"corps":["快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 126381,
+    "name": "<p>请阐述 GMP 原理，若一个 P 上的 G 阻塞了，M 会阻塞吗？P 和 M 是一一对应吗？</p>",
+    "options": null,
+    "type": 6,
+    "level": 3,
+    "freq": 0.001663893,
+    "group_id": 23,
+    "kps": [
+      "并发编程",
+      "编译和运行时"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

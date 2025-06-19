@@ -1,1 +1,30 @@
-{"success":true,"data":{"id":4769,"name":"<p>简述Vue 的⽗组件和⼦组件⽣命周期钩⼦执⾏顺序是什么 ？</p>","options":null,"type":6,"level":2,"freq":0.001743173,"group_id":45,"kps":["基础"],"years":[2024,2023],"corps":["泰豪软件","美团","京东"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 4769,
+    "name": "<p>简述Vue 的⽗组件和⼦组件⽣命周期钩⼦执⾏顺序是什么 ？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001743173,
+    "group_id": 45,
+    "kps": [
+      "基础"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "泰豪软件",
+      "美团",
+      "京东"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

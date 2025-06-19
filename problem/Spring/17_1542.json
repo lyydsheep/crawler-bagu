@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":1542,"name":"<p>SpringMVC的拦截器和过滤器有什么区别？执行顺序？</p>","options":null,"type":6,"level":2,"freq":0.0007806401,"group_id":17,"kps":["容器","MVC"],"years":[2024],"corps":["小米"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 1542,
+    "name": "<p>SpringMVC的拦截器和过滤器有什么区别？执行顺序？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0007806401,
+    "group_id": 17,
+    "kps": [
+      "容器",
+      "MVC"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "小米"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

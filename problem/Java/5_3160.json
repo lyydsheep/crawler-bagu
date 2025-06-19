@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":3160,"name":"<p>主线程可以捕获到子线程的异常吗？</p>","options":null,"type":6,"level":2,"freq":0.0001755926,"group_id":5,"kps":["多线程","异常处理"],"years":[2024],"corps":["阿里橙狮体育"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 3160,
+    "name": "<p>主线程可以捕获到子线程的异常吗？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0001755926,
+    "group_id": 5,
+    "kps": [
+      "多线程",
+      "异常处理"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "阿里橙狮体育"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

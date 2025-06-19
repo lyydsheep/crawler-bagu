@@ -1,1 +1,38 @@
-{"success":true,"data":{"id":3428,"name":"<p>什么是自动配置？SpringBoot如何实现自动配置？</p>","options":null,"type":6,"level":2,"freq":0.01068091,"group_id":7,"kps":["核心注解","配置文件","Starter"],"years":[2024,2023,2022],"corps":["钛动科技","同盾科技","快手","滴滴","拼多多","猿辅导","浩鲸科技","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 3428,
+    "name": "<p>什么是自动配置？SpringBoot如何实现自动配置？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.01068091,
+    "group_id": 7,
+    "kps": [
+      "核心注解",
+      "配置文件",
+      "Starter"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "钛动科技",
+      "同盾科技",
+      "快手",
+      "滴滴",
+      "拼多多",
+      "猿辅导",
+      "浩鲸科技",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

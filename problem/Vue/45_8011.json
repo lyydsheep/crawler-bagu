@@ -1,1 +1,30 @@
-{"success":true,"data":{"id":8011,"name":"<p>DIFF算法的原理</p>","options":null,"type":6,"level":2,"freq":0.00232423,"group_id":45,"kps":["进阶"],"years":[2024,2023],"corps":["字节跳动","嘉为科技","滴滴"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 8011,
+    "name": "<p>DIFF算法的原理</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.00232423,
+    "group_id": 45,
+    "kps": [
+      "进阶"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "字节跳动",
+      "嘉为科技",
+      "滴滴"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

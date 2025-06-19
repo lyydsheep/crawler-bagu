@@ -1,1 +1,42 @@
-{"success":true,"data":{"id":16621,"name":"<p>数据库中聚簇索引和非聚簇索引的概念</p>","options":null,"type":6,"level":1,"freq":0.005234297,"group_id":4,"kps":["基础理论"],"years":[2024,2023,2022],"corps":["正浩创新","腾讯","美团","快手","小米","恒生电子","中国电信","微众银行","金山","网易","B站","饿了么","字节跳动","字节抖音"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 16621,
+    "name": "<p>数据库中聚簇索引和非聚簇索引的概念</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.005234297,
+    "group_id": 4,
+    "kps": [
+      "基础理论"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "正浩创新",
+      "腾讯",
+      "美团",
+      "快手",
+      "小米",
+      "恒生电子",
+      "中国电信",
+      "微众银行",
+      "金山",
+      "网易",
+      "B站",
+      "饿了么",
+      "字节跳动",
+      "字节抖音"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

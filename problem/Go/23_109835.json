@@ -1,1 +1,32 @@
-{"success":true,"data":{"id":109835,"name":"<p>简述context的数据结构</p>","options":null,"type":6,"level":2,"freq":0.008319467,"group_id":23,"kps":["标准库","编译和运行时"],"years":[2024,2023],"corps":["腾讯","京东","深信服","知乎"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 109835,
+    "name": "<p>简述context的数据结构</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.008319467,
+    "group_id": 23,
+    "kps": [
+      "标准库",
+      "编译和运行时"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "腾讯",
+      "京东",
+      "深信服",
+      "知乎"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

@@ -1,1 +1,41 @@
-{"success":true,"data":{"id":44020,"name":"<p>请介绍Spring Boot中的核心注解</p>","options":null,"type":6,"level":1,"freq":0.02269693,"group_id":7,"kps":["核心注解"],"years":[2024,2023,2022],"corps":["水滴","海尔智家","慧策","美团","腾讯","百度","快手","满帮集团","携程","唯品会","饿了么","字节跳动","京东"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 44020,
+    "name": "<p>请介绍Spring Boot中的核心注解</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.02269693,
+    "group_id": 7,
+    "kps": [
+      "核心注解"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "水滴",
+      "海尔智家",
+      "慧策",
+      "美团",
+      "腾讯",
+      "百度",
+      "快手",
+      "满帮集团",
+      "携程",
+      "唯品会",
+      "饿了么",
+      "字节跳动",
+      "京东"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

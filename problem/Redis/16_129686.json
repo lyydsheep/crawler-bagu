@@ -1,1 +1,30 @@
-{"success":true,"data":{"id":129686,"name":"<p>在主从模式/哨兵模式下，若主节点挂了，key没有同步到主节点，查询不到key就又可以获取锁，如何解决</p>","options":null,"type":6,"level":2,"freq":0.0005768676,"group_id":16,"kps":["集群与部署","常见问题与解决方案"],"years":[2024,2023],"corps":["百度","OPPO"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 129686,
+    "name": "<p>在主从模式/哨兵模式下，若主节点挂了，key没有同步到主节点，查询不到key就又可以获取锁，如何解决</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0005768676,
+    "group_id": 16,
+    "kps": [
+      "集群与部署",
+      "常见问题与解决方案"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "百度",
+      "OPPO"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

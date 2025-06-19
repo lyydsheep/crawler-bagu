@@ -1,1 +1,38 @@
-{"success":true,"data":{"id":14663,"name":"<p>Go语言中map的遍历顺序是怎样的，为什么要这样设计</p>","options":null,"type":6,"level":1,"freq":0.02163061,"group_id":23,"kps":["基本语法","变量和类型"],"years":[2025,2024,2023,2022],"corps":["Momenta","度小满","阿里云","迅雷网络","快手","腾讯","百度","联想集团"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 14663,
+    "name": "<p>Go语言中map的遍历顺序是怎样的，为什么要这样设计</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.02163061,
+    "group_id": 23,
+    "kps": [
+      "基本语法",
+      "变量和类型"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "Momenta",
+      "度小满",
+      "阿里云",
+      "迅雷网络",
+      "快手",
+      "腾讯",
+      "百度",
+      "联想集团"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

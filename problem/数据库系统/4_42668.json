@@ -1,1 +1,32 @@
-{"success":true,"data":{"id":42668,"name":"<p>在SQL语句select * from table where a=1 and b=2 order by c中，索引(a,b,c)是否生效？</p>","options":null,"type":6,"level":2,"freq":0.001744766,"group_id":4,"kps":["索引与查询优化"],"years":[2024,2023],"corps":["某二次元大厂","米哈游","美团","滴滴","携程"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 42668,
+    "name": "<p>在SQL语句select * from table where a=1 and b=2 order by c中，索引(a,b,c)是否生效？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001744766,
+    "group_id": 4,
+    "kps": [
+      "索引与查询优化"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "某二次元大厂",
+      "米哈游",
+      "美团",
+      "滴滴",
+      "携程"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

@@ -1,1 +1,51 @@
-{"success":true,"data":{"id":4220,"name":"<p>for…in 和for…of有什么区别？</p>","options":null,"type":6,"level":2,"freq":0.01312248,"group_id":24,"kps":["ES6","基础语法","对象和数组"],"years":[2024,2023,2022],"corps":["4399","字节跳动","Wind万得","B站","滴滴","深信服","360","微软","奇安信","爱奇艺","酷家乐","大智慧","掌阅科技","TikTok","腾讯","美团","百度","百度智能云","京东","快手","度小满"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 4220,
+    "name": "<p>for…in 和for…of有什么区别？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.01312248,
+    "group_id": 24,
+    "kps": [
+      "ES6",
+      "基础语法",
+      "对象和数组"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "4399",
+      "字节跳动",
+      "Wind万得",
+      "B站",
+      "滴滴",
+      "深信服",
+      "360",
+      "微软",
+      "奇安信",
+      "爱奇艺",
+      "酷家乐",
+      "大智慧",
+      "掌阅科技",
+      "TikTok",
+      "腾讯",
+      "美团",
+      "百度",
+      "百度智能云",
+      "京东",
+      "快手",
+      "度小满"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

@@ -1,1 +1,42 @@
-{"success":true,"data":{"id":5625,"name":"<p>Redis为啥要选择单线程？</p>","options":null,"type":6,"level":2,"freq":0.00605711,"group_id":16,"kps":["常见问题与解决方案"],"years":[2024,2023,2022],"corps":["百度","小米","阿里云","科大讯飞","用友","美团","字节跳动","腾讯云","快手","度小满","网易","4399","七牛云","饿了么"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 5625,
+    "name": "<p>Redis为啥要选择单线程？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.00605711,
+    "group_id": 16,
+    "kps": [
+      "常见问题与解决方案"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "百度",
+      "小米",
+      "阿里云",
+      "科大讯飞",
+      "用友",
+      "美团",
+      "字节跳动",
+      "腾讯云",
+      "快手",
+      "度小满",
+      "网易",
+      "4399",
+      "七牛云",
+      "饿了么"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

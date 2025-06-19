@@ -1,1 +1,33 @@
-{"success":true,"data":{"id":6821,"name":"<p>事务的隔离级别有哪些</p>","options":null,"type":6,"level":2,"freq":0.001475289,"group_id":13,"kps":["事务与并发控制"],"years":[2024,2023],"corps":["网易","招银网络科技","完美世界","滴滴","美团","华为"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 6821,
+    "name": "<p>事务的隔离级别有哪些</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001475289,
+    "group_id": 13,
+    "kps": [
+      "事务与并发控制"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "网易",
+      "招银网络科技",
+      "完美世界",
+      "滴滴",
+      "美团",
+      "华为"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

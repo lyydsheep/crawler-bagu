@@ -1,1 +1,44 @@
-{"success":true,"data":{"id":26461,"name":"<p>请说明BERT和GPT的区别，以及它们是如何训练的</p>","options":null,"type":6,"level":2,"freq":0.008724554,"group_id":108,"kps":["自然语言处理","大模型"],"years":[2025,2024,2023],"corps":["网易有道","小红书","SmartX","长亭科技","滴滴","中国联通","寒武纪","金山","饿了么","字节跳动","腾讯","美团","百度","OPPO","科大讯飞"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 26461,
+    "name": "<p>请说明BERT和GPT的区别，以及它们是如何训练的</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.008724554,
+    "group_id": 108,
+    "kps": [
+      "自然语言处理",
+      "大模型"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023
+    ],
+    "corps": [
+      "网易有道",
+      "小红书",
+      "SmartX",
+      "长亭科技",
+      "滴滴",
+      "中国联通",
+      "寒武纪",
+      "金山",
+      "饿了么",
+      "字节跳动",
+      "腾讯",
+      "美团",
+      "百度",
+      "OPPO",
+      "科大讯飞"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

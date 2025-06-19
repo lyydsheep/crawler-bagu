@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":239423,"name":"<p>除了使用 Babel 语法，还有什么方式可以将高级的 ES 语法转化为兼容的低级 JS 语法？</p>","options":null,"type":6,"level":2,"freq":0.0003364737,"group_id":24,"kps":["ES6","编译与转译"],"years":[2023],"corps":["快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 239423,
+    "name": "<p>除了使用 Babel 语法，还有什么方式可以将高级的 ES 语法转化为兼容的低级 JS 语法？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0003364737,
+    "group_id": 24,
+    "kps": [
+      "ES6",
+      "编译与转译"
+    ],
+    "years": [
+      2023
+    ],
+    "corps": [
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

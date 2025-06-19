@@ -1,1 +1,31 @@
-{"success":true,"data":{"id":122866,"name":"<p>请说明Hashcode、==和equals的区别</p>","options":null,"type":6,"level":1,"freq":0.0008779631,"group_id":5,"kps":["Java API与常用库","集合框架"],"years":[2024,2023],"corps":["华为","京东","快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 122866,
+    "name": "<p>请说明Hashcode、==和equals的区别</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.0008779631,
+    "group_id": 5,
+    "kps": [
+      "Java API与常用库",
+      "集合框架"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "华为",
+      "京东",
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

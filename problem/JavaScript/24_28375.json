@@ -1,1 +1,39 @@
-{"success":true,"data":{"id":28375,"name":"<p>请说明闭包可能导致的问题</p>","options":null,"type":6,"level":2,"freq":0.00538358,"group_id":24,"kps":["闭包"],"years":[2024,2023,2022],"corps":["瑞幸","顺丰","腾讯","携程","CVTE视源股份","奇安信","吉比特","同程旅行","金山","美团","华为"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 28375,
+    "name": "<p>请说明闭包可能导致的问题</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.00538358,
+    "group_id": 24,
+    "kps": [
+      "闭包"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "瑞幸",
+      "顺丰",
+      "腾讯",
+      "携程",
+      "CVTE视源股份",
+      "奇安信",
+      "吉比特",
+      "同程旅行",
+      "金山",
+      "美团",
+      "华为"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

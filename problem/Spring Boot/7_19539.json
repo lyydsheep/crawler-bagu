@@ -1,1 +1,36 @@
-{"success":true,"data":{"id":19539,"name":"<p>讲述一段 Spring Boot 代码从执行 java -jar 命令到打开网页看到内容的中间过程</p>","options":null,"type":6,"level":2,"freq":0.01068091,"group_id":7,"kps":["基础知识","内置服务器"],"years":[2024,2023,2022],"corps":["蔚来","上海电气","威泰普科技有限公司","美团","滴滴","用友","唯品会"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 19539,
+    "name": "<p>讲述一段 Spring Boot 代码从执行 java -jar 命令到打开网页看到内容的中间过程</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.01068091,
+    "group_id": 7,
+    "kps": [
+      "基础知识",
+      "内置服务器"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "蔚来",
+      "上海电气",
+      "威泰普科技有限公司",
+      "美团",
+      "滴滴",
+      "用友",
+      "唯品会"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

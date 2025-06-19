@@ -1,1 +1,41 @@
-{"success":true,"data":{"id":22915,"name":"<p>请解释什么是死锁和事务</p>","options":null,"type":6,"level":1,"freq":0.00548355,"group_id":4,"kps":["事务与并发控制","基础理论"],"years":[2024,2023,2022],"corps":["用友","深圳巨沃科技","百度","阿里国际","美团","阿里巴巴","深信服","顺丰","小米","字节跳动","腾讯","快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 22915,
+    "name": "<p>请解释什么是死锁和事务</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.00548355,
+    "group_id": 4,
+    "kps": [
+      "事务与并发控制",
+      "基础理论"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "用友",
+      "深圳巨沃科技",
+      "百度",
+      "阿里国际",
+      "美团",
+      "阿里巴巴",
+      "深信服",
+      "顺丰",
+      "小米",
+      "字节跳动",
+      "腾讯",
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

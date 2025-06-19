@@ -1,1 +1,41 @@
-{"success":true,"data":{"id":50835,"name":"<p>请讲解一下Go协程</p>","options":null,"type":6,"level":2,"freq":0.02828619,"group_id":23,"kps":["并发编程"],"years":[2024,2023,2022],"corps":["4399","字节跳动","360","影石Insta360","金山","腾讯","晴洋游戏","快手","成都好未来","滴滴","航班管家","吉比特","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 50835,
+    "name": "<p>请讲解一下Go协程</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.02828619,
+    "group_id": 23,
+    "kps": [
+      "并发编程"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "4399",
+      "字节跳动",
+      "360",
+      "影石Insta360",
+      "金山",
+      "腾讯",
+      "晴洋游戏",
+      "快手",
+      "成都好未来",
+      "滴滴",
+      "航班管家",
+      "吉比特",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

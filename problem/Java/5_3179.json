@@ -1,1 +1,27 @@
-{"success":true,"data":{"id":3179,"name":"<p>在 Java 程序中怎么保证多线程的运行安全？</p>","options":null,"type":6,"level":2,"freq":0.0001755926,"group_id":5,"kps":["多线程"],"years":[2024],"corps":["科大讯飞"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 3179,
+    "name": "<p>在 Java 程序中怎么保证多线程的运行安全？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0001755926,
+    "group_id": 5,
+    "kps": [
+      "多线程"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "科大讯飞"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

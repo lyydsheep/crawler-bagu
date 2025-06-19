@@ -1,1 +1,50 @@
-{"success":true,"data":{"id":22096,"name":"<p>channel底层原理是什么，在什么时候会产生panic？</p>","options":null,"type":6,"level":3,"freq":0.05324459,"group_id":23,"kps":["并发编程","编译和运行时"],"years":[2025,2024,2023,2022],"corps":["百度","作业帮","汇量科技","商汤科技","字节跳动","滴滴","北京枫悦，Crazy Maple Studio枫叶互动","无问芯穹","快手","好未来","字节飞书","腾讯","京东","Shopee虾皮","贝壳","大华","奇安信","金山","腾讯互娱","华顺信安"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 22096,
+    "name": "<p>channel底层原理是什么，在什么时候会产生panic？</p>",
+    "options": null,
+    "type": 6,
+    "level": 3,
+    "freq": 0.05324459,
+    "group_id": 23,
+    "kps": [
+      "并发编程",
+      "编译和运行时"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "百度",
+      "作业帮",
+      "汇量科技",
+      "商汤科技",
+      "字节跳动",
+      "滴滴",
+      "北京枫悦，Crazy Maple Studio枫叶互动",
+      "无问芯穹",
+      "快手",
+      "好未来",
+      "字节飞书",
+      "腾讯",
+      "京东",
+      "Shopee虾皮",
+      "贝壳",
+      "大华",
+      "奇安信",
+      "金山",
+      "腾讯互娱",
+      "华顺信安"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

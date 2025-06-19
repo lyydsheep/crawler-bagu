@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":106050,"name":"<p>Spring自动装配时，如何通过POM文件知道引入哪个配置类</p>","options":null,"type":6,"level":2,"freq":0.0007806401,"group_id":17,"kps":["基础知识","控制反转（IoC）与依赖注入（DI）"],"years":[2024],"corps":["字节跳动"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 106050,
+    "name": "<p>Spring自动装配时，如何通过POM文件知道引入哪个配置类</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0007806401,
+    "group_id": 17,
+    "kps": [
+      "基础知识",
+      "控制反转（IoC）与依赖注入（DI）"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "字节跳动"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

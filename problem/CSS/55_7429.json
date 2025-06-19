@@ -1,1 +1,28 @@
-{"success":true,"data":{"id":7429,"name":"<p>vw、vh 是什么？</p>","options":null,"type":6,"level":2,"freq":0.0006925208,"group_id":55,"kps":["响应式设计","CSS3"],"years":[2024],"corps":["携程"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 7429,
+    "name": "<p>vw、vh 是什么？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.0006925208,
+    "group_id": 55,
+    "kps": [
+      "响应式设计",
+      "CSS3"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "携程"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

@@ -1,1 +1,35 @@
-{"success":true,"data":{"id":6726,"name":"<p>说说你对泛型的理解</p>","options":null,"type":6,"level":2,"freq":0.001053556,"group_id":5,"kps":["泛型与注解"],"years":[2025,2024,2023,2022],"corps":["杭州中小厂","亚信","淘天集团","联影集团","B站","字节跳动"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 6726,
+    "name": "<p>说说你对泛型的理解</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001053556,
+    "group_id": 5,
+    "kps": [
+      "泛型与注解"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "杭州中小厂",
+      "亚信",
+      "淘天集团",
+      "联影集团",
+      "B站",
+      "字节跳动"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

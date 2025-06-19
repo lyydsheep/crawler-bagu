@@ -1,1 +1,30 @@
-{"success":true,"data":{"id":126786,"name":"<p>如何优雅地结束一个Goroutine</p>","options":null,"type":6,"level":2,"freq":0.008319467,"group_id":23,"kps":["并发编程"],"years":[2025,2024],"corps":["Momenta","腾讯","快手"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 126786,
+    "name": "<p>如何优雅地结束一个Goroutine</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.008319467,
+    "group_id": 23,
+    "kps": [
+      "并发编程"
+    ],
+    "years": [
+      2025,
+      2024
+    ],
+    "corps": [
+      "Momenta",
+      "腾讯",
+      "快手"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

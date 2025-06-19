@@ -1,1 +1,36 @@
-{"success":true,"data":{"id":74374,"name":"<p>分析索引的缺点</p>","options":null,"type":6,"level":1,"freq":0.002492522,"group_id":4,"kps":["索引与查询优化"],"years":[2025,2024,2023,2022],"corps":["长亭科技","东方海外","美团","滴滴","拼多多","用友","浙江大华"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 74374,
+    "name": "<p>分析索引的缺点</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.002492522,
+    "group_id": 4,
+    "kps": [
+      "索引与查询优化"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "长亭科技",
+      "东方海外",
+      "美团",
+      "滴滴",
+      "拼多多",
+      "用友",
+      "浙江大华"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

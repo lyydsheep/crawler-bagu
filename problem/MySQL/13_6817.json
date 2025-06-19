@@ -1,1 +1,38 @@
-{"success":true,"data":{"id":6817,"name":"<p>CHAR 和 VARCHAR 的区别？</p>","options":null,"type":6,"level":1,"freq":0.003934104,"group_id":13,"kps":["基础概念"],"years":[2024,2023,2022],"corps":["CVTE视源股份","小米","华为","用友","恒生电子","顺丰","昆山海隆","浙江民泰商业银行","美团","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 6817,
+    "name": "<p>CHAR 和 VARCHAR 的区别？</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.003934104,
+    "group_id": 13,
+    "kps": [
+      "基础概念"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "CVTE视源股份",
+      "小米",
+      "华为",
+      "用友",
+      "恒生电子",
+      "顺丰",
+      "昆山海隆",
+      "浙江民泰商业银行",
+      "美团",
+      "百度"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

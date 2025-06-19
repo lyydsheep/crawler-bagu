@@ -1,1 +1,32 @@
-{"success":true,"data":{"id":4397,"name":"<p>如何判断一个对象是不是空对象 ？</p>","options":null,"type":6,"level":2,"freq":0.001682369,"group_id":24,"kps":["对象和数组"],"years":[2024,2023],"corps":["百度","数新网络","大华","爱数科技","字节抖音"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 4397,
+    "name": "<p>如何判断一个对象是不是空对象 ？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.001682369,
+    "group_id": 24,
+    "kps": [
+      "对象和数组"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "百度",
+      "数新网络",
+      "大华",
+      "爱数科技",
+      "字节抖音"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

@@ -1,1 +1,34 @@
-{"success":true,"data":{"id":7280,"name":"<p>普通类和抽象类有哪些区别？</p>","options":null,"type":6,"level":1,"freq":0.001229148,"group_id":5,"kps":["面向对象编程"],"years":[2024,2023,2022],"corps":["汕头奥格科技","腾讯云智","B站","京东","百度","华为"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 7280,
+    "name": "<p>普通类和抽象类有哪些区别？</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.001229148,
+    "group_id": 5,
+    "kps": [
+      "面向对象编程"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "汕头奥格科技",
+      "腾讯云智",
+      "B站",
+      "京东",
+      "百度",
+      "华为"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

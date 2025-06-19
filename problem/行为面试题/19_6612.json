@@ -1,1 +1,45 @@
-{"success":true,"data":{"id":6612,"name":"<p>你有团队合作精神吗</p>","options":null,"type":6,"level":1,"freq":0.001846722,"group_id":19,"kps":["领导力和团队合作"],"years":[2025,2024,2023,2022],"corps":["中国电信","小红书","科大讯飞","腾讯","虎牙","上海汉德","七牛云","奥比中光","杭州端点科技","百度","小米","携程","神策数据","广联达","阿里巴巴","OPPO"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 6612,
+    "name": "<p>你有团队合作精神吗</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.001846722,
+    "group_id": 19,
+    "kps": [
+      "领导力和团队合作"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "中国电信",
+      "小红书",
+      "科大讯飞",
+      "腾讯",
+      "虎牙",
+      "上海汉德",
+      "七牛云",
+      "奥比中光",
+      "杭州端点科技",
+      "百度",
+      "小米",
+      "携程",
+      "神策数据",
+      "广联达",
+      "阿里巴巴",
+      "OPPO"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

@@ -1,1 +1,41 @@
-{"success":true,"data":{"id":4216,"name":"<p>简述ES6 Proxy的作用？</p>","options":null,"type":6,"level":2,"freq":0.006056528,"group_id":24,"kps":["ES6"],"years":[2025,2024,2023,2022],"corps":["顺丰","美团","滴滴","携程","上海云丹网络科技","商汤科技","京东","快手","好未来","联想集团","字节跳动","帆软"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 4216,
+    "name": "<p>简述ES6 Proxy的作用？</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.006056528,
+    "group_id": 24,
+    "kps": [
+      "ES6"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "顺丰",
+      "美团",
+      "滴滴",
+      "携程",
+      "上海云丹网络科技",
+      "商汤科技",
+      "京东",
+      "快手",
+      "好未来",
+      "联想集团",
+      "字节跳动",
+      "帆软"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

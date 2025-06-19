@@ -1,1 +1,44 @@
-{"success":true,"data":{"id":137313,"name":"<p>AOF和RDB的原理是什么，分别是如何实现和工作的</p>","options":null,"type":6,"level":2,"freq":0.007210845,"group_id":16,"kps":["基础知识","数据结构"],"years":[2024,2023,2022],"corps":["去哪儿旅行","第四范式","多益网络","百度","字节跳动","腾讯","美团","高德地图","京东","科大讯飞","小米","携程","用友","小红书","游卡"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 137313,
+    "name": "<p>AOF和RDB的原理是什么，分别是如何实现和工作的</p>",
+    "options": null,
+    "type": 6,
+    "level": 2,
+    "freq": 0.007210845,
+    "group_id": 16,
+    "kps": [
+      "基础知识",
+      "数据结构"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "去哪儿旅行",
+      "第四范式",
+      "多益网络",
+      "百度",
+      "字节跳动",
+      "腾讯",
+      "美团",
+      "高德地图",
+      "京东",
+      "科大讯飞",
+      "小米",
+      "携程",
+      "用友",
+      "小红书",
+      "游卡"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}

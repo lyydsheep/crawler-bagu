@@ -1,1 +1,42 @@
-{"success":true,"data":{"id":31308,"name":"<p>你比别人的优势在哪里</p>","options":null,"type":6,"level":1,"freq":0.001510954,"group_id":19,"kps":["自我认知"],"years":[2024,2023,2022],"corps":["拼多多","4399","Shopee虾皮","安克创新","海康威视","字节跳动","蚂蚁集团","用友","小米","peropero","华为","百度","快手","美团"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
+{
+  "success": true,
+  "data": {
+    "id": 31308,
+    "name": "<p>你比别人的优势在哪里</p>",
+    "options": null,
+    "type": 6,
+    "level": 1,
+    "freq": 0.001510954,
+    "group_id": 19,
+    "kps": [
+      "自我认知"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "拼多多",
+      "4399",
+      "Shopee虾皮",
+      "安克创新",
+      "海康威视",
+      "字节跳动",
+      "蚂蚁集团",
+      "用友",
+      "小米",
+      "peropero",
+      "华为",
+      "百度",
+      "快手",
+      "美团"
+    ],
+    "emptyReason": "OverLimit",
+    "answer": " ",
+    "analysis": " ",
+    "more_ask": " ",
+    "mindmap": null,
+    "keynote": " "
+  }
+}
