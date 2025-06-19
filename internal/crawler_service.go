@@ -106,7 +106,7 @@ func NewCrawlerService(destinations []string, c *colly.Collector, rl ratelimit.L
 
 func NewCollector() *colly.Collector {
 	c := colly.NewCollector(
-		colly.UserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36\n"),
+		colly.UserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"),
 		colly.IgnoreRobotsTxt(),
 		colly.Async(false),
 	)
