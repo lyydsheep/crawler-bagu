@@ -1,0 +1,1 @@
+{"success":true,"data":{"id":33638,"name":"<p>当使用ZSet存储1000W条数据来设计排行榜时，应如何进行设计，为何存储过多数据需要优化，并说明rehash的相关内容</p>","options":null,"type":6,"level":3,"freq":0.0002884338,"group_id":16,"kps":["数据结构","性能与优化"],"years":[2025],"corps":["字节跳动"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
