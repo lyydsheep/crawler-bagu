@@ -5,6 +5,7 @@ import (
 	"github.com/gocolly/colly"
 	"github.com/rs/zerolog/log"
 	"go.uber.org/ratelimit"
+	"os"
 )
 
 type CrawlerService struct {
@@ -60,8 +61,11 @@ func (svc *CrawlerService) processContent(data KeyContent) (err error) {
 	// 创建题目类型目录
 	var dir string
 	if dir, err = Touch(data.PageTitle); err != nil {
-		log.Error().Msgf("Touch error: %v", err)
-		return err
+		// 不是文件已存在错误
+		if !os.IsExist(err) {
+			log.Error().Msgf("Touch error: %v", err)
+			return err
+		}
 	}
 
 	// 爬取有效题目
@@ -76,6 +80,8 @@ func (svc *CrawlerService) processContent(data KeyContent) (err error) {
 			cnt++
 			// 成功写入文件
 			if flag {
+				// 两秒一题
+				svc.rl.Take()
 				svc.rl.Take()
 			}
 		}
