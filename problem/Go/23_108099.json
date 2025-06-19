@@ -1,1 +1,0 @@
-{"success":true,"data":{"id":108099,"name":"<p>在Go语言中，对于有缓冲的channel，向其发送和接收消息在关闭和未关闭情况下分别会怎么样</p>","options":null,"type":6,"level":2,"freq":0.008319467,"group_id":23,"kps":["并发编程","基本语法"],"years":[2024,2023,2022],"corps":["金山","腾讯","七牛云","百度"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
