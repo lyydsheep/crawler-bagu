@@ -30,7 +30,6 @@ func (svc *CrawlerService) registerHook(c *colly.Collector) {
 			log.Error().Msgf("jsonContent == ''")
 			return
 		}
-		log.Debug().Msgf("jsonContent: %s.", jsonContent)
 		log.Info().Msgf("obtained json data successfully.")
 
 		// 解析JSON数据
@@ -39,7 +38,6 @@ func (svc *CrawlerService) registerHook(c *colly.Collector) {
 			log.Error().Msgf("json.Unmarshal error: %v.", err)
 			return
 		}
-		log.Debug().Msgf("json data: %v", data)
 		log.Info().Msgf("parsed json data successfully, the problemList length is %d.", len(data.ProblemList))
 	})
 
