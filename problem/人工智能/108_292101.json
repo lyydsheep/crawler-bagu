@@ -1,0 +1,1 @@
+{"success":true,"data":{"id":292101,"name":"<p>请介绍Lora的原理，为什么不在layernorm层也做lora，embedding层能否使用lora</p>","options":null,"type":6,"level":2,"freq":0.0004154549,"group_id":108,"kps":["深度学习","大模型"],"years":[2024],"corps":["腾讯音乐"],"emptyReason":"OverLimit","answer":" ","analysis":" ","more_ask":" ","mindmap":null,"keynote":" "}}
