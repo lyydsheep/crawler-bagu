@@ -3,8 +3,8 @@ package internal
 import (
 	"encoding/json"
 	"github.com/gocolly/colly"
+	"github.com/rs/zerolog/log"
 	"go.uber.org/ratelimit"
-	"google.golang.org/appengine/log"
 )
 
 type CrawlerService struct {
@@ -17,44 +17,44 @@ type CrawlerService struct {
 func (svc *CrawlerService) registerHook(c *colly.Collector) {
 	var data KeyContent
 	c.OnHTML("div[data-widget-id='problem-exercise-widget']", func(e *colly.HTMLElement) {
-		log.Infof(nil, "visiting %s, the name of html is %s.", e.Request.URL.String(), e.Name)
+		log.Info().Msgf("visiting %s, the name of html is %s.", e.Request.URL.String(), e.Name)
 		jsonScript := e.DOM.Find("script[type='application/json']").First()
 		if jsonScript.Length() == 0 {
-			log.Errorf(nil, "jsonScript.Length() == 0")
+			log.Error().Msgf("can not find json script")
 			return
 		}
 
 		// 获取JSON数据
 		jsonContent := jsonScript.Text()
 		if jsonContent == "" {
-			log.Errorf(nil, "jsonContent == ''")
+			log.Error().Msgf("jsonContent == ''")
 			return
 		}
-		log.Debugf(nil, "jsonContent: %s.", jsonContent)
-		log.Infof(nil, "obtained json data successfully.")
+		log.Debug().Msgf("jsonContent: %s.", jsonContent)
+		log.Info().Msgf("obtained json data successfully.")
 
 		// 解析JSON数据
 		err := json.Unmarshal([]byte(jsonContent), &data)
 		if err != nil {
-			log.Errorf(nil, "json.Unmarshal error: %v", err)
+			log.Error().Msgf("json.Unmarshal error: %v.", err)
 			return
 		}
-		log.Debugf(nil, "data: %v", data)
-		log.Infof(nil, "parsed json data successfully, the problemList length is %d.", len(data.ProblemList))
+		log.Debug().Msgf("json data: %v", data)
+		log.Info().Msgf("parsed json data successfully, the problemList length is %d.", len(data.ProblemList))
 	})
 
 	c.OnScraped(func(resp *colly.Response) {
-		log.Infof(nil, "scraped %s, begin process data.", resp.Request.URL.String())
+		log.Info().Msgf("scraped %s.", resp.Request.URL.String())
 		// 处理数据
 		if err := svc.processContent(data); err != nil {
-			log.Errorf(nil, "processContent error: %v.", err)
+			log.Error().Msgf("processContent error: %v.", err)
 			return
 		}
-		log.Infof(nil, "processed json data successfully.")
+		log.Info().Msgf("processed %d questions successfully.", len(data.ProblemList))
 	})
 
 	c.OnError(func(resp *colly.Response, err error) {
-		log.Errorf(nil, "resp.Request.URL: %s, error: %v.", resp.Request.URL.String(), err)
+		log.Error().Msgf("resp.Request.URL: %s, error: %v.", resp.Request.URL.String(), err)
 	})
 }
 
@@ -62,7 +62,7 @@ func (svc *CrawlerService) processContent(data KeyContent) (err error) {
 	// 创建题目类型目录
 	var dir string
 	if dir, err = Touch(data.PageTitle); err != nil {
-		log.Errorf(nil, "Touch error: %v", err)
+		log.Error().Msgf("Touch error: %v", err)
 		return err
 	}
 
@@ -70,23 +70,28 @@ func (svc *CrawlerService) processContent(data KeyContent) (err error) {
 	cnt := 1
 	for _, problem := range data.ProblemList {
 		if len(problem.Corps) > 0 {
-			svc.rl.Take()
-			if err = fetchAndSaveAnswer(dir, data.GroupId, problem.Id); err != nil {
-				log.Errorf(nil, "fetchAndSaveAnswer error: %v, groupId is %d, problemId is %d", err, data.GroupId, problem.Id)
+			flag := true
+			if flag, err = fetchAndSaveAnswer(dir, data.GroupId, problem.Id); err != nil {
+				log.Error().Msgf("fetchAndSaveAnswer error: %v, groupId is %d, problemId is %d", err, data.GroupId, problem.Id)
 				continue
 			}
 			cnt++
+			// 成功写入文件
+			if flag {
+				svc.rl.Take()
+			}
 		}
 	}
-	log.Infof(nil, "the number of valid questions is %d", cnt)
+	log.Info().Msgf("the number of valid questions is %d", cnt)
 	return nil
 }
 
 func (svc *CrawlerService) Run() {
+	svc.registerHook(svc.c)
 	// 爬取所有的题目类型
 	for _, destination := range svc.Destinations {
 		if err := svc.c.Visit(destination); err != nil {
-			log.Errorf(nil, "svc.c.Visit(%s) error: %v", destination, err)
+			log.Info().Msgf("svc.c.Visit(%s) error: %v", destination, err)
 		}
 	}
 }
