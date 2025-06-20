@@ -27,6 +27,11 @@ type KeyContent struct {
 	ProblemList []Problem `json:"problemList"`
 }
 
+var (
+	lastId int
+	gId    int
+)
+
 func fetchAndSaveAnswer(dir string, groupId int, problemId int) (bool, error) {
 	// 检查一下是否已经写入了
 	filename := fmt.Sprintf("%s/%d_%d.json", dir, groupId, problemId)
@@ -41,6 +46,7 @@ func fetchAndSaveAnswer(dir string, groupId int, problemId int) (bool, error) {
 
 	// fetch answer
 	url := fmt.Sprintf("https://www.bagujing.com/api/problems/%d?groupId=%d", problemId, groupId)
+	gId = groupId
 	body, err := get(url)
 	if err != nil {
 		return true, err
@@ -84,6 +90,16 @@ func get(url string) ([]byte, error) {
 
 	// 设置其他Header
 	req.Header.Set("User-Agent", "Mozilla/5.0")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36")
+	req.Header.Set("priority", "u=1, i")
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Sec-Ch-Ua", "\"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"")
+	req.Header.Set("Sec-Ch-Ua-Mobile", "?0")
+	req.Header.Set("Sec-Ch-Ua-Platform", "\"macOS\"")
+	req.Header.Set("sec-fetch-dest", "empty")
+	req.Header.Set("Sec-Fetch-Mode", "cors")
+	req.Header.Set("Sec-Fetch-Site", "same-origin")
+	req.Header.Set("Referer", fmt.Sprintf("https://www.bagujing.com/problem-exercise/%d?pid=%d", gId, lastId))
 
 	// 发送请求
 	client := &http.Client{}

@@ -5,7 +5,9 @@ import (
 	"github.com/gocolly/colly"
 	"github.com/rs/zerolog/log"
 	"go.uber.org/ratelimit"
+	"math/rand/v2"
 	"os"
+	"time"
 )
 
 type CrawlerService struct {
@@ -81,8 +83,7 @@ func (svc *CrawlerService) processContent(data KeyContent) (err error) {
 			// 成功写入文件
 			if flag {
 				// 两秒一题
-				svc.rl.Take()
-				svc.rl.Take()
+				time.Sleep(10*time.Second + time.Duration(8000*rand.Float32())*time.Millisecond)
 			}
 		}
 	}
