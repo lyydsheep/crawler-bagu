@@ -96,7 +96,6 @@ func click(selector string, page *rod.Page, ch chan struct{}) error {
 
 func hiJack(page *rod.Page, ch chan struct{}) {
 	router := page.HijackRequests()
-	defer router.MustStop()
 	targetUrl := "*/api/problems/*?groupId*"
 	router.MustAdd(targetUrl, func(ctx *rod.Hijack) {
 		ctx.MustLoadResponse()
