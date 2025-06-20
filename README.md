@@ -16,7 +16,7 @@
     - 可以根据 problemList 中的 id 对题目进行爬取
       ![img.png](img.png)
 
-## 爬取流程
+## 爬取流程（colly）
 1. **初始化配置**：预设爬取目标类型及URL
     - Java
     - Go：https://www.xxx.com/problem-exercise/23?pid=44029
@@ -28,3 +28,6 @@
     - 遍历problemList，筛选corps不为空的题目
     - 构造API请求：https://www.xxx.com/api/problems/$id?groupId=$groupId
     - 请求头需包含Cookie信息
+
+## 爬取思路（Rod）
+![img_1.png](img_1.png)

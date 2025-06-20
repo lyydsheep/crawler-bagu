@@ -15,8 +15,8 @@ func NewDestinations() []string {
 		//"https://www.bagujing.com/problem-exercise/68?pid=8331",
 
 		// Java
-		"https://www.bagujing.com/problem-exercise/5?pid=130144",
-		"https://www.bagujing.com/problem-exercise/17?pid=16181",
+		//"https://www.bagujing.com/problem-exercise/5?pid=130144",
+		"https://www.bagujing.com/problem-exercise/17?pid=47792",
 		"https://www.bagujing.com/problem-exercise/7?pid=15739",
 		"https://www.bagujing.com/problem-exercise/37?pid=3281",
 		"https://www.bagujing.com/problem-exercise/62?pid=3911",
