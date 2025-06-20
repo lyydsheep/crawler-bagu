@@ -129,6 +129,11 @@ func save(resp Response, data string) {
 		return
 	}
 
+	if resp.Data.EmptyReason != "" {
+		log.Fatal().Msgf("problem %d is empty, reason: %s", resp.Data.Id, resp.Data.EmptyReason)
+		return
+	}
+
 	log.Info().Msgf("begin to save problem to %s", filename)
 	if err = saveAnswer(filename, []byte(data)); err != nil {
 		log.Error().Msgf("saveAnswer error: %v", err)
