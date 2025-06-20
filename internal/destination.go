@@ -8,18 +8,18 @@ func NewDestinations() []string {
 		//"https://www.bagujing.com/problem-exercise/26?pid=9525",
 		//"https://www.bagujing.com/problem-exercise/55?pid=9584",
 		//"https://www.bagujing.com/problem-exercise/24?pid=20161",
-		//"https://bagujing.com/problem-exercise/59?pid=4407",
-		//"https://www.bagujing.com/problem-exercise/58?pid=4577",
-		//"https://www.bagujing.com/problem-exercise/44?pid=7567",
-		//"https://www.bagujing.com/problem-exercise/45?pid=20215",
-		//"https://www.bagujing.com/problem-exercise/68?pid=8331",
-		//
-		//// Java
-		//"https://www.bagujing.com/problem-exercise/5?pid=14897",
-		//"https://www.bagujing.com/problem-exercise/17?pid=16181",
-		//"https://www.bagujing.com/problem-exercise/7?pid=15739",
-		//"https://www.bagujing.com/problem-exercise/37?pid=3281",
-		//"https://www.bagujing.com/problem-exercise/62?pid=3911",
+		"https://bagujing.com/problem-exercise/59?pid=4407",
+		"https://www.bagujing.com/problem-exercise/58?pid=4577",
+		"https://www.bagujing.com/problem-exercise/44?pid=7567",
+		"https://www.bagujing.com/problem-exercise/45?pid=20215",
+		"https://www.bagujing.com/problem-exercise/68?pid=8331",
+
+		// Java
+		"https://www.bagujing.com/problem-exercise/5?pid=14897",
+		"https://www.bagujing.com/problem-exercise/17?pid=16181",
+		"https://www.bagujing.com/problem-exercise/7?pid=15739",
+		"https://www.bagujing.com/problem-exercise/37?pid=3281",
+		"https://www.bagujing.com/problem-exercise/62?pid=3911",
 
 		// Go
 		"https://www.bagujing.com/problem-exercise/23?pid=44029",

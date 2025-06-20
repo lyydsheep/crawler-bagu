@@ -10,6 +10,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -32,19 +33,19 @@ func (r *Rod) Consume(url string) error {
 	}
 
 	// 访问页面
-	page := r.b.MustPage(url)
+	page := r.b.MustPage(url).MustWaitStable()
 	defer page.Close()
 
 	// 获取标题
 	_, element, _ := page.Has(`head > title`)
 	title, _ := element.Text()
+	title = strings.TrimSpace(strings.Split(title, "-")[0])
 	d, err := pkg.Touch(title)
 	if err != nil {
 		log.Error().Msgf("Touch error: %v.", err)
 		return err
 	}
 	dir = d
-	log.Debug().Msgf("title is %s.", title)
 
 	// 创建拦截器
 	ch := make(chan struct{})
@@ -107,7 +108,7 @@ func hiJack(page *rod.Page, ch chan struct{}) {
 		}
 
 		// 保存题目和答案
-		go save(resp)
+		go save(resp, ctx.Response.Body())
 
 		// 完成工作
 		ch <- struct{}{}
@@ -115,7 +116,7 @@ func hiJack(page *rod.Page, ch chan struct{}) {
 	router.Run()
 }
 
-func save(resp Response) {
+func save(resp Response, data string) {
 	var (
 		filename string
 		ok       bool
@@ -128,13 +129,8 @@ func save(resp Response) {
 		return
 	}
 
-	data, err := json.Marshal(resp.Data)
-	if err != nil {
-		log.Error().Msgf("json.Marshal error: %v", err)
-		return
-	}
-
-	if err = saveAnswer(filename, data); err != nil {
+	log.Info().Msgf("begin to save problem to %s", filename)
+	if err = saveAnswer(filename, []byte(data)); err != nil {
 		log.Error().Msgf("saveAnswer error: %v", err)
 		return
 	}
