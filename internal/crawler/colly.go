@@ -69,11 +69,8 @@ func processContent(data KeyContent) (err error) {
 	// 创建题目类型目录
 	var dir string
 	if dir, err = pkg.Touch(data.PageTitle); err != nil {
-		// 不是文件已存在错误
-		if !os.IsExist(err) {
-			log.Error().Msgf("Touch error: %v", err)
-			return err
-		}
+		log.Error().Msgf("Touch error: %v", err)
+		return err
 	}
 
 	// 爬取有效题目
@@ -104,14 +101,12 @@ var (
 
 func fetchAndSaveAnswer(dir string, groupId int, problemId int) (bool, error) {
 	// 检查一下是否已经写入了
-	filename := fmt.Sprintf("%s/%d_%d.json", dir, groupId, problemId)
-	if _, err := os.Stat(filename); err == nil {
-		log.Info().Msgf("answer already exists, skip %s", filename)
+	var (
+		filename string
+		ok       bool
+	)
+	if filename, ok = checkExist(dir, groupId, problemId); ok {
 		return false, nil
-	} else if !os.IsNotExist(err) {
-		// 如果错误不是“文件不存在”，则返回错误
-		log.Error().Msgf("os.Stat error: %v", err)
-		return false, err
 	}
 
 	// fetch answer
@@ -133,9 +128,7 @@ func fetchAndSaveAnswer(dir string, groupId int, problemId int) (bool, error) {
 	}
 
 	// 保存 answer
-	err = os.WriteFile(filename, body, 0644)
-	if err != nil {
-		log.Error().Msgf("os.WriteFile error: %v", err)
+	if err = saveAnswer(filename, body); err != nil {
 		return true, err
 	}
 	log.Info().Msgf("saved answer to %s", filename)
