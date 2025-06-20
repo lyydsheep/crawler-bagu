@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"crawler-bagu/pkg"
 	"fmt"
 	"log"
 	"os"
@@ -17,7 +18,7 @@ func TestGet(t *testing.T) {
 }
 
 func TestFetchAndSaveAnswer(t *testing.T) {
-	dir, err := Touch("go-23")
+	dir, err := pkg.Touch("go-23")
 	if err != nil {
 		if !os.IsExist(err) {
 			log.Fatal(err)

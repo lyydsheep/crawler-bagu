@@ -1,4 +1,4 @@
-package internal
+package crawler
 
 type Response struct {
 	Success bool `json:"success"`
