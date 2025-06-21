@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "data": {
+    "id": 6821,
+    "name": "<p>事务的隔离级别有哪些</p>",
+    "options": null,
+    "answer": "<p>在 MySQL 中，事务的隔离级别主要有以下四种：</p>\n<ol>\n  <li>\n    <p><strong>读未提交 (Read Uncommitted)</strong>：</p>\n    <ul>\n      <li>这种隔离级别允许一个事务读取另一个事务未提交的数据。</li>\n      <li>可能导致“脏读”（Dirty Read），即一个事务读取到另一个事务尚未提交的数据。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>读已提交 (Read Committed)</strong>：</p>\n    <ul>\n      <li>在这个级别中，事务只能读取到其他事务已提交的数据。</li>\n      <li>这样可以避免脏读，但可能会出现“不可重复读”（Non-repeatable Read），即在同一事务中两次读取同一数据时，数据可能会因为其他事务的提交而不同。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>可重复读 (Repeatable Read)</strong>：</p>\n    <ul>\n      <li>此级别保证在一个事务中多次读取同一数据会得到相同的结果。</li>\n      <li>可以防止脏读和不可重复读，但可能会出现“幻读”（Phantom Read），这意味着在同一事务中，新增的行可能会影响查询结果。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>串行化 (Serializable)</strong>：</p>\n    <ul>\n      <li>这是最高的隔离级别，保证事务完全串行执行。</li>\n      <li>虽然可以完全避免脏读、不可重复读和幻读，但会导致性能下降，因为串行化会增加事务的等待时间。</li>\n    </ul>\n  </li>\n</ol>\n<p>在 MySQL 中，默认的隔离级别是 <strong>可重复读</strong>。可以根据具体的业务需求，通过 SQL 命令设置不同的隔离级别。</p>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.001475289,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：MySQL中事务的隔离级别有哪些。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>对MySQL事务隔离级别概念的了解。</li>\n      <li>各隔离级别特点及可能出现的问题。</li>\n      <li>不同隔离级别适用场景。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<ul>\n  <li><strong>事务</strong>：是数据库中不可分割的一组操作序列，这些操作要么全部执行成功，要么全部失败回滚。</li>\n  <li><strong>并发事务问题</strong>：多个事务并发执行时，可能会出现脏读、不可重复读、幻读等问题。\n    <ul>\n      <li><strong>脏读</strong>：一个事务读取到另一个未提交事务修改的数据。</li>\n      <li><strong>不可重复读</strong>：一个事务中多次读取同一数据，由于其他事务的修改导致结果不一致。</li>\n      <li><strong>幻读</strong>：一个事务按照条件查询数据时，由于其他事务的插入或删除操作，导致多次查询结果不同。</li>\n    </ul>\n  </li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）读未提交（Read Uncommitted）</h4>\n<ul>\n  <li><strong>特点</strong>：事务可以读取其他未提交事务修改的数据。</li>\n  <li><strong>可能出现的问题</strong>：会出现脏读、不可重复读和幻读问题。</li>\n  <li><strong>适用场景</strong>：很少使用，因为它不能保证数据的一致性，可能会导致数据混乱。</li>\n</ul>\n<h4>（2）读已提交（Read Committed）</h4>\n<ul>\n  <li><strong>特点</strong>：事务只能读取其他已提交事务修改的数据。</li>\n  <li><strong>可能出现的问题</strong>：避免了脏读，但仍可能出现不可重复读和幻读问题。</li>\n  <li><strong>适用场景</strong>：适用于对数据一致性要求不是特别高的场景，比如大多数Web应用的查询操作。</li>\n</ul>\n<h4>（3）可重复读（Repeatable Read）</h4>\n<ul>\n  <li><strong>特点</strong>：在同一个事务中，多次读取同一数据结果保持一致，即使其他事务对该数据进行了修改并提交。</li>\n  <li><strong>可能出现的问题</strong>：避免了脏读和不可重复读，但在某些情况下可能出现幻读（MySQL InnoDB引擎通过Next-Key Lock机制解决了幻读问题）。</li>\n  <li><strong>适用场景</strong>：是MySQL默认的隔离级别，适用于对数据一致性要求较高的场景，如金融交易系统。</li>\n</ul>\n<h4>（4）串行化（Serializable）</h4>\n<ul>\n  <li><strong>特点</strong>：所有事务串行执行，一个事务执行完后另一个事务才能开始执行。</li>\n  <li><strong>可能出现的问题</strong>：避免了脏读、不可重复读和幻读问题，但并发性能最差。</li>\n  <li><strong>适用场景</strong>：适用于对数据一致性要求极高且对并发性能要求不高的场景，如某些特殊的财务系统。</li>\n</ul>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-sql\">-- 设置事务隔离级别为读未提交\nSET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;\n-- 开启事务\nSTART TRANSACTION;\n-- 执行事务操作\nSELECT * FROM your_table;\n-- 提交事务\nCOMMIT;\n\n-- 设置事务隔离级别为读已提交\nSET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;\n\n-- 设置事务隔离级别为可重复读\nSET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;\n\n-- 设置事务隔离级别为串行化\nSET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）混淆各隔离级别的特点</h4>\n<ul>\n  <li>误区：不能准确区分各隔离级别能避免哪些并发问题。</li>\n  <li>纠正：牢记各隔离级别与脏读、不可重复读、幻读的对应关系。</li>\n</ul>\n<h4>（2）忽视性能与一致性的平衡</h4>\n<ul>\n  <li>误区：只追求高隔离级别保证数据一致性，不考虑性能影响。</li>\n  <li>纠正：根据实际业务场景，在数据一致性和并发性能之间找到平衡。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>\n  “MySQL中有四种事务隔离级别，分别是读未提交、读已提交、可重复读和串行化。\n  读未提交允许事务读取其他未提交事务修改的数据，会出现脏读、不可重复读和幻读问题，适用场景较少。\n  读已提交只能读取其他已提交事务修改的数据，避免了脏读，但可能存在不可重复读和幻读问题，常用于大多数Web应用查询操作。\n  可重复读保证在同一事务中多次读取同一数据结果一致，避免了脏读和不可重复读，MySQL InnoDB引擎通过Next - Key Lock机制解决了幻读问题，是MySQL默认隔离级别，适用于对数据一致性要求较高的场景。\n  串行化让所有事务串行执行，避免了所有并发问题，但并发性能最差，适用于对数据一致性要求极高且对并发性能要求不高的场景。\n</p>\n<p>在实际应用中，需要根据业务需求在数据一致性和并发性能之间进行权衡，选择合适的隔离级别。”</p>",
+    "more_ask": "<p>面试官可能会进一步问：</p>\n<ol>\n  <li>\n    <p><strong>事务的四个隔离级别分别是什么？各自的特点是什么？</strong></p>\n    <ul>\n      <li>提示：可以谈论具体的读现象，比如脏读、不可重复读和幻读。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>你能举例说明在实际应用中何时使用某个隔离级别吗？</strong></p>\n    <ul>\n      <li>提示：考虑性能与一致性之间的权衡。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>你知道在MySQL中如何设置事务的隔离级别吗？</strong></p>\n    <ul>\n      <li>提示：注意使用的SQL命令以及影响的范围。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>如果一个事务在较高的隔离级别下运行，可能会导致什么问题？</strong></p>\n    <ul>\n      <li>提示：考虑死锁和性能的影响。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>在分布式系统中，事务的隔离级别如何影响数据一致性？</strong></p>\n    <ul>\n      <li>提示：可以聊聊CAP定理和BASE模型。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>请解释一下“乐观锁”和“悲观锁”的区别，以及它们如何与事务隔离级别相关联。</strong></p>\n    <ul>\n      <li>提示：关注锁的机制以及应用场景。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>事务隔离级别可以通过什么方式进行调整？对性能的影响如何？</strong></p>\n    <ul>\n      <li>提示：考虑应用层与数据库层的调整方法。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>在高并发情况下，如何优化事务的隔离级别以提高性能？</strong></p>\n    <ul>\n      <li>提示：讨论读写分离、缓存等策略。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>如何检测和解决因高隔离级别导致的死锁问题？</strong></p>\n    <ul>\n      <li>提示：可以分享一些监控和调试的方法。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>在执行长事务时，应注意哪些问题？</strong></p>\n    <ul>\n      <li>提示：讨论事务的持续时间与资源竞争的关系。</li>\n    </ul>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((事务隔离级别))\n    读未提交(Read Uncommitted)\n      允许读取未提交的数据\n      可能导致脏读\n    读已提交(Read Committed)\n      只能读取已提交的数据\n      避免脏读\n      可能出现不可重复读\n    可重复读(Repeatable Read)\n      多次读取同一数据结果相同\n      防止脏读和不可重复读\n      可能出现幻读\n    串行化(Serializable)\n      保证事务完全串行执行\n      避免所有问题\n      导致性能下降",
+    "keynote": "- 读未提交：允许读取未提交的数据，可能导致脏读。\n- 读已提交：只能读取已提交的数据，避免脏读，可能出现不可重复读。\n- 可重复读：多次读取同一数据结果相同，防止脏读和不可重复读，可能出现幻读。\n- 串行化：保证事务完全串行执行，避免所有问题但会导致性能下降。\n- MySQL 默认隔离级别是可重复读。",
+    "group_id": 13,
+    "kps": [
+      "事务与并发控制"
+    ],
+    "years": [
+      2024,
+      2023
+    ],
+    "corps": [
+      "网易",
+      "招银网络科技",
+      "完美世界",
+      "滴滴",
+      "美团",
+      "华为"
+    ]
+  }
+}

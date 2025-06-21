@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "data": {
+    "id": 22173,
+    "name": "<p>事务并发会遇到什么问题</p>",
+    "options": null,
+    "answer": "<p>在数据库系统中，事务并发执行可能会遇到以下几类问题：</p>\n<h3>脏读（Dirty Read）</h3>\n<ul>\n  <li><strong>定义</strong>：一个事务读取了另一个未提交事务修改的数据。</li>\n  <li><strong>示例</strong>：\n    <ul>\n      <li>事务T1更新了某条记录的值，但还未提交。</li>\n      <li>事务T2此时读取了这条被T1更新但未提交的数据。</li>\n      <li>随后，事务T1由于某种原因回滚了，那么T2读取到的数据就是无效的“脏数据”。</li>\n    </ul>\n  </li>\n</ul>\n<h3>不可重复读（Non - Repeatable Read）</h3>\n<ul>\n  <li><strong>定义</strong>：在一个事务内多次读取同一数据集合，在这个事务还未结束时，另一个事务对该数据集合进行了更新操作，导致前一个事务两次读取的数据不一致。</li>\n  <li><strong>示例</strong>：\n    <ul>\n      <li>事务T1读取某条记录的值。</li>\n      <li>事务T2更新了这条记录的值并提交。</li>\n      <li>事务T1再次读取这条记录时，发现读取到的值与第一次读取的不同。不可重复读主要针对的是数据的更新操作。</li>\n    </ul>\n  </li>\n</ul>\n<h3>幻读（Phantom Read）</h3>\n<ul>\n  <li><strong>定义</strong>：一个事务在执行过程中，两次查询相同的范围时，由于另一个事务在这个范围内插入或删除了数据，导致第一次和第二次查询的结果集不同，就好像出现了“幻影”一样。</li>\n  <li><strong>示例</strong>：\n    <ul>\n      <li>事务T1查询满足某个条件的记录集合。</li>\n      <li>事务T2插入了一些满足该条件的新记录并提交。</li>\n      <li>事务T1再次查询相同条件的记录集合时，会发现结果集中多了一些记录，就像出现了幻影一样。幻读主要针对的是数据的插入和删除操作。</li>\n    </ul>\n  </li>\n</ul>\n<h3>丢失更新（Lost Update）</h3>\n<ul>\n  <li><strong>定义</strong>：两个事务同时对同一数据进行更新操作，其中一个事务的更新结果被另一个事务的更新覆盖，导致前一个事务的更新丢失。</li>\n  <li><strong>示例</strong>：\n    <ul>\n      <li>事务T1和事务T2同时读取某条记录的值。</li>\n      <li>事务T1对该记录进行了更新操作。</li>\n      <li>事务T2也对该记录进行了更新操作并提交，此时事务T1的更新结果就被事务T2覆盖了，即事务T1的更新丢失。</li>\n    </ul>\n  </li>\n</ul>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.00224327,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：事务并发会遇到什么问题。</li>\n  <li><strong>考察点</strong>：对数据库事务并发特性的理解，包括并发可能引发的各类异常情况及原理。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<ul>\n  <li><strong>事务</strong>：是数据库中不可分割的操作序列，具有原子性、一致性、隔离性和持久性（ACID）。</li>\n  <li><strong>并发</strong>：多个事务同时对数据库进行操作。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）脏读（Dirty Read）</h4>\n<ul>\n  <li><strong>问题描述</strong>：一个事务读取了另一个未提交事务修改的数据。</li>\n  <li><strong>产生原因</strong>：事务隔离级别较低，允许一个事务读取另一个未提交事务的中间结果。</li>\n  <li><strong>影响</strong>：如果未提交事务最终回滚，读取到的数据就是无效的，可能导致后续操作基于错误数据进行。</li>\n</ul>\n<h4>（2）不可重复读（Non - Repeatable Read）</h4>\n<ul>\n  <li><strong>问题描述</strong>：在一个事务内，多次读取同一数据却得到不同结果。</li>\n  <li><strong>产生原因</strong>：在事务执行期间，另一个事务对该数据进行了更新并提交。</li>\n  <li><strong>影响</strong>：破坏了事务的一致性，使得事务内的操作结果可能不一致。</li>\n</ul>\n<h4>（3）幻读（Phantom Read）</h4>\n<ul>\n  <li><strong>问题描述</strong>：一个事务在执行过程中，两次相同的查询返回了不同数量的记录。</li>\n  <li><strong>产生原因</strong>：在事务执行期间，另一个事务插入或删除了符合查询条件的记录。</li>\n  <li><strong>影响</strong>：同样破坏了事务的一致性，可能导致事务内的逻辑出现错误。</li>\n</ul>\n<h4>（4）丢失更新（Lost Update）</h4>\n<ul>\n  <li><strong>问题描述</strong>：两个事务同时更新同一数据，其中一个事务的更新结果被另一个事务覆盖。</li>\n  <li><strong>产生原因</strong>：并发事务对同一数据进行写操作时没有适当的同步机制。</li>\n  <li><strong>影响</strong>：数据的更新信息丢失，导致数据不一致。</li>\n</ul>\n<h3>4. 示例说明</h3>\n<h4>（1）脏读示例</h4>\n<pre><code class=\"language-sql\">-- 事务A\nBEGIN TRANSACTION;\nUPDATE accounts SET balance = balance - 100 WHERE account_id = 1;\n-- 此时事务B读取到了未提交的余额变化\n-- 事务A回滚\nROLLBACK;\n</code></pre>\n<h4>（2）不可重复读示例</h4>\n<pre><code class=\"language-sql\">-- 事务A\nBEGIN TRANSACTION;\nSELECT balance FROM accounts WHERE account_id = 1;\n-- 此时事务B更新了账户1的余额并提交\nSELECT balance FROM accounts WHERE account_id = 1;\n-- 两次查询结果不同\nCOMMIT;\n</code></pre>\n<h4>（3）幻读示例</h4>\n<pre><code class=\"language-sql\">-- 事务A\nBEGIN TRANSACTION;\nSELECT COUNT(*) FROM orders WHERE order_date = '2024-01-01';\n-- 此时事务B插入了一条订单记录，日期为2024-01-01并提交\nSELECT COUNT(*) FROM orders WHERE order_date = '2024-01-01';\n-- 两次查询结果不同\nCOMMIT;\n</code></pre>\n<h4>（4）丢失更新示例</h4>\n<pre><code class=\"language-sql\">-- 事务A和事务B同时执行\nBEGIN TRANSACTION;\nSELECT balance FROM accounts WHERE account_id = 1;\n-- 都读取到余额为1000\nUPDATE accounts SET balance = balance + 100 WHERE account_id = 1;\n-- 最终余额只增加了100，而不是200\nCOMMIT;\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）混淆不可重复读和幻读</h4>\n<ul>\n  <li><strong>误区</strong>：认为不可重复读和幻读是同一类问题。</li>\n  <li><strong>纠正</strong>：不可重复读主要针对数据的更新操作，而幻读主要针对数据的插入和删除操作。</li>\n</ul>\n<h4>（2）忽视丢失更新问题</h4>\n<ul>\n  <li><strong>误区</strong>：只关注读操作的并发问题，忽略了写操作的并发问题。</li>\n  <li><strong>纠正</strong>：丢失更新是并发写操作中常见的问题，需要重视。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>事务并发会遇到脏读、不可重复读、幻读和丢失更新等问题。脏读是指一个事务读取了另一个未提交事务修改的数据；不可重复读是指在一个事务内多次读取同一数据得到不同结果；幻读是指一个事务在执行过程中两次相同查询返回不同数量的记录；丢失更新是指两个事务同时更新同一数据，其中一个事务的更新结果被另一个事务覆盖。这些问题会破坏事务的一致性，影响数据库的正确性。在实际应用中，需要通过合理设置事务隔离级别和使用锁机制来避免这些问题。</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      如何解决事务并发带来的脏读问题？\n      提示：从数据库的隔离级别、锁机制等方面思考解决办法。\n    </p>\n  </li>\n  <li>\n    <p>\n      简述可串行化隔离级别是如何保证事务并发正确性的？\n      提示：结合可串行化的定义，考虑事务执行顺序和并发控制手段。\n    </p>\n  </li>\n  <li>\n    <p>\n      锁升级在解决事务并发问题中起到什么作用，会带来什么负面影响？\n      提示：先理解锁升级的概念，再分析其对并发性能和系统资源的影响。\n    </p>\n  </li>\n  <li>\n    <p>\n      多版本并发控制（MVCC）与传统锁机制在处理事务并发时有什么不同？\n      提示：对比两者的实现原理、并发性能和适用场景。\n    </p>\n  </li>\n  <li>\n    <p>\n      当数据库出现死锁时，如何快速定位和解决？\n      提示：思考数据库提供的死锁检测工具和解决死锁的策略。\n    </p>\n  </li>\n  <li>\n    <p>\n      对于高并发场景下的数据库，如何选择合适的隔离级别？\n      提示：综合考虑数据一致性要求、并发性能需求和业务特点。\n    </p>\n  </li>\n  <li>\n    <p>\n      乐观锁和悲观锁在事务并发控制中的应用场景分别是什么？\n      提示：根据两种锁的特点，分析不同业务场景下的适用性。\n    </p>\n  </li>\n  <li>\n    <p>\n      数据库的并发控制机制对数据库性能有哪些影响？\n      提示：从锁的使用、事务执行时间和资源消耗等方面分析。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((数据库事务并发执行问题))\n    脏读（Dirty Read）\n      定义：一个事务读取另一个未提交事务修改的数据\n    不可重复读（Non - Repeatable Read）\n      定义：一个事务内多次读取同一数据集合，另一事务更新导致两次读取数据不一致，针对更新操作\n    幻读（Phantom Read）\n      定义：一个事务两次查询相同范围，另一事务插入或删除数据导致结果集不同，针对插入和删除操作\n    丢失更新（Lost Update）\n      定义：两个事务同时更新同一数据，一个事务更新结果被另一个覆盖",
+    "keynote": "脏读：读取未提交事务修改的数据\n不可重复读：事务内多次读同一数据集合，因另一事务更新致数据不一致，针对更新操作\n幻读：事务两次查询相同范围，因另一事务插入或删除数据致结果集不同，针对插入和删除操作\n丢失更新：两事务同时更新同一数据，一事务更新结果被另一覆盖",
+    "group_id": 4,
+    "kps": [
+      "事务与并发控制"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "CVTE视源股份",
+      "用友",
+      "美团",
+      "阿里巴巴",
+      "百度",
+      "满帮集团",
+      "贝壳",
+      "中国农业银行",
+      "字节跳动"
+    ]
+  }
+}

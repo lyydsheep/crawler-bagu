@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "data": {
+    "id": 1306,
+    "name": "<p>索引失效的情况有哪些</p>",
+    "options": null,
+    "answer": "<p>在数据库系统中，索引失效通常指的是索引未能被有效利用，从而导致查询性能下降。索引失效的情况主要有以下几种：</p>\n<ol>\n  <li>\n    <p><strong>不适当的查询条件</strong>：</p>\n    <ul>\n      <li>使用了不完全的条件，比如使用<code>LIKE '%value'</code>，会导致索引失效，因为数据库无法使用索引来优化该查询。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>数据类型不匹配</strong>：</p>\n    <ul>\n      <li>在查询时使用了不同的数据类型，比如将字符串类型与数字类型进行比较，可能导致索引失效。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>函数应用</strong>：</p>\n    <ul>\n      <li>在WHERE子句中对索引列应用了函数，例如<code>WHERE UPPER(column) = 'VALUE'</code>。这会使得索引无法被使用。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>OR条件</strong>：</p>\n    <ul>\n      <li>在包含OR条件的查询中，如果OR的两边的列并不是同一个索引，可能会导致索引失效。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>高选择性字段</strong>：</p>\n    <ul>\n      <li>当查询条件的选择性很低时，索引的性能可能会变差，数据库优化器可能选择全表扫描而不是使用索引。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>隐式转换</strong>：</p>\n    <ul>\n      <li>进行隐式类型转换（如VARCHAR转为INT），也可能导致索引失效。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>更新频繁的字段</strong>：</p>\n    <ul>\n      <li>对频繁更新的字段建立索引，可能导致索引的维护成本过高，从而影响查询性能。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>索引碎片</strong>：</p>\n    <ul>\n      <li>当索引过于碎片化时，查询性能可能会受到影响，虽不完全是索引失效，但同样会导致性能下降。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>数据库优化器的错误选择</strong>：</p>\n    <ul>\n      <li>有时候，数据库优化器可能做出不理想的决策，选择不使用索引，而是选择全表扫描。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>缺失联接条件</strong>：</p>\n    <ul>\n      <li>在JOIN操作中，如果没有提供足够的联接条件，可能导致索引失效。</li>\n    </ul>\n  </li>\n  <li>\n    <p><strong>锁定或单行索引</strong>：</p>\n    <ul>\n      <li>当大量数据的查询涉及到锁定，可能会引发性能问题。</li>\n    </ul>\n  </li>\n</ol>\n<p>通过了解这些索引失效的情况，可以帮助开发人员在设计数据库和编写查询时，更好地利用索引，提升查询性能。</p>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.008225324,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：索引失效的情况有哪些。</li>\n  <li><strong>考察点</strong>：对数据库索引原理、不同操作对索引使用影响的理解，以及在实际场景中判断索引是否生效的能力。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<ul>\n  <li><strong>索引的作用</strong>：数据库索引是一种数据结构，用于提高数据库表中数据的查询速度。通过索引，数据库可以快速定位到满足查询条件的数据行，而不必全表扫描。</li>\n  <li><strong>索引的类型</strong>：常见的索引类型包括B树索引、哈希索引等，不同类型索引在不同场景下性能表现不同。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）对索引列进行函数运算</h4>\n<ul>\n  <li>当对索引列使用函数时，数据库无法直接使用索引来定位数据。例如在MySQL中，<code>SELECT * FROM users WHERE YEAR(created_at) = 2023;</code>，这里对<code>created_at</code>列使用了<code>YEAR</code>函数，会导致索引失效，数据库需要全表扫描来查找满足条件的数据。</li>\n</ul>\n<h4>（2）隐式类型转换</h4>\n<ul>\n  <li>如果查询条件中的数据类型与索引列的数据类型不一致，数据库会进行隐式类型转换，这可能导致索引失效。例如，索引列<code>id</code>是整数类型，而查询语句<code>SELECT * FROM users WHERE id = '123';</code>，将字符串与整数进行比较，数据库会将字符串转换为整数，从而使索引无法正常使用。</li>\n</ul>\n<h4>（3）使用<code>OR</code>连接条件</h4>\n<ul>\n  <li>当查询条件使用<code>OR</code>连接多个条件时，如果其中一个条件没有索引，可能会导致整个索引失效。例如<code>SELECT * FROM users WHERE id = 1 OR name = 'John';</code>，若<code>name</code>列没有索引，数据库可能选择全表扫描。</li>\n</ul>\n<h4>（4）模糊查询以通配符开头</h4>\n<ul>\n  <li>在使用<code>LIKE</code>进行模糊查询时，如果通配符<code>%</code>在开头，如<code>SELECT * FROM users WHERE name LIKE '%John';</code>，数据库无法使用索引快速定位，会进行全表扫描。</li>\n</ul>\n<h4>（5）复合索引不满足最左前缀原则</h4>\n<ul>\n  <li>对于复合索引（多个列组成的索引），必须从最左边的列开始使用索引。例如，有复合索引<code>(col1, col2, col3)</code>，查询语句<code>SELECT * FROM table WHERE col2 = 'value';</code>不满足最左前缀原则，会导致索引失效。</li>\n</ul>\n<h4>（6）<code>IS NULL</code>和<code>IS NOT NULL</code></h4>\n<ul>\n  <li>部分数据库对于<code>IS NULL</code>和<code>IS NOT NULL</code>的处理可能导致索引失效。例如在某些情况下，使用<code>SELECT * FROM users WHERE age IS NULL;</code>或<code>SELECT * FROM users WHERE age IS NOT NULL;</code>可能无法使用索引。</li>\n</ul>\n<h4>（7）比较运算符使用不当</h4>\n<ul>\n  <li>某些复杂的比较运算符组合可能导致索引失效。例如，在范围查询后使用等值查询，如<code>SELECT * FROM users WHERE age > 20 AND age = 25;</code>，数据库可能无法有效使用索引。</li>\n</ul>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-sql\">-- 创建测试表\nCREATE TABLE users (\n    id INT,\n    name VARCHAR(50),\n    created_at DATE,\n    age INT,\n    INDEX idx_id (id),\n    INDEX idx_name (name),\n    INDEX idx_created_at (created_at),\n    INDEX idx_age (age),\n    INDEX idx_name_age (name, age)\n);\n\n-- 索引失效示例：对索引列使用函数\nSELECT * FROM users WHERE YEAR(created_at) = 2023;\n\n-- 索引失效示例：隐式类型转换\nSELECT * FROM users WHERE id = '123';\n\n-- 索引失效示例：使用OR连接条件\nSELECT * FROM users WHERE id = 1 OR name = 'John';\n\n-- 索引失效示例：模糊查询以通配符开头\nSELECT * FROM users WHERE name LIKE '%John';\n\n-- 索引失效示例：复合索引不满足最左前缀原则\nSELECT * FROM users WHERE age = 25;  -- 复合索引 (name, age)，这里只使用age列\n\n-- 索引失效示例：IS NULL\nSELECT * FROM users WHERE age IS NULL;\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）认为所有索引都能在任何情况下使用</h4>\n<ul>\n  <li>误区：认为只要创建了索引，查询时就一定会使用该索引。</li>\n  <li>纠正：要考虑查询条件、数据类型、操作符等因素对索引使用的影响。</li>\n</ul>\n<h4>（2）忽视复合索引的最左前缀原则</h4>\n<ul>\n  <li>误区：在使用复合索引时，不注意从最左边的列开始使用。</li>\n  <li>纠正：理解复合索引的原理，确保查询条件符合最左前缀原则。</li>\n</ul>\n<h4>（3）只关注单个条件对索引的影响</h4>\n<ul>\n  <li>误区：只考虑一个查询条件是否能使用索引，而忽略多个条件组合时的影响。</li>\n  <li>纠正：综合考虑查询语句中所有条件对索引使用的影响。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>索引失效的情况主要有以下几种：一是对索引列进行函数运算，数据库无法直接利用索引定位数据；二是存在隐式类型转换，当查询条件与索引列数据类型不一致时，会使索引无法正常使用；三是使用<code>OR</code>连接条件，若其中部分条件无索引，可能导致整个索引失效；四是模糊查询以通配符开头，如<code>LIKE '%xxx'</code>形式，无法利用索引快速定位；五是复合索引不满足最左前缀原则，必须从复合索引最左边的列开始使用；六是使用<code>IS NULL</code>和<code>IS NOT NULL</code>，部分数据库处理这类条件时可能使索引失效；七是比较运算符使用不当，一些复杂的比较运算符组合会影响索引的有效使用。在编写数据库查询语句时，要充分考虑这些情况，以确保索引能正常发挥作用，提高查询性能。</p>",
+    "more_ask": "<p>面试官可能会进一步问：</p>\n<ol>\n  <li>\n    <p><strong>你能详细描述一下索引失效的常见原因吗？</strong><br>提示：考虑数据类型、查询方式和索引类型的影响。</p>\n  </li>\n  <li>\n    <p><strong>在实际应用中，你如何监控和诊断索引的使用情况？</strong><br>提示：谈谈工具和方法，比如数据库性能监控工具。</p>\n  </li>\n  <li>\n    <p><strong>索引的选择与创建时有哪些最佳实践？</strong><br>提示：涉及选择合适字段、索引类型等方面。</p>\n  </li>\n  <li>\n    <p><strong>你能举例说明一次索引失效导致性能问题的案例吗？</strong><br>提示：分享实际经历并描述如何解决。</p>\n  </li>\n  <li>\n    <p><strong>在何种情况下，删除索引反而能提升查询性能？</strong><br>提示：考虑到存储和维护成本。</p>\n  </li>\n  <li>\n    <p><strong>针对特定查询，你会优先选择哪种类型的索引？为什么？</strong><br>提示：讨论B树、哈希索引等的适用场景。</p>\n  </li>\n  <li>\n    <p><strong>你如何评估一个数据库的索引策略是否有效？</strong><br>提示：考虑查询性能与索引占用空间的关系。</p>\n  </li>\n  <li>\n    <p><strong>在分布式数据库环境中，索引管理会有哪些特殊挑战？</strong><br>提示：讨论数据分片和一致性问题。</p>\n  </li>\n  <li>\n    <p><strong>你了解哪些技术可以替代传统索引以提升查询性能？</strong><br>提示：考虑全文搜索、倒排索引等。</p>\n  </li>\n  <li>\n    <p><strong>如何优化索引的维护成本？</strong><br>提示：转向定期分析、重建或重新组织索引的策略。</p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  索引失效\n    不适当的查询条件\n      使用了不完全的条件\n    数据类型不匹配\n      使用了不同的数据类型\n    函数应用\n      在WHERE子句中对索引列应用函数\n    OR条件\n      OR的两边的列不是同一个索引\n    高选择性字段\n      查询条件的选择性很低\n    隐式转换\n      进行隐式类型转换\n    更新频繁的字段\n      对频繁更新的字段建立索引\n    索引碎片\n      索引过于碎片化\n    数据库优化器的错误选择\n      优化器选择不使用索引\n    缺失联接条件\n      JOIN操作中缺少联接条件\n    锁定或单行索引\n      大量数据查询涉及锁定",
+    "keynote": "- 不适当的查询条件（如`LIKE '%value'`）\n- 数据类型不匹配（字符串与数字比较）\n- 函数应用（如`UPPER(column)`）\n- OR条件（不同索引列的OR）\n- 低选择性字段\n- 隐式转换（VARCHAR转INT）\n- 更新频繁的字段\n- 索引碎片\n- 数据库优化器错误选择\n- 缺失联接条件\n- 锁定或单行索引",
+    "group_id": 4,
+    "kps": [
+      "索引与查询优化"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "百考丝信息科技",
+      "杭州银行",
+      "小米",
+      "焦点科技",
+      "哈啰出行",
+      "合思",
+      "亚信安全",
+      "名通科技",
+      "字节跳动",
+      "奈雪的茶",
+      "京东",
+      "58同城",
+      "联想集团",
+      "途虎养车",
+      "携程",
+      "B站",
+      "用友",
+      "滴滴",
+      "美团",
+      "OPPO",
+      "度小满",
+      "腾讯PCG"
+    ]
+  }
+}

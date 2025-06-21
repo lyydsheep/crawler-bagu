@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "data": {
+    "id": 39018,
+    "name": "<p>请说明select、from、where、order by、group by、having子句的执行顺序</p>",
+    "options": null,
+    "answer": "<p>在 MySQL 中，这些子句的执行顺序如下：</p>\n<ol>\n  <li><code>from</code>：首先执行 <code>from</code> 子句，它的作用是从指定的表或者视图中获取数据，确定查询的数据来源。</li>\n  <li><code>where</code>：接着执行 <code>where</code> 子句，它会对 <code>from</code> 子句获取到的数据进行过滤，只保留满足 <code>where</code> 条件的记录。</li>\n  <li><code>group by</code>：然后是 <code>group by</code> 子句，它将 <code>where</code> 子句过滤后的结果按照指定的列进行分组。</li>\n  <li><code>having</code>：<code>having</code> 子句在 <code>group by</code> 之后执行，它用于对分组后的结果进行过滤，筛选出满足 <code>having</code> 条件的分组。</li>\n  <li><code>select</code>：<code>select</code> 子句在前面的操作完成后执行，它从经过前面步骤处理后的数据中选择需要的列。</li>\n  <li><code>order by</code>：最后执行 <code>order by</code> 子句，它会对 <code>select</code> 子句返回的结果集按照指定的列进行排序。</li>\n</ol>",
+    "type": 6,
+    "level": 1,
+    "freq": 0.003196459,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：说明<code>select</code>、<code>from</code>、<code>where</code>、<code>order by</code>、<code>group by</code>、<code>having</code>子句的执行顺序。</li>\n  <li><strong>考察点</strong>：对 MySQL 查询语句中各子句执行顺序的理解。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<ul>\n  <li>在 MySQL 中，一个完整的查询语句通常由多个子句组成，每个子句有不同的功能。<code>from</code>子句用于指定数据来源，<code>where</code>子句用于筛选行，<code>group by</code>子句用于分组，<code>having</code>子句用于对分组后的数据进行筛选，<code>select</code>子句用于选择要返回的列，<code>order by</code>子句用于对结果集进行排序。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）执行顺序</h4>\n<p>MySQL 查询语句中各子句的执行顺序如下：</p>\n<ol>\n  <li><strong><code>from</code></strong>：首先执行<code>from</code>子句，它的作用是确定数据的来源表。从指定的表或视图中读取数据，并且如果涉及多个表，会进行表连接操作，生成一个临时的结果集。</li>\n  <li><strong><code>where</code></strong>：接着执行<code>where</code>子句，它会对<code>from</code>子句生成的临时结果集进行筛选。根据<code>where</code>子句中的条件，过滤掉不满足条件的行，得到一个新的临时结果集。</li>\n  <li><strong><code>group by</code></strong>：然后执行<code>group by</code>子句，它会将<code>where</code>子句筛选后的结果集按照指定的列进行分组。分组后的数据会被聚合函数（如<code>sum</code>、<code>count</code>等）进行计算。</li>\n  <li><strong><code>having</code></strong>：<code>having</code>子句在<code>group by</code>之后执行，它用于对分组后的结果进行筛选。只有满足<code>having</code>子句条件的分组才会被保留，形成新的临时结果集。</li>\n  <li><strong><code>select</code></strong>：<code>select</code>子句在前面的操作完成后执行，它从前面生成的临时结果集中选择要返回的列。可以使用列名、表达式、聚合函数等。</li>\n  <li><strong><code>order by</code></strong>：最后执行<code>order by</code>子句，它对<code>select</code>子句返回的结果集按照指定的列进行排序，可以是升序（<code>asc</code>）或降序（<code>desc</code>）。</li>\n</ol>\n<h4>（2）示例说明执行顺序的重要性</h4>\n<p>假设有一个<code>orders</code>表，包含<code>order_id</code>、<code>customer_id</code>、<code>order_amount</code>三列。以下查询语句：</p>\n<pre><code class=\"language-sql\">SELECT customer_id, SUM(order_amount) as total_amount\nFROM orders\nWHERE order_amount > 100\nGROUP BY customer_id\nHAVING SUM(order_amount) > 500\nORDER BY total_amount DESC;\n</code></pre>\n<ul>\n  <li>首先，<code>from</code>子句从<code>orders</code>表中读取所有数据。</li>\n  <li>然后，<code>where</code>子句筛选出<code>order_amount</code>大于 100 的行。</li>\n  <li>接着，<code>group by</code>子句将筛选后的结果按<code>customer_id</code>分组。</li>\n  <li>之后，<code>having</code>子句筛选出分组后<code>SUM(order_amount)</code>大于 500 的分组。</li>\n  <li>再然后，<code>select</code>子句选择<code>customer_id</code>和分组后的<code>SUM(order_amount)</code>（命名为<code>total_amount</code>）。</li>\n  <li>最后，<code>order by</code>子句按<code>total_amount</code>降序排序结果集。</li>\n</ul>\n<h3>4. 常见误区</h3>\n<h4>（1）认为<code>select</code>先执行</h4>\n<ul>\n  <li>误区：很多人可能会认为<code>select</code>子句是最先执行的，因为它在查询语句的最前面。</li>\n  <li>纠正：实际上<code>select</code>子句是在其他子句完成相应操作后才执行的，它是基于前面生成的临时结果集来选择要返回的列。</li>\n</ul>\n<h4>（2）混淆<code>where</code>和<code>having</code>的执行顺序</h4>\n<ul>\n  <li>误区：不清楚<code>where</code>和<code>having</code>的区别和执行顺序，可能会错误地在<code>where</code>子句中使用聚合函数。</li>\n  <li>纠正：<code>where</code>子句在分组之前执行，不能使用聚合函数；<code>having</code>子句在分组之后执行，可以使用聚合函数对分组结果进行筛选。</li>\n</ul>\n<h3>5. 总结回答</h3>\n<p>MySQL 中<code>select</code>、<code>from</code>、<code>where</code>、<code>order by</code>、<code>group by</code>、<code>having</code>子句的执行顺序为：<code>from</code> -> <code>where</code> -> <code>group by</code> -> <code>having</code> -> <code>select</code> -> <code>order by</code>。<code>from</code>子句确定数据来源，<code>where</code>子句对数据进行行级筛选，<code>group by</code>子句对筛选后的数据进行分组，<code>having</code>子句对分组后的数据进行筛选，<code>select</code>子句选择要返回的列，<code>order by</code>子句对最终结果集进行排序。理解这个执行顺序对于编写正确的 SQL 查询语句非常重要。</p>",
+    "more_ask": "<h3>1. 请解释为什么是这样的执行顺序，这种顺序对查询性能有什么影响？</h3>\n<p>提示：从 SQL 语句的逻辑处理过程出发，思考每个子句的作用以及它们之间的依赖关系，再结合数据库的查询优化机制分析性能影响。</p>\n<h3>2. 在复杂查询中，如何利用执行顺序优化 <code>group by</code> 和 <code>having</code> 子句的性能？</h3>\n<p>提示：考虑索引的使用、数据过滤的先后顺序，以及如何减少 <code>group by</code> 操作的数据量。</p>\n<h3>3. 当 <code>where</code> 子句和 <code>having</code> 子句都能实现部分过滤功能时，如何选择使用哪个子句？</h3>\n<p>提示：对比 <code>where</code> 子句和 <code>having</code> 子句的执行时机和作用对象，根据具体的查询需求来判断。</p>\n<h3>4. 请举例说明 <code>order by</code> 子句在不同执行顺序下可能出现的问题及解决办法。</h3>\n<p>提示：思考 <code>order by</code> 与其他子句的交互，例如在 <code>group by</code> 之后使用 <code>order by</code> 可能出现的排序结果不符合预期的情况。</p>\n<h3>5. 如果在 <code>from</code> 子句中使用了多个表进行连接，执行顺序会有什么变化？</h3>\n<p>提示：考虑不同的连接类型（如内连接、外连接）以及数据库的连接优化策略。</p>\n<h3>6. 如何通过 SQL 语句查看 MySQL 实际的查询执行顺序？</h3>\n<p>提示：可以使用 MySQL 提供的特定关键字或工具来获取查询执行计划。</p>\n<h3>7. 在子查询中，这些子句的执行顺序是否会有所不同？</h3>\n<p>提示：分析子查询的嵌套结构和执行特点，与普通查询的执行顺序进行对比。</p>",
+    "mindmap": "mindmap\n  root((MySQL子句执行顺序))\n    from\n      作用：从指定表或视图获取数据，确定查询数据来源\n    where\n      作用：对from子句获取的数据过滤，保留满足条件记录\n    group by\n      作用：将where过滤结果按指定列分组\n    having\n      作用：对分组结果过滤，筛选满足条件分组\n    select\n      作用：从前面处理后的数据中选择需要的列\n    order by\n      作用：对select返回结果集按指定列排序",
+    "keynote": "from：获取数据，确定来源\nwhere：过滤from结果\ngroup by：对where结果分组\nhaving：过滤分组结果\nselect：选择所需列\norder by：对select结果排序",
+    "group_id": 13,
+    "kps": [
+      "基础概念"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "美团",
+      "作业帮",
+      "快手",
+      "招银网络科技",
+      "京东",
+      "贝壳",
+      "好未来,小米",
+      "科大讯飞",
+      "阿里巴巴"
+    ]
+  }
+}

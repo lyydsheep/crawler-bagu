@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "data": {
+    "id": 13798,
+    "name": "<p>请介绍Redis的ZSet及其底层的跳表</p>",
+    "options": null,
+    "answer": "<h3>Redis的ZSet</h3>\n<p>ZSet（有序集合）是Redis提供的一种数据结构，它兼具了Set（集合）和Hash（哈希表）的特性。</p>\n<h4>特点</h4>\n<ul>\n  <li><strong>唯一性</strong>：ZSet中的每个成员都是唯一的，就像Set一样，不会存在重复的元素。</li>\n  <li><strong>有序性</strong>：与Set不同的是，ZSet中的每个成员都关联着一个浮点型的分数（score），Redis会根据这些分数对成员进行从小到大的排序。如果多个成员的分数相同，Redis会按照成员的字典序进行排序。</li>\n</ul>\n<h4>应用场景</h4>\n<ul>\n  <li><strong>排行榜系统</strong>：可以根据用户的积分、成绩等分数信息，将用户作为成员存储在ZSet中，方便实时获取排名信息。</li>\n  <li><strong>时间线系统</strong>：以时间戳作为分数，将事件作为成员，能够按照时间顺序对事件进行排序和检索。</li>\n</ul>\n<h4>常用命令</h4>\n<ul>\n  <li><code>ZADD</code>：向ZSet中添加一个或多个成员及其分数。例如：<code>ZADD myzset 1 \"member1\" 2 \"member2\"</code>。</li>\n  <li><code>ZRANGE</code>：根据索引范围获取ZSet中的成员。例如：<code>ZRANGE myzset 0 -1</code> 会返回ZSet中所有成员。</li>\n  <li><code>ZSCORE</code>：获取指定成员的分数。例如：<code>ZSCORE myzset \"member1\"</code>。</li>\n</ul>\n<h3>跳表（Skip List）</h3>\n<p>跳表是Redis中ZSet的底层实现之一（当元素数量较多或者成员长度较长时使用，另一种实现是压缩列表），它是一种可以实现快速查找的数据结构。</p>\n<h4>基本原理</h4>\n<p>跳表是在有序链表的基础上发展而来的。在普通的有序链表中，查找一个元素需要从头节点开始逐个遍历，时间复杂度为O(n)。而跳表通过在原始链表的基础上增加多级索引，使得查找过程可以跳过一些不必要的节点，从而提高查找效率。</p>\n<h4>结构特点</h4>\n<ul>\n  <li><strong>多层结构</strong>：跳表由多层链表组成，最底层是原始的有序链表，存储了所有的元素。每一层链表都是下一层链表的子集，并且节点数量逐渐减少。</li>\n  <li><strong>节点指针</strong>：每个节点除了存储元素的值和分数外，还包含多个指针，分别指向不同层次的下一个节点。通过这些指针，可以在不同层次的链表中快速移动。</li>\n</ul>\n<h4>查找过程</h4>\n<ul>\n  <li>从最高层的链表开始，从左到右遍历节点，直到找到一个分数大于或等于目标分数的节点，或者到达链表的末尾。</li>\n  <li>如果当前节点的分数等于目标分数，则查找成功；如果当前节点的分数大于目标分数，则下降到下一层链表继续查找。</li>\n  <li>重复上述步骤，直到找到目标节点或者确定目标节点不存在。</li>\n</ul>\n<h4>插入和删除操作</h4>\n<ul>\n  <li><strong>插入操作</strong>：首先按照查找过程找到插入位置，然后将新节点插入到原始链表中。接着，通过随机算法决定新节点需要提升到的层次，为新节点在相应层次上创建指针。</li>\n  <li><strong>删除操作</strong>：先找到要删除的节点，然后从各层链表中删除该节点，并更新相关指针。</li>\n</ul>\n<h4>时间复杂度</h4>\n<p>跳表的查找、插入和删除操作的平均时间复杂度都是O(log n)，这使得它在处理大量数据时具有较高的效率。同时，跳表的实现相对简单，比平衡树等数据结构更容易理解和维护。</p>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.01038362,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：介绍Redis的ZSet及其底层的跳表。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>对Redis中ZSet数据结构的理解。</li>\n      <li>对跳表数据结构的理解。</li>\n      <li>跳表在ZSet中的应用。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）Redis数据结构概述</h4>\n<p>Redis是一个开源的高性能键值对数据库，支持多种数据结构，如字符串（String）、哈希（Hash）、列表（List）、集合（Set）和有序集合（ZSet）等。每种数据结构都有其特定的应用场景。</p>\n<h4>（2）跳表的基本概念</h4>\n<p>跳表（Skip List）是一种随机化的数据结构，它通过在每个节点中维护多个指向其他节点的指针，从而可以在 <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n      <semantics>\n        <mrow>\n          <mi>O</mi>\n          <mo stretchy=\"false\">(</mo>\n          <mi>l</mi>\n          <mi>o</mi>\n          <mi>g</mi>\n          <mi>n</mi>\n          <mo stretchy=\"false\">)</mo>\n        </mrow>\n        <annotation encoding=\"application/x-tex\">O(log n)</annotation>\n      </semantics>\n    </math></span> 的平均时间复杂度内完成插入、删除和查找操作。跳表的效率可以和平衡树相媲美，但实现起来更加简单。</p>\n<h3>3. 解析</h3>\n<h4>（1）Redis的ZSet</h4>\n<ul>\n  <li><strong>定义</strong>：ZSet（Sorted Set）即有序集合，是Redis提供的一种数据结构。它和Set类似，都是不允许有重复成员的集合，但ZSet中的每个成员都关联着一个分数（score），Redis会根据分数对成员进行从小到大的排序。</li>\n  <li><strong>应用场景</strong>：常用于排行榜系统，如游戏中的玩家排行榜、文章的点赞排行榜等；还可用于实现时间线，根据时间戳作为分数来存储数据。</li>\n  <li><strong>操作命令</strong>：常见的操作命令有<code>ZADD</code>（添加成员和分数）、<code>ZRANGE</code>（按分数范围获取成员）、<code>ZREM</code>（移除成员）等。</li>\n</ul>\n<h4>（2）跳表在ZSet中的应用</h4>\n<ul>\n  <li><strong>选择跳表的原因</strong>：ZSet需要支持按分数范围的快速查找和插入、删除操作。跳表可以在 <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n        <semantics>\n          <mrow>\n            <mi>O</mi>\n            <mo stretchy=\"false\">(</mo>\n            <mi>l</mi>\n            <mi>o</mi>\n            <mi>g</mi>\n            <mi>n</mi>\n            <mo stretchy=\"false\">)</mo>\n          </mrow>\n          <annotation encoding=\"application/x-tex\">O(log n)</annotation>\n        </semantics>\n      </math></span> 的平均时间复杂度内完成这些操作，而且实现相对简单，比平衡树更容易维护。同时，跳表还支持范围查找，这对于ZSet按分数范围获取成员非常重要。</li>\n  <li><strong>跳表的结构</strong>：跳表由多个节点组成，每个节点包含一个成员和对应的分数，以及多个指向其他节点的指针。每个节点的层数是随机确定的，层数越高，节点越少。最底层的链表包含所有的节点，从底层向上，每层链表的节点逐渐减少。</li>\n  <li><strong>跳表的操作</strong>：\n    <ul>\n      <li><strong>插入操作</strong>：首先随机确定新节点的层数，然后从最高层开始，找到合适的插入位置，将新节点插入到每层链表中。</li>\n      <li><strong>删除操作</strong>：从最高层开始，找到要删除的节点，将其从每层链表中删除。</li>\n      <li><strong>查找操作</strong>：从最高层开始，根据分数比较，找到合适的位置，然后逐层向下查找，直到找到目标节点或确定目标节点不存在。</li>\n    </ul>\n  </li>\n</ul>\n<h4>（3）ZSet的其他实现方式</h4>\n<p>在Redis中，ZSet在元素较少时会使用压缩列表（ziplist）来实现，当元素数量超过一定阈值时，才会转换为跳表实现。压缩列表是一种连续内存的数据结构，在元素较少时可以节省内存。</p>\n<h3>4. 示例代码（使用Redis客户端操作ZSet）</h3>\n<pre><code class=\"language-python\">import redis\n\n# 连接到Redis\nr = redis.Redis(host='localhost', port=6379, db=0)\n\n# 添加成员和分数\nr.zadd('leaderboard', {'player1': 100, 'player2': 200, 'player3': 150})\n\n# 获取分数从小到大的前两名玩家\nplayers = r.zrange('leaderboard', 0, 1, withscores=True)\nfor player, score in players:\n    print(f'Player: {player.decode()}, Score: {score}')\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）认为ZSet只能按分数从小到大排序</h4>\n<ul>\n  <li>误区：只知道ZSet默认按分数从小到大排序，不知道可以使用<code>ZREVRANGE</code>等命令按分数从大到小排序。</li>\n  <li>纠正：Redis提供了反向排序的命令，可以根据需求灵活排序。</li>\n</ul>\n<h4>（2）忽视跳表的随机性</h4>\n<ul>\n  <li>误区：认为跳表的性能是稳定的，没有考虑到跳表的层数是随机确定的，可能会影响性能。</li>\n  <li>纠正：跳表的平均时间复杂度是 <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n        <semantics>\n          <mrow>\n            <mi>O</mi>\n            <mo stretchy=\"false\">(</mo>\n            <mi>l</mi>\n            <mi>o</mi>\n            <mi>g</mi>\n            <mi>n</mi>\n            <mo stretchy=\"false\">)</mo>\n          </mrow>\n          <annotation encoding=\"application/x-tex\">O(log n)</annotation>\n        </semantics>\n      </math></span>，但在极端情况下，性能可能会下降。</li>\n</ul>\n<h4>（3）不清楚ZSet的实现转换</h4>\n<ul>\n  <li>误区：不知道ZSet在元素较少时会使用压缩列表实现，只关注跳表实现。</li>\n  <li>纠正：了解ZSet在不同场景下的实现方式，有助于优化内存使用。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>“Redis的ZSet是一种有序集合数据结构，其中每个成员都关联着一个分数，Redis会根据分数对成员进行从小到大的排序。ZSet常用于排行榜系统、时间线等场景。</p>\n<p>ZSet的底层在元素较少时使用压缩列表实现，当元素数量超过一定阈值时，会使用跳表实现。跳表是一种随机化的数据结构，它通过在每个节点中维护多个指向其他节点的指针，可以在 <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n      <semantics>\n        <mrow>\n          <mi>O</mi>\n          <mo stretchy=\"false\">(</mo>\n          <mi>l</mi>\n          <mi>o</mi>\n          <mi>g</mi>\n          <mi>n</mi>\n          <mo stretchy=\"false\">)</mo>\n        </mrow>\n        <annotation encoding=\"application/x-tex\">O(log n)</annotation>\n      </semantics>\n    </math></span> 的平均时间复杂度内完成插入、删除和查找操作。跳表支持范围查找，非常适合ZSet按分数范围获取成员的需求。</p>\n<p>不过，需要注意的是，跳表的层数是随机确定的，可能会影响性能。同时，ZSet不仅可以按分数从小到大排序，还可以使用反向排序命令按分数从大到小排序。了解ZSet在不同场景下的实现方式，有助于优化内存使用。”</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      跳表插入元素时如何动态维护索引层？\n      提示：思考插入元素时，如何决定是否要在索引层添加该元素，以及怎样保证跳表的平衡性。\n    </p>\n  </li>\n  <li>\n    <p>\n      跳表删除元素的具体步骤是什么，会对索引层有什么影响？\n      提示：先确定删除元素在跳表中的位置，再考虑删除后索引层的调整。\n    </p>\n  </li>\n  <li>\n    <p>\n      与其他有序数据结构（如红黑树）相比，跳表在Redis的ZSet中使用有哪些优势和劣势？\n      提示：从时间复杂度、实现复杂度、内存占用等方面对比。\n    </p>\n  </li>\n  <li>\n    <p>\n      跳表的空间复杂度是多少，如何优化其空间占用？\n      提示：分析跳表中节点和索引层的存储情况，思考减少冗余存储的方法。\n    </p>\n  </li>\n  <li>\n    <p>\n      在高并发场景下，Redis的ZSet使用跳表会有什么问题，如何解决？\n      提示：考虑并发读写时跳表的一致性问题，以及Redis的应对机制。\n    </p>\n  </li>\n  <li>\n    <p>\n      跳表的查找效率是如何保证的，平均和最坏情况下的时间复杂度分别是多少？\n      提示：分析跳表的索引结构对查找过程的影响。\n    </p>\n  </li>\n  <li>\n    <p>\n      Redis的ZSet中，跳表和压缩列表是如何配合使用的？\n      提示：了解Redis根据数据量和元素大小在两种结构间的切换规则。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何手动实现一个简单的跳表？\n      提示：从跳表的节点结构、插入、删除、查找操作入手。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((Redis的ZSet与跳表))\n    Redis的ZSet\n      特点\n        唯一性\n        有序性\n      应用场景\n        排行榜系统\n        时间线系统\n      常用命令\n        ZADD\n        ZRANGE\n        ZSCORE\n    跳表（Skip List）\n      基本原理\n        基于有序链表发展\n        增加多级索引提高查找效率\n      结构特点\n        多层结构\n        节点指针\n      查找过程\n        从最高层开始遍历\n        分数判断与降层查找\n      插入和删除操作\n        插入操作\n        删除操作\n      时间复杂度\n        平均O(log n)\n        实现简单易维护",
+    "keynote": "Redis的ZSet：兼具Set和Hash特性\n- 特点：唯一性、有序性（按分数排序，分数相同按字典序）\n- 应用场景：排行榜系统、时间线系统\n- 常用命令：ZADD、ZRANGE、ZSCORE\n\n跳表（Skip List）：ZSet底层实现之一\n- 基本原理：基于有序链表，增加多级索引\n- 结构特点：多层结构，节点含多指针\n- 查找过程：高层遍历，分数判断，降层查找\n- 插入和删除操作：按查找定位，插入随机提升层次，删除更新指针\n- 时间复杂度：平均O(log n)，实现简单易维护",
+    "group_id": 16,
+    "kps": [
+      "基础知识",
+      "数据结构"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "快手",
+      "字节跳动",
+      "用友",
+      "作业帮",
+      "美团",
+      "数字马力",
+      "能科",
+      "CVTE视源股份",
+      "哈啰出行",
+      "京东",
+      "去哪儿旅行",
+      "百度",
+      "字节抖音",
+      "腾讯",
+      "高德地图",
+      "OPPO",
+      "滴滴",
+      "携程",
+      "顺丰",
+      "B站",
+      "伴鱼"
+    ]
+  }
+}

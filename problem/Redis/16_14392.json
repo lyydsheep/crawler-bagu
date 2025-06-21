@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "data": {
+    "id": 14392,
+    "name": "<p>Redis的ZSet除了跳表（SkipList）还包含什么</p>",
+    "options": null,
+    "answer": "<p>Redis的ZSet（有序集合）除了跳表（SkipList）还包含哈希表（Hash Table）。</p>\n<p>在Redis的ZSet实现里，哈希表和跳表是协同工作的。哈希表的键是成员对象，值是对应的分数。借助哈希表，能以O(1)的时间复杂度来查找某个成员对应的分数。当需要快速获取某个成员的分数时，哈希表就发挥了重要作用，比如执行ZSCORE命令时，就可以直接通过哈希表来快速定位成员的分数。</p>\n<p>跳表则是一种有序的数据结构，它允许快速的插入、删除和查找操作，其平均时间复杂度为O(log N)。跳表按照分数对成员进行排序，这样在执行范围查找操作时，例如ZRANGE、ZREVRANGE等命令，跳表就可以高效地完成任务。</p>\n<p>通过结合哈希表和跳表这两种数据结构，Redis的ZSet既可以快速地根据成员查找分数，又能高效地进行范围查找，从而满足了不同场景下对有序集合操作的需求。</p>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.002019037,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：Redis的ZSet除了跳表（SkipList）还包含什么。</li>\n  <li><strong>考察点</strong>：对Redis中ZSet数据结构的全面了解，包括其内部组成部分及各部分的作用。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）ZSet简介</h4>\n<p>ZSet（有序集合）是Redis的一种数据结构，它的每个成员都关联着一个分数（score），Redis会根据分数对成员进行排序。ZSet既可以通过成员来获取分数，也可以根据分数范围来获取成员，在很多场景如排行榜等有广泛应用。</p>\n<h4>（2）跳表（SkipList）</h4>\n<p>跳表是一种随机化的数据结构，它通过在每个节点中维护多个指向其他节点的指针，来实现快速的查找、插入和删除操作。在ZSet中，跳表用于实现按分数范围的快速查找和遍历。</p>\n<h3>3. 解析</h3>\n<h4>（1）哈希表（Hash Table）</h4>\n<p>除了跳表，Redis的ZSet还包含一个哈希表。哈希表的键是ZSet中的成员，值是该成员对应的分数。哈希表的主要作用是实现O(1)时间复杂度的成员查找和分数获取。当需要根据成员来获取其分数时，Redis可以直接通过哈希表快速定位到对应的分数，而不需要遍历跳表。</p>\n<h4>（2）跳表和哈希表的协同工作</h4>\n<p>跳表和哈希表在ZSet中是协同工作的。当向ZSet中添加一个成员时，Redis会同时在跳表和哈希表中进行插入操作，确保跳表按分数有序，哈希表能快速查找成员。当删除一个成员时，也会同时在两个数据结构中进行删除操作。</p>\n<h3>4. 示例代码（伪代码）</h3>\n<pre><code class=\"language-python\"># 模拟向ZSet中添加成员\nzset = {\n    \"skiplist\": [],  # 跳表\n    \"hash_table\": {}  # 哈希表\n}\n\ndef zadd(zset, score, member):\n    # 在跳表中插入成员和分数\n    insert_into_skiplist(zset[\"skiplist\"], score, member)\n    # 在哈希表中插入成员和分数\n    zset[\"hash_table\"][member] = score\n\n# 模拟根据成员获取分数\ndef zscore(zset, member):\n    return zset[\"hash_table\"].get(member)\n\n# 模拟根据分数范围获取成员\ndef zrangebyscore(zset, min_score, max_score):\n    return search_skiplist(zset[\"skiplist\"], min_score, max_score)\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）认为ZSet只包含跳表</h4>\n<p>\n  误区：只知道ZSet使用跳表来实现有序性，忽略了哈希表的存在。\n  纠正：要明确ZSet除了跳表还包含哈希表，两者协同工作以实现高效的操作。\n</p>\n<h4>（2）混淆跳表和哈希表的作用</h4>\n<p>\n  误区：不清楚跳表和哈希表在ZSet中的具体作用，认为它们的功能是一样的。\n  纠正：跳表主要用于按分数范围的快速查找和遍历，而哈希表用于O(1)时间复杂度的成员查找和分数获取。\n</p>\n<h3>6. 总结回答</h3>\n<p>“Redis的ZSet除了跳表（SkipList）还包含哈希表（Hash Table）。跳表用于实现按分数范围的快速查找和遍历，它可以在O(log N)的时间复杂度内完成插入、删除和查找操作。而哈希表的键是ZSet中的成员，值是该成员对应的分数，其主要作用是实现O(1)时间复杂度的成员查找和分数获取。</p>\n<p>跳表和哈希表在ZSet中协同工作，当向ZSet中添加或删除成员时，Redis会同时在跳表和哈希表中进行相应的操作，以保证数据的一致性和操作的高效性。”</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      <strong>跳表在ZSet中的插入操作是怎样的，时间复杂度是多少？</strong>\n      提示：思考跳表插入时如何找到插入位置，以及如何更新索引层。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>ZSet中哈希表的作用是什么，它如何与跳表协同工作？</strong>\n      提示：考虑哈希表的特性，以及它在ZSet中存储的数据和跳表存储的数据之间的关联。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>当ZSet中的元素数量较少时，Redis为什么不使用跳表而使用压缩列表？</strong>\n      提示：对比跳表和压缩列表在空间和时间复杂度上的差异。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>在并发场景下，ZSet的跳表和哈希表如何保证数据的一致性？</strong>\n      提示：思考Redis的并发控制机制，如锁、CAS等。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>如果要对ZSet中的元素进行范围查询，跳表和哈希表分别起到什么作用？</strong>\n      提示：分析范围查询的步骤，以及跳表和哈希表在每个步骤中的作用。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>ZSet的跳表中随机层数的生成算法是怎样的，为什么要这样设计？</strong>\n      提示：了解随机层数的生成规则，以及这样设计对跳表性能的影响。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>当ZSet中的元素分数发生变化时，跳表和哈希表分别需要进行哪些更新操作？</strong>\n      提示：考虑分数变化对元素在跳表中的位置和哈希表中存储的影响。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>ZSet的哈希表在扩容时会对跳表产生什么影响，Redis是如何处理的？</strong>\n      提示：思考哈希表扩容的过程，以及跳表和哈希表之间的数据关联。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((Redis的ZSet))\n    数据结构\n      哈希表（Hash Table）\n      跳表（SkipList）\n    协同工作\n      哈希表作用\n        键为成员对象，值为分数\n        O(1)复杂度查找成员分数\n        支持ZSCORE命令\n      跳表作用\n        有序数据结构\n        平均O(log N)复杂度插入、删除、查找\n        按分数排序成员\n        支持ZRANGE、ZREVRANGE命令\n    优势\n      快速根据成员查分数\n      高效进行范围查找",
+    "keynote": "Redis的ZSet包含哈希表和跳表\n哈希表：键为成员对象、值为分数，O(1)查分数，支持ZSCORE命令\n跳表：有序结构，O(log N)插入删除查找，按分数排序，支持范围查找命令\n结合两者可满足不同场景操作需求",
+    "group_id": 16,
+    "kps": [
+      "数据结构"
+    ],
+    "years": [
+      2025,
+      2024
+    ],
+    "corps": [
+      "快手",
+      "小米",
+      "58同城",
+      "Momenta",
+      "字节跳动",
+      "腾讯",
+      "滴滴"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "data": {
+    "id": 15806,
+    "name": "<p>请写一个加锁的 SQL 解决幻读问题，并说明加的是什么锁</p>",
+    "options": null,
+    "answer": "<h3>问题分析</h3>\n<p>幻读是指在一个事务中，多次执行相同的查询语句，却得到不同的结果集，通常是因为在两次查询之间有其他事务插入或删除了符合查询条件的记录。在 MySQL 中，可以使用可串行化隔离级别或者显式加锁的方式来解决幻读问题。这里我们使用显式加锁的方式，通过 <code>SELECT ... FOR UPDATE</code> 语句来实现。</p>\n<h3>示例代码</h3>\n<p>假设我们有一个 <code>orders</code> 表，表结构如下：</p>\n<pre><code class=\"language-sql\">CREATE TABLE orders (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    order_number VARCHAR(20),\n    amount DECIMAL(10, 2)\n);\n</code></pre>\n<p>以下是一个加锁的 SQL 语句来解决幻读问题：</p>\n<pre><code class=\"language-sql\">-- 开启事务\nSTART TRANSACTION;\n-- 执行加锁查询\nSELECT * FROM orders WHERE amount > 100 FOR UPDATE;\n-- 模拟一些业务操作\n-- 可以在这里执行其他 SQL 语句，比如更新、插入等操作\n-- 提交事务\nCOMMIT;\n</code></pre>\n<h3>加的锁说明</h3>\n<p>在上述 SQL 语句中，<code>SELECT ... FOR UPDATE</code> 加的是行级排他锁（X 锁）。当执行 <code>SELECT ... FOR UPDATE</code> 语句时，MySQL 会对符合查询条件的所有记录加上排他锁，同时还会对查询范围加上间隙锁（Gap Lock）和临键锁（Next-Key Lock）。</p>\n<ul>\n  <li><strong>行级排他锁（X 锁）</strong>：防止其他事务对这些记录进行修改或删除操作，直到当前事务提交或回滚。</li>\n  <li><strong>间隙锁（Gap Lock）</strong>：锁定索引记录之间的间隙，防止其他事务在这些间隙中插入新的记录，从而避免了幻读的发生。</li>\n  <li><strong>临键锁（Next-Key Lock）</strong>：是行级排他锁和间隙锁的组合，既锁定记录本身，又锁定记录前后的间隙。</li>\n</ul>\n<p>通过这种方式，其他事务无法插入、更新或删除符合查询条件的记录，直到当前事务结束，从而解决了幻读问题。</p>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.0007376444,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：编写加锁的 SQL 解决幻读问题，并说明所加的锁。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>对 MySQL 中幻读问题的理解。</li>\n      <li>不同锁机制在解决幻读问题中的应用。</li>\n      <li>加锁 SQL 语句的编写。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）幻读问题</h4>\n<p>幻读指在一个事务中，多次执行相同的查询语句，由于其他事务插入或删除了符合查询条件的记录，导致每次查询结果集不同。</p>\n<h4>（2）MySQL 锁机制</h4>\n<ul>\n  <li><strong>共享锁（S 锁）</strong>：允许事务读取一行数据，多个事务可以同时对同一行数据加共享锁。</li>\n  <li><strong>排他锁（X 锁）</strong>：允许事务更新或删除一行数据，同一时间只有一个事务能对一行数据加排他锁。</li>\n  <li><strong>间隙锁</strong>：锁定一个范围，但不包含记录本身，用于防止其他事务在该范围内插入新记录。</li>\n  <li><strong>临键锁</strong>：是间隙锁和行锁的组合，既能锁定记录本身，又能锁定记录前后的间隙。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）解决幻读的方法</h4>\n<p>在 MySQL 的可重复读隔离级别下，默认使用临键锁来解决幻读问题。可以通过在查询时显式加锁来确保。</p>\n<h4>（2）加锁 SQL 示例</h4>\n<p>假设存在一个 <code>orders</code> 表，包含 <code>id</code> 和 <code>amount</code> 字段，要查询 <code>amount</code> 大于 100 的记录并防止幻读。</p>\n<pre><code class=\"language-sql\">-- 开启事务\nSTART TRANSACTION;\n\n-- 加临键锁查询\nSELECT * FROM orders WHERE amount > 100 FOR UPDATE;\n\n-- 后续业务操作\n-- ...\n\n-- 提交事务\nCOMMIT;\n</code></pre>\n<h4>（3）所加的锁</h4>\n<p>上述 SQL 中使用了 <code>FOR UPDATE</code> 语句，在可重复读隔离级别下，它会对符合条件的记录加临键锁。临键锁可以防止其他事务在查询范围的间隙插入新记录，从而避免幻读问题。</p>\n<h3>4. 常见误区</h3>\n<h4>（1）使用共享锁解决幻读</h4>\n<ul>\n  <li>误区：认为共享锁可以解决幻读问题。</li>\n  <li>纠正：共享锁主要用于并发读取，不能阻止其他事务插入新记录，无法解决幻读问题。</li>\n</ul>\n<h4>（2）忽略隔离级别</h4>\n<ul>\n  <li>误区：只关注加锁，而忽略了隔离级别对锁机制的影响。</li>\n  <li>纠正：不同的隔离级别下，锁的行为可能不同。在可重复读隔离级别下，<code>FOR UPDATE</code> 才会使用临键锁解决幻读。</li>\n</ul>\n<h3>5. 总结回答</h3>\n<p>可以使用如下 SQL 解决幻读问题：</p>\n<pre><code class=\"language-sql\">START TRANSACTION;\nSELECT * FROM orders WHERE amount > 100 FOR UPDATE;\n-- 后续业务操作\n-- ...\nCOMMIT;\n</code></pre>\n<p>这里加的是临键锁。在 MySQL 的可重复读隔离级别下，<code>FOR UPDATE</code> 语句会对符合条件的记录加临键锁，它是间隙锁和行锁的组合，既能锁定记录本身，又能锁定记录前后的间隙，防止其他事务在查询范围的间隙插入新记录，从而避免幻读问题。</p>",
+    "more_ask": "<h3>1. 不同隔离级别下锁的表现</h3>\n<ul>\n  <li><strong>问题</strong>：在可重复读和串行化隔离级别下，你写的加锁 SQL 表现有什么不同？</li>\n  <li><strong>提示</strong>：思考不同隔离级别对事务的并发控制规则，以及这些规则如何影响锁的行为，比如锁的持有时间、锁的范围等。</li>\n</ul>\n<h3>2. 锁的性能影响</h3>\n<ul>\n  <li><strong>问题</strong>：你加的锁对数据库性能有什么影响？如何优化？</li>\n  <li><strong>提示</strong>：从锁的粒度、锁的持有时间、并发事务的数量等方面考虑对性能的影响，优化可以从调整锁的使用方式、优化查询语句等角度思考。</li>\n</ul>\n<h3>3. 死锁相关</h3>\n<ul>\n  <li><strong>问题</strong>：使用你加的锁可能会导致死锁吗？如何避免？</li>\n  <li><strong>提示</strong>：分析死锁产生的四个必要条件，结合你加锁 SQL 的执行过程，看是否会满足这些条件，避免死锁可以从锁的顺序、超时机制等方面考虑。</li>\n</ul>\n<h3>4. 锁与索引的关系</h3>\n<ul>\n  <li><strong>问题</strong>：索引对加锁 SQL 有什么影响？如果没有合适的索引会怎样？</li>\n  <li><strong>提示</strong>：索引可以帮助数据库快速定位数据，从而影响锁的范围和加锁效率，没有合适索引时，数据库可能会进行全表扫描，导致锁的范围扩大。</li>\n</ul>\n<h3>5. 锁在高并发场景下的应用</h3>\n<ul>\n  <li><strong>问题</strong>：在高并发场景下，你写的加锁 SQL 会有什么问题？如何改进？</li>\n  <li><strong>提示</strong>：高并发场景下可能会出现锁竞争激烈的问题，导致性能下降甚至系统崩溃，改进可以从优化锁的使用、采用乐观锁等方面考虑。</li>\n</ul>",
+    "mindmap": "mindmap\n  root((幻读问题解决))\n    问题分析\n      幻读定义\n      MySQL解决方式\n      采用方法\n    加的锁说明\n      行级排他锁（X锁）\n      间隙锁（Gap Lock）\n      临键锁（Next-Key Lock）",
+    "keynote": "幻读定义：一个事务中多次执行相同查询语句得不同结果集，因其他事务插入或删除符合条件记录\nMySQL解决幻读方式：可串行化隔离级别、显式加锁\n采用方法：SELECT ... FOR UPDATE语句\n行级排他锁（X锁）：防其他事务修改或删除记录，至当前事务提交或回滚\n间隙锁（Gap Lock）：锁定索引记录间隙，防其他事务插入新记录\n临键锁（Next-Key Lock）：行级排他锁和间隙锁组合，锁定记录及前后间隙",
+    "group_id": 13,
+    "kps": [
+      "事务与并发控制"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "字节跳动",
+      "Shopee虾皮",
+      "腾讯"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "data": {
+    "id": 21113,
+    "name": "<p>Redis默认的数据淘汰策略是什么？</p>",
+    "options": null,
+    "answer": "<p>Redis 4.0 之前默认的数据淘汰策略是 noeviction，在该策略下，当 Redis 内存使用达到最大内存限制时，若客户端尝试执行会让内存分配增加的命令（如 SET、LPUSH 等），Redis 会直接返回错误，而不会淘汰任何数据。</p>\n<p>从 Redis 4.0 开始，默认的数据淘汰策略变为 allkeys-lru。此策略会从所有键中挑选最近最少使用（LRU）的键进行淘汰，以释放内存空间，从而允许新的数据写入。</p>",
+    "type": 6,
+    "level": 1,
+    "freq": 0.0002884338,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：Redis默认的数据淘汰策略是什么。</li>\n  <li><strong>考察点</strong>：对Redis数据淘汰机制的了解，特别是默认淘汰策略的掌握。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）Redis数据淘汰机制的必要性</h4>\n<p>Redis是基于内存存储数据的，内存空间有限。当Redis使用的内存达到一定阈值（由<code>maxmemory</code>参数设置）时，为了继续提供服务，需要淘汰一些数据以释放内存。</p>\n<h4>（2）常见的数据淘汰策略类型</h4>\n<p>Redis提供了多种数据淘汰策略，不同策略适用于不同的业务场景，主要分为以下几类：</p>\n<ul>\n  <li>针对设置了过期时间的键：如<code>volatile-lru</code>、<code>volatile-lfu</code>、<code>volatile-random</code>、<code>volatile-ttl</code>。</li>\n  <li>针对所有键：如<code>allkeys-lru</code>、<code>allkeys-lfu</code>、<code>allkeys-random</code>。</li>\n  <li>不淘汰数据：<code>noeviction</code>。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）Redis默认的数据淘汰策略</h4>\n<p>Redis默认的数据淘汰策略是<code>noeviction</code>。当Redis使用的内存达到<code>maxmemory</code>设置的阈值时，如果采用<code>noeviction</code>策略，Redis将不再接受写操作（如<code>SET</code>、<code>LPUSH</code>等），但仍然可以执行读操作（如<code>GET</code>）。这意味着在内存达到上限后，新的数据无法写入，直到有旧数据被手动删除或者过期。</p>\n<h4>（2）选择默认策略的原因</h4>\n<p>选择<code>noeviction</code>作为默认策略是为了保证数据的安全性。在一些对数据完整性要求较高的场景中，不希望因为内存不足而自动淘汰数据，避免数据丢失。用户可以根据自己的业务需求，通过修改<code>redis.conf</code>文件中的<code>maxmemory-policy</code>参数或者使用<code>CONFIG SET maxmemory-policy</code>命令来更改淘汰策略。</p>\n<h3>4. 示例说明</h3>\n<p>假设Redis配置了<code>maxmemory</code>为100MB，当Redis使用的内存达到100MB时，由于默认策略是<code>noeviction</code>，执行以下写操作会报错：</p>\n<pre><code>127.0.0.1:6379> SET key value\n(error) OOM command not allowed when used memory > 'maxmemory'.\n</code></pre>\n<p>但读操作仍然可以正常执行：</p>\n<pre><code>127.0.0.1:6379> GET existing_key\n\"existing_value\"\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）认为默认策略会自动淘汰数据</h4>\n<p>\n  误区：很多人可能认为Redis默认会采用某种自动淘汰数据的策略，如<code>volatile-lru</code>。\n  纠正：实际上默认策略是<code>noeviction</code>，不会自动淘汰数据，达到内存上限后会拒绝写操作。\n</p>\n<h4>（2）不清楚如何修改淘汰策略</h4>\n<p>\n  误区：只知道有多种淘汰策略，但不知道如何修改默认策略。\n  纠正：可以通过修改<code>redis.conf</code>文件中的<code>maxmemory-policy</code>参数，或者在Redis运行时使用<code>CONFIG SET maxmemory-policy</code>命令来更改淘汰策略。\n</p>\n<h3>6. 总结回答</h3>\n<p>Redis默认的数据淘汰策略是<code>noeviction</code>。当Redis使用的内存达到<code>maxmemory</code>设置的阈值时，采用该策略的Redis将不再接受写操作，但读操作仍可正常执行。选择该策略是为了保证数据的安全性，避免自动淘汰数据导致的数据丢失。用户可根据业务需求，通过修改<code>redis.conf</code>文件中的<code>maxmemory-policy</code>参数或使用<code>CONFIG SET maxmemory-policy</code>命令来更改淘汰策略。</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      Redis 不同数据淘汰策略在实际应用场景中的选择依据是什么？\n      提示：从业务对数据的读写频率、数据的时效性、内存使用情况等方面思考。\n    </p>\n  </li>\n  <li>\n    <p>\n      当 Redis 采用 volatile-lru 淘汰策略时，如何优化以提高缓存命中率？\n      提示：考虑数据的访问模式、缓存更新机制、数据的冷热分离等。\n    </p>\n  </li>\n  <li>\n    <p>\n      若要手动实现一个类似 Redis 的 LRU 数据淘汰机制，代码思路是怎样的？\n      提示：可以使用双向链表和哈希表结合的方式，链表用于维护数据的访问顺序，哈希表用于快速查找数据。\n    </p>\n  </li>\n  <li>\n    <p>\n      Redis 数据淘汰策略在集群环境下会有什么特殊问题？如何解决？\n      提示：思考集群中数据分布、节点间同步、负载均衡等方面可能出现的问题及应对方法。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何监控 Redis 数据淘汰策略的执行情况？\n      提示：可以从 Redis 提供的监控命令、日志信息、指标监控工具等方面考虑。\n    </p>\n  </li>\n  <li>\n    <p>\n      当 Redis 内存达到最大限制且采用 noeviction 策略时，会对业务产生什么影响？如何应对？\n      提示：分析业务的读写操作、错误处理机制，以及如何调整 Redis 配置或业务逻辑。\n    </p>\n  </li>\n  <li>\n    <p>\n      除了默认的几种数据淘汰策略，是否可以自定义 Redis 的数据淘汰策略？如果可以，该怎么做？\n      提示：了解 Redis 的扩展机制、Lua 脚本的使用等。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((Redis数据淘汰策略))\n    Redis 4.0之前\n      默认策略：noeviction\n      达到最大内存限制表现\n        执行增加内存分配命令返回错误\n        不淘汰数据\n    Redis 4.0开始\n      默认策略：allkeys - lru\n      策略方式\n        从所有键选最近最少使用键淘汰\n        释放内存允许新数据写入",
+    "keynote": "Redis 4.0之前：默认策略noeviction，达最大内存限制，执行增内存命令返回错误，不淘汰数据\nRedis 4.0开始：默认策略allkeys - lru，从所有键选最近最少使用键淘汰，释放内存允许新写入",
+    "group_id": 16,
+    "kps": [
+      "基础知识"
+    ],
+    "years": [
+      2024
+    ],
+    "corps": [
+      "安恒信息"
+    ]
+  }
+}

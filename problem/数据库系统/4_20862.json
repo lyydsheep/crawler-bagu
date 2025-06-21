@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "data": {
+    "id": 20862,
+    "name": "<p>left join和right join的区别是什么</p>",
+    "options": null,
+    "answer": "<p>在数据库系统中，<code>LEFT JOIN</code> 和 <code>RIGHT JOIN</code> 是用于组合两个或多个表中记录的连接操作，它们的主要区别在于返回结果集时对参与连接的表中记录的保留情况，以下为你详细介绍：</p>\n<h3>语法</h3>\n<pre><code class=\"language-sql\">-- LEFT JOIN 语法\nSELECT 列名列表\nFROM 表1\nLEFT JOIN 表2\nON 表1.列名 = 表2.列名;\n\n-- RIGHT JOIN 语法\nSELECT 列名列表\nFROM 表1\nRIGHT JOIN 表2\nON 表1.列名 = 表2.列名;\n</code></pre>\n<h3>区别</h3>\n<ul>\n  <li><strong>保留记录的表不同</strong>\n    <ul>\n      <li><strong>LEFT JOIN（左连接）</strong>：以左表（<code>FROM</code> 子句中第一个指定的表）为基础，返回左表中的所有记录，无论右表中是否有匹配的记录。如果右表中没有与左表匹配的记录，则结果集中右表的列将填充为 <code>NULL</code>。</li>\n      <li><strong>RIGHT JOIN（右连接）</strong>：以右表（<code>JOIN</code> 关键字后面指定的表）为基础，返回右表中的所有记录，无论左表中是否有匹配的记录。如果左表中没有与右表匹配的记录，则结果集中左表的列将填充为 <code>NULL</code>。</li>\n    </ul>\n  </li>\n</ul>\n<h3>示例</h3>\n<p>假设有两个表：<code>students</code> 和 <code>scores</code>，表结构和数据如下：</p>\n<pre><code class=\"language-sql\">-- 创建 students 表\nCREATE TABLE students (\n    student_id INT PRIMARY KEY,\n    student_name VARCHAR(50)\n);\n\n-- 插入数据\nINSERT INTO students (student_id, student_name) VALUES\n(1, 'Alice'),\n(2, 'Bob'),\n(3, 'Charlie');\n\n-- 创建 scores 表\nCREATE TABLE scores (\n    score_id INT PRIMARY KEY,\n    student_id INT,\n    score INT\n);\n\n-- 插入数据\nINSERT INTO scores (score_id, student_id, score) VALUES\n(1, 1, 85),\n(2, 2, 90);\n</code></pre>\n<h4>LEFT JOIN 示例</h4>\n<pre><code class=\"language-sql\">SELECT students.student_name, scores.score\nFROM students\nLEFT JOIN scores\nON students.student_id = scores.student_id;\n</code></pre>\n<p><strong>结果</strong>：</p>\n<table>\n  <thead>\n    <tr>\n      <th>student_name</th>\n      <th>score</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Alice</td>\n      <td>85</td>\n    </tr>\n    <tr>\n      <td>Bob</td>\n      <td>90</td>\n    </tr>\n    <tr>\n      <td>Charlie</td>\n      <td>NULL</td>\n    </tr>\n  </tbody>\n</table>\n<h4>RIGHT JOIN 示例</h4>\n<pre><code class=\"language-sql\">SELECT students.student_name, scores.score\nFROM students\nRIGHT JOIN scores\nON students.student_id = scores.student_id;\n</code></pre>\n<p><strong>结果</strong>：</p>\n<table>\n  <thead>\n    <tr>\n      <th>student_name</th>\n      <th>score</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Alice</td>\n      <td>85</td>\n    </tr>\n    <tr>\n      <td>Bob</td>\n      <td>90</td>\n    </tr>\n  </tbody>\n</table>\n<h3>总结</h3>\n<p><code>LEFT JOIN</code> 和 <code>RIGHT JOIN</code> 本质上是相似的，只是在保留记录的表上有所不同。在实际应用中，如果需要以左表为基础进行连接，就使用 <code>LEFT JOIN</code>；如果需要以右表为基础进行连接，就使用 <code>RIGHT JOIN</code>。实际上，<code>RIGHT JOIN</code> 可以通过交换表的顺序并使用 <code>LEFT JOIN</code> 来实现相同的结果。</p>",
+    "type": 6,
+    "level": 1,
+    "freq": 0.005732802,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：left join和right join的区别是什么。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>对SQL中连接操作的理解。</li>\n      <li>left join和right join的语法和功能。</li>\n      <li>两种连接操作结果集的差异。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）SQL连接操作</h4>\n<p>连接操作是SQL中用于合并两个或多个表中记录的操作，通过匹配不同表中的列来关联数据。</p>\n<h4>（2）left join和right join的基本概念</h4>\n<ul>\n  <li>left join（左连接）：以左表为主，返回左表中的所有记录，以及右表中匹配的记录。如果右表中没有匹配的记录，则用NULL填充。</li>\n  <li>right join（右连接）：以右表为主，返回右表中的所有记录，以及左表中匹配的记录。如果左表中没有匹配的记录，则用NULL填充。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）结果集差异</h4>\n<ul>\n  <li>left join：无论右表中是否有匹配的记录，左表的所有记录都会出现在结果集中。右表中没有匹配的部分用NULL表示。</li>\n  <li>right join：无论左表中是否有匹配的记录，右表的所有记录都会出现在结果集中。左表中没有匹配的部分用NULL表示。</li>\n</ul>\n<h4>（2）语法差异</h4>\n<ul>\n  <li>left join语法：</li>\n</ul>\n<pre><code class=\"language-sql\">SELECT column_name(s)\nFROM table1\nLEFT JOIN table2\nON table1.column_name = table2.column_name;\n</code></pre>\n<ul>\n  <li>right join语法：</li>\n</ul>\n<pre><code class=\"language-sql\">SELECT column_name(s)\nFROM table1\nRIGHT JOIN table2\nON table1.column_name = table2.column_name;\n</code></pre>\n<h4>（3）使用场景差异</h4>\n<ul>\n  <li>left join：当需要以左表的数据为基础，查看与之关联的右表数据时使用。例如，有一个用户表和一个订单表，想查看所有用户的订单信息，即使某些用户没有订单，也能看到用户信息。</li>\n  <li>right join：当需要以右表的数据为基础，查看与之关联的左表数据时使用。不过在实际应用中，right join使用相对较少，因为left join可以通过交换表的顺序达到相同的效果。</li>\n</ul>\n<h3>4. 示例代码</h3>\n<p>假设有两个表：<code>employees</code>（员工表）和<code>departments</code>（部门表）。</p>\n<pre><code class=\"language-sql\">-- 创建员工表\nCREATE TABLE employees (\n    employee_id INT PRIMARY KEY,\n    employee_name VARCHAR(50),\n    department_id INT\n);\n\n-- 创建部门表\nCREATE TABLE departments (\n    department_id INT PRIMARY KEY,\n    department_name VARCHAR(50)\n);\n\n-- 插入数据\nINSERT INTO employees (employee_id, employee_name, department_id) VALUES\n(1, 'Alice', 1),\n(2, 'Bob', 2),\n(3, 'Charlie', NULL);\n\nINSERT INTO departments (department_id, department_name) VALUES\n(1, 'HR'),\n(2, 'IT'),\n(3, 'Finance');\n\n-- left join示例\nSELECT employees.employee_name, departments.department_name\nFROM employees\nLEFT JOIN departments\nON employees.department_id = departments.department_id;\n\n-- right join示例\nSELECT employees.employee_name, departments.department_name\nFROM employees\nRIGHT JOIN departments\nON employees.department_id = departments.department_id;\n</code></pre>\n<ul>\n  <li>left join结果：会包含所有员工的信息，即使员工没有对应的部门，部门名称会显示为NULL。</li>\n  <li>right join结果：会包含所有部门的信息，即使部门没有对应的员工，员工名称会显示为NULL。</li>\n</ul>\n<h3>5. 常见误区</h3>\n<h4>（1）混淆主表</h4>\n<ul>\n  <li>误区：不清楚left join以左表为主，right join以右表为主，导致结果理解错误。</li>\n  <li>纠正：明确left join和right join中主表的概念，根据需求选择合适的连接方式。</li>\n</ul>\n<h4>（2）认为两种连接完全等价</h4>\n<ul>\n  <li>误区：认为left join和right join只是写法不同，结果一样。</li>\n  <li>纠正：虽然可以通过交换表的顺序让left join和right join达到相同的结果，但它们本身的主表不同，结果集有差异。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>“left join和right join都是SQL中的连接操作，它们的主要区别在于主表不同。left join以左表为主，会返回左表中的所有记录，以及右表中匹配的记录，若右表无匹配记录则用NULL填充；right join以右表为主，会返回右表中的所有记录，以及左表中匹配的记录，若左表无匹配记录则用NULL填充。</p>\n<p>在语法上，二者只是关键字不同。在使用场景方面，left join常用于以左表数据为基础查看关联的右表数据，right join常用于以右表数据为基础查看关联的左表数据，但right join使用相对较少，因为left join可通过交换表顺序达到类似效果。</p>\n<p>例如，在员工表和部门表的连接中，left join会保证所有员工信息都在结果集中，right join会保证所有部门信息都在结果集中。”</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      如何优化使用 LEFT JOIN 或 RIGHT JOIN 的查询性能？\n      提示：从索引、表结构、查询语句写法等方面思考。\n    </p>\n  </li>\n  <li>\n    <p>\n      在使用 LEFT JOIN 时，如果左表和右表有重复列名，会出现什么情况，如何处理？\n      提示：考虑查询结果列的显示情况，以及 SQL 中处理列名冲突的方法。\n    </p>\n  </li>\n  <li>\n    <p>\n      当 LEFT JOIN 或 RIGHT JOIN 涉及多个表连接时，连接顺序对查询结果和性能有什么影响？\n      提示：分析不同连接顺序下结果集的生成过程和资源消耗。\n    </p>\n  </li>\n  <li>\n    <p>\n      请举例说明在什么业务场景下适合使用 LEFT JOIN，什么场景适合使用 RIGHT JOIN？\n      提示：结合实际业务数据的特点和查询需求来思考。\n    </p>\n  </li>\n  <li>\n    <p>\n      如果在 LEFT JOIN 中右表数据量非常大，会对查询产生什么影响，如何解决？\n      提示：考虑性能瓶颈和优化策略，如分区、索引等。\n    </p>\n  </li>\n  <li>\n    <p>\n      在 MySQL 中，LEFT JOIN 和 RIGHT JOIN 的底层实现原理是什么？\n      提示：可以从查询执行计划、存储引擎等方面去了解。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何使用 LEFT JOIN 或 RIGHT JOIN 实现全外连接的效果？\n      提示：思考如何通过组合查询来模拟全外连接。\n    </p>\n  </li>\n  <li>\n    <p>\n      当使用 LEFT JOIN 或 RIGHT JOIN 时，ON 子句和 WHERE 子句的过滤条件有什么区别？\n      提示：分析不同子句在连接过程和结果筛选中的作用。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((数据库系统中 LEFT JOIN 和 RIGHT JOIN))\n    语法\n      LEFT JOIN 语法\n      RIGHT JOIN 语法\n    区别\n      保留记录的表不同\n        LEFT JOIN（左连接）\n        RIGHT JOIN（右连接）\n    示例\n      LEFT JOIN 示例\n      RIGHT JOIN 示例\n    总结\n      本质相似，保留记录的表不同\n      应用选择\n      RIGHT JOIN 可通过交换表顺序用 LEFT JOIN 实现",
+    "keynote": "数据库系统中 LEFT JOIN 和 RIGHT JOIN\n- 语法：有各自的 SELECT 语句格式\n- 区别：\n  - LEFT JOIN 以左表为基础，返回左表所有记录，右表无匹配则列填 NULL\n  - RIGHT JOIN 以右表为基础，返回右表所有记录，左表无匹配则列填 NULL\n- 示例：用 students 和 scores 表展示两种连接结果\n- 总结：本质相似，按基础表选连接方式，RIGHT JOIN 可由 LEFT JOIN 替代",
+    "group_id": 4,
+    "kps": [
+      "基础理论"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "焦点科技",
+      "灵动科技",
+      "vivo",
+      "数字马力",
+      "中通",
+      "字节跳动",
+      "招银网络科技",
+      "达实智能",
+      "腾讯",
+      "深信服",
+      "顺丰",
+      "网易",
+      "滴滴",
+      "百度",
+      "美团",
+      "快手"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "data": {
+    "id": 20751,
+    "name": "<p>请说明 Go 语言中 slice 的原理</p>",
+    "options": null,
+    "answer": "<p>在 Go 语言里，切片（slice）是对数组的抽象，它提供了一种灵活、动态的方式来处理序列数据。下面详细说明其原理：</p>\n<h3>数据结构</h3>\n<p>在 Go 语言的运行时，切片是一个结构体，定义在 <code>runtime</code> 包中，其结构大致如下：</p>\n<pre><code class=\"language-go\">type slice struct {\n    array unsafe.Pointer // 指向底层数组的指针\n    len   int            // 切片的长度，即当前切片中元素的数量\n    cap   int            // 切片的容量，即底层数组从切片起始位置开始的元素数量\n}\n</code></pre>\n<ul>\n  <li><code>array</code>：这是一个指向底层数组的指针，切片通过这个指针来访问实际存储的数据。</li>\n  <li><code>len</code>：表示切片当前包含的元素个数，使用 <code>len()</code> 函数可以获取该值。</li>\n  <li><code>cap</code>：代表切片的容量，也就是底层数组从切片起始位置开始的元素数量，使用 <code>cap()</code> 函数可以获取该值。</li>\n</ul>\n<h3>创建切片</h3>\n<p>可以通过多种方式创建切片：</p>\n<ul>\n  <li><strong>基于数组创建</strong>：</li>\n</ul>\n<pre><code class=\"language-go\">arr := [5]int{1, 2, 3, 4, 5}\ns := arr[1:3] // 创建一个从索引 1 到 2 的切片\n</code></pre>\n<p>这里 <code>s</code> 是一个切片，它的底层数组是 <code>arr</code>，<code>len(s)</code> 为 2，<code>cap(s)</code> 为 4。</p>\n<ul>\n  <li><strong>使用 <code>make</code> 函数创建</strong>：</li>\n</ul>\n<pre><code class=\"language-go\">s := make([]int, 3, 5) // 创建一个长度为 3，容量为 5 的切片\n</code></pre>\n<p>使用 <code>make</code> 函数创建切片时，会先分配一个底层数组，然后返回一个指向该数组的切片。</p>\n<h3>切片的扩容</h3>\n<p>当向切片中添加元素时，如果切片的长度超过了其容量，就需要进行扩容。扩容的大致步骤如下：</p>\n<ol>\n  <li>计算新的容量：Go 语言会根据切片的当前容量来决定新的容量大小。一般来说，如果原容量小于 1024，新容量会翻倍；如果原容量大于等于 1024，新容量会增加 25%。</li>\n  <li>分配新的底层数组：根据新的容量分配一块新的内存空间。</li>\n  <li>复制元素：将原底层数组中的元素复制到新的底层数组中。</li>\n  <li>更新切片的指针、长度和容量：让切片指向新的底层数组，并更新长度和容量。</li>\n</ol>\n<p>以下是一个扩容的示例：</p>\n<pre><code class=\"language-go\">package main\n\nimport \"fmt\"\n\nfunc main() {\n    s := make([]int, 0, 2)\n    fmt.Printf(\"len: %d, cap: %d\\n\", len(s), cap(s))\n    s = append(s, 1, 2)\n    fmt.Printf(\"len: %d, cap: %d\\n\", len(s), cap(s))\n    s = append(s, 3)\n    fmt.Printf(\"len: %d, cap: %d\\n\", len(s), cap(s))\n}\n</code></pre>\n<h3>切片的引用特性</h3>\n<p>切片是引用类型，多个切片可以引用同一个底层数组。对一个切片的修改可能会影响到其他引用同一底层数组的切片。例如：</p>\n<pre><code class=\"language-go\">arr := [5]int{1, 2, 3, 4, 5}\ns1 := arr[1:3]\ns2 := arr[2:4]\ns1[1] = 10\nfmt.Println(s2[0]) // 输出 10\n</code></pre>\n<p>在这个例子中，<code>s1</code> 和 <code>s2</code> 引用了同一个底层数组 <code>arr</code>，修改 <code>s1</code> 中的元素会影响到 <code>s2</code>。</p>\n<p>综上所述，Go 语言的切片通过一个包含指针、长度和容量的结构体来实现，它提供了动态数组的功能，并且在扩容时会重新分配底层数组。同时，切片是引用类型，多个切片可以共享同一个底层数组。</p>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.03660566,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：说明Go语言中slice的原理。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>slice的底层数据结构。</li>\n      <li>slice的创建和初始化方式。</li>\n      <li>slice的扩容机制。</li>\n      <li>slice与数组的关系。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）数组</h4>\n<p>数组是具有固定长度且元素类型相同的序列，在内存中是连续存储的。数组的长度在定义时就确定，之后不能改变。</p>\n<h4>（2）slice</h4>\n<p>slice是对数组的抽象，是一种动态数组，长度可以动态变化。它提供了更灵活的方式来处理数据集合。</p>\n<h3>3. 解析</h3>\n<h4>（1）底层数据结构</h4>\n<p>Go语言中slice是一个结构体，包含三个字段：</p>\n<ul>\n  <li><strong>指针（ptr）</strong>：指向底层数组的起始位置。</li>\n  <li><strong>长度（len）</strong>：表示slice当前包含的元素个数。</li>\n  <li><strong>容量（cap）</strong>：表示底层数组从起始位置开始的最大元素个数。</li>\n</ul>\n<pre><code class=\"language-go\">type slice struct {\n    array unsafe.Pointer\n    len   int\n    cap   int\n}\n</code></pre>\n<h4>（2）创建和初始化</h4>\n<ul>\n  <li><strong>使用make函数</strong>：可以指定slice的长度和容量。</li>\n</ul>\n<pre><code class=\"language-go\">s := make([]int, 3, 5) // 创建一个长度为3，容量为5的int类型slice\n</code></pre>\n<ul>\n  <li><strong>使用字面量</strong>：可以直接初始化slice。</li>\n</ul>\n<pre><code class=\"language-go\">s := []int{1, 2, 3} // 创建一个长度和容量都为3的int类型slice\n</code></pre>\n<ul>\n  <li><strong>从数组或其他slice派生</strong>：通过指定起始和结束索引来创建新的slice。</li>\n</ul>\n<pre><code class=\"language-go\">arr := [5]int{1, 2, 3, 4, 5}\ns := arr[1:3] // 创建一个长度为2，容量为4的slice，指向arr的第2和第3个元素\n</code></pre>\n<h4>（3）扩容机制</h4>\n<p>当向slice中添加元素时，如果长度超过了容量，slice会进行扩容。扩容的步骤如下：</p>\n<ul>\n  <li>如果新的长度小于原容量的2倍，且原容量小于1024，新容量会扩展为原容量的2倍。</li>\n  <li>如果原容量大于等于1024，新容量会按照1.25倍左右的比例进行扩展。</li>\n  <li>扩容时会创建一个新的底层数组，将原数组的元素复制到新数组中，然后更新slice的指针、长度和容量。</li>\n</ul>\n<pre><code class=\"language-go\">s := make([]int, 0, 2)\ns = append(s, 1, 2) // 此时len(s)=2, cap(s)=2\ns = append(s, 3)    // 触发扩容，新容量可能变为4\n</code></pre>\n<h4>（4）slice与数组的关系</h4>\n<ul>\n  <li>slice是对数组的引用，多个slice可以引用同一个底层数组。</li>\n  <li>修改slice中的元素会影响到对应的底层数组和其他引用该数组的slice。</li>\n</ul>\n<pre><code class=\"language-go\">arr := [5]int{1, 2, 3, 4, 5}\ns1 := arr[1:3]\ns2 := arr[2:4]\ns1[1] = 10 // 修改s1的元素会影响到arr和s2\nfmt.Println(s2[0]) // 输出: 10\n</code></pre>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-go\">package main\n\nimport \"fmt\"\n\nfunc main() {\n    // 创建一个长度为3，容量为5的slice\n    s := make([]int, 3, 5)\n    fmt.Printf(\"len: %d, cap: %d\\n\", len(s), cap(s))\n\n    // 向slice中添加元素\n    s = append(s, 4, 5)\n    fmt.Printf(\"len: %d, cap: %d\\n\", len(s), cap(s))\n\n    // 触发扩容\n    s = append(s, 6)\n    fmt.Printf(\"len: %d, cap: %d\\n\", len(s), cap(s))\n}\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）认为slice是值类型</h4>\n<ul>\n  <li>误区：将slice当作值类型处理，认为传递slice时会复制整个数据。</li>\n  <li>纠正：slice是引用类型，传递slice时只复制了底层的结构体，它们仍然引用同一个底层数组。</li>\n</ul>\n<h4>（2）忽略扩容的性能开销</h4>\n<ul>\n  <li>误区：频繁向slice中添加元素而不考虑扩容的性能开销。</li>\n  <li>纠正：在创建slice时尽量预估好容量，减少不必要的扩容操作。</li>\n</ul>\n<h4>（3）混淆长度和容量</h4>\n<ul>\n  <li>误区：不清楚长度和容量的区别，在使用slice时可能会出现越界错误。</li>\n  <li>纠正：长度表示slice当前包含的元素个数，容量表示底层数组从起始位置开始的最大元素个数。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>“Go语言中slice是对数组的抽象，是一种动态数组。它的底层是一个结构体，包含三个字段：指向底层数组的指针、长度和容量。</p>\n<p>slice可以通过make函数、字面量或从数组/其他slice派生的方式创建和初始化。当向slice中添加元素时，如果长度超过了容量，slice会进行扩容。扩容时会创建一个新的底层数组，将原数组的元素复制到新数组中。</p>\n<p>slice是引用类型，多个slice可以引用同一个底层数组，修改slice中的元素会影响到对应的底层数组和其他引用该数组的slice。</p>\n<p>需要注意的是，slice是引用类型，传递时只复制结构体；频繁扩容会带来性能开销，应尽量预估好容量；同时要清楚长度和容量的区别，避免越界错误。”</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      当对一个 slice 进行扩容时，底层数组是如何处理的？\n      提示：思考扩容时是否会创建新的底层数组，以及旧数组元素如何迁移。\n    </p>\n  </li>\n  <li>\n    <p>\n      请说明 slice 作为函数参数传递时，在函数内部修改 slice 会对外部产生什么影响？\n      提示：考虑 slice 是引用类型，分析修改元素和修改 slice 本身的不同情况。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何高效地删除 slice 中的元素？\n      提示：从避免内存浪费和减少元素移动次数的角度思考。\n    </p>\n  </li>\n  <li>\n    <p>\n      多个 slice 共享同一个底层数组时，修改其中一个 slice 的元素会有什么后果？\n      提示：结合底层数组的特性，分析对其他 slice 的影响。\n    </p>\n  </li>\n  <li>\n    <p>\n      请解释 slice 的容量和长度的区别，以及它们在操作中有什么作用？\n      提示：分别说明长度和容量的含义，以及在 append 等操作中的表现。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((Go语言切片原理))\n    数据结构\n      结构体定义在runtime包\n      array：指向底层数组的指针\n      len：切片长度，可用len()获取\n      cap：切片容量，可用cap()获取\n    创建切片\n      基于数组创建\n      使用make函数创建\n    切片的扩容\n      计算新容量（原容量<1024，新容量翻倍；原容量>=1024，新容量增加25%）\n      分配新的底层数组\n      复制元素\n      更新切片指针、长度和容量\n    切片的引用特性\n      多个切片可引用同一底层数组\n      对一个切片修改可能影响其他切片",
+    "keynote": "Go语言切片是对数组的抽象，提供灵活动态处理序列数据方式\n数据结构：runtime包中结构体，含指向底层数组指针array、长度len、容量cap\n创建方式：基于数组、使用make函数\n扩容步骤：算新容量、分配新数组、复制元素、更新指针长度容量\n引用特性：多个切片可引用同一底层数组，修改会相互影响",
+    "group_id": 23,
+    "kps": [
+      "基本语法",
+      "变量和类型"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "百度",
+      "小米",
+      "松鼠AI",
+      "无问芯穹",
+      "快手",
+      "百度网盘",
+      "Shopee虾皮",
+      "滴滴",
+      "某小厂",
+      "深信服",
+      "B站",
+      "小红书",
+      "金山",
+      "七牛云",
+      "Momenta",
+      "腾讯",
+      "腾讯互娱",
+      "字节跳动",
+      "上海司睿杰建科"
+    ]
+  }
+}

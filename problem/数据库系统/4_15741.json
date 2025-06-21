@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "data": {
+    "id": 15741,
+    "name": "<p>简述UNION和UNION ALL关键字的区别和作用</p>",
+    "options": null,
+    "answer": "<p>在数据库系统中，<code>UNION</code> 和 <code>UNION ALL</code> 都是用于合并多个 <code>SELECT</code> 语句的结果集的关键字，下面详细介绍它们的区别和作用。</p>\n<h3>作用</h3>\n<p><code>UNION</code> 和 <code>UNION ALL</code> 的主要作用是将多个 <code>SELECT</code> 语句的结果集合并成一个结果集。这在需要从多个表或者不同的查询条件中获取数据并将它们组合在一起时非常有用。</p>\n<h4>示例表结构</h4>\n<p>假设我们有两个表 <code>table1</code> 和 <code>table2</code>，它们的结构和数据如下：</p>\n<pre><code class=\"language-sql\">-- 创建 table1 表\nCREATE TABLE table1 (\n    id INT,\n    name VARCHAR(50)\n);\n\n-- 插入数据\nINSERT INTO table1 (id, name) VALUES (1, 'Alice');\nINSERT INTO table1 (id, name) VALUES (2, 'Bob');\n\n-- 创建 table2 表\nCREATE TABLE table2 (\n    id INT,\n    name VARCHAR(50)\n);\n\n-- 插入数据\nINSERT INTO table2 (id, name) VALUES (2, 'Bob');\nINSERT INTO table2 (id, name) VALUES (3, 'Charlie');\n</code></pre>\n<h3><code>UNION</code></h3>\n<h4>作用</h4>\n<p><code>UNION</code> 用于合并多个 <code>SELECT</code> 语句的结果集，并自动去除重复的行。它会对合并后的结果集进行排序和去重操作。</p>\n<h4>语法</h4>\n<pre><code class=\"language-sql\">SELECT column1, column2, ...\nFROM table1\nUNION\nSELECT column1, column2, ...\nFROM table2;\n</code></pre>\n<h4>示例</h4>\n<pre><code class=\"language-sql\">SELECT id, name FROM table1\nUNION\nSELECT id, name FROM table2;\n</code></pre>\n<h4>结果</h4>\n<pre><code>id | name\n---|--------\n1  | Alice\n2  | Bob\n3  | Charlie\n</code></pre>\n<p>可以看到，重复的行 <code>(2, 'Bob')</code> 只出现了一次。</p>\n<h3><code>UNION ALL</code></h3>\n<h4>作用</h4>\n<p><code>UNION ALL</code> 同样用于合并多个 <code>SELECT</code> 语句的结果集，但它不会去除重复的行，也不会对结果集进行排序。它只是简单地将多个结果集连接在一起。</p>\n<h4>语法</h4>\n<pre><code class=\"language-sql\">SELECT column1, column2, ...\nFROM table1\nUNION ALL\nSELECT column1, column2, ...\nFROM table2;\n</code></pre>\n<h4>示例</h4>\n<pre><code class=\"language-sql\">SELECT id, name FROM table1\nUNION ALL\nSELECT id, name FROM table2;\n</code></pre>\n<h4>结果</h4>\n<pre><code>id | name\n---|--------\n1  | Alice\n2  | Bob\n2  | Bob\n3  | Charlie\n</code></pre>\n<p>可以看到，重复的行 <code>(2, 'Bob')</code> 出现了两次。</p>\n<h3>区别总结</h3>\n<ul>\n  <li><strong>去重处理</strong>：<code>UNION</code> 会自动去除合并结果集中的重复行，而 <code>UNION ALL</code> 不会进行去重操作，会保留所有行。</li>\n  <li><strong>性能</strong>：由于 <code>UNION</code> 需要进行去重和排序操作，通常比 <code>UNION ALL</code> 的性能要低。如果可以确定合并的结果集中不会有重复行，或者不需要去除重复行，建议使用 <code>UNION ALL</code> 以提高查询性能。</li>\n</ul>",
+    "type": 6,
+    "level": 1,
+    "freq": 0.002492522,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：简述UNION和UNION ALL关键字的区别和作用。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>对SQL中UNION和UNION ALL关键字功能的理解。</li>\n      <li>两者在结果集处理上的差异。</li>\n      <li>对性能影响的认识。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<ul>\n  <li>在数据库操作中，经常需要将多个查询结果合并成一个结果集。UNION和UNION ALL就是用于实现这一功能的关键字。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）作用</h4>\n<ul>\n  <li><strong>UNION</strong>：用于合并多个SELECT语句的结果集，它会去除结果集中的重复行，最终返回的是一个包含所有查询结果且无重复行的结果集。</li>\n  <li><strong>UNION ALL</strong>：同样用于合并多个SELECT语句的结果集，但它不会去除重复行，会将所有查询结果直接合并在一起。</li>\n</ul>\n<h4>（2）区别</h4>\n<ul>\n  <li><strong>重复行处理</strong>：\n    <ul>\n      <li>UNION会自动对合并后的结果集进行去重操作，保证结果集中每行数据的唯一性。</li>\n      <li>UNION ALL不会进行去重，即使有重复行也会全部保留。</li>\n    </ul>\n  </li>\n  <li><strong>性能方面</strong>：\n    <ul>\n      <li>UNION由于需要进行去重操作，通常会比UNION ALL消耗更多的系统资源和时间，性能相对较低。</li>\n      <li>UNION ALL只是简单地将结果集合并，不需要进行去重判断，因此性能较高。</li>\n    </ul>\n  </li>\n</ul>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-sql\">-- 创建示例表\nCREATE TABLE table1 (\n    id INT\n);\n\nCREATE TABLE table2 (\n    id INT\n);\n\n-- 插入示例数据\nINSERT INTO table1 VALUES (1), (2), (3);\nINSERT INTO table2 VALUES (3), (4), (5);\n\n-- 使用UNION\nSELECT id FROM table1\nUNION\nSELECT id FROM table2;\n\n-- 使用UNION ALL\nSELECT id FROM table1\nUNION ALL\nSELECT id FROM table2;\n</code></pre>\n<ul>\n  <li>在上述示例中，使用UNION时，结果集中不会有重复的<code>id</code>值；而使用UNION ALL时，重复的<code>id</code>值会被保留。</li>\n</ul>\n<h3>5. 常见误区</h3>\n<h4>（1）混淆两者功能</h4>\n<ul>\n  <li>误区：认为UNION和UNION ALL都能去重或都不能去重。</li>\n  <li>纠正：明确UNION会去重，UNION ALL不会去重。</li>\n</ul>\n<h4>（2）忽视性能差异</h4>\n<ul>\n  <li>误区：在不需要去重的场景下也使用UNION，导致性能下降。</li>\n  <li>纠正：如果确定结果集中不需要去重，优先使用UNION ALL以提高性能。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>“UNION和UNION ALL关键字都用于合并多个SELECT语句的结果集。UNION会去除合并结果集中的重复行，保证结果集的唯一性；而UNION ALL不会进行去重操作，会将所有查询结果直接合并。</p>\n<p>在性能方面，由于UNION需要进行去重操作，通常会比UNION ALL消耗更多的系统资源和时间，性能相对较低。因此，在不需要去重的场景下，应优先使用UNION ALL以提高性能。”</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      当使用 UNION 或 UNION ALL 连接的两个查询结果集列的数据类型不完全一致时，数据库会如何处理？\n      提示：思考数据库的隐式数据类型转换规则。\n    </p>\n  </li>\n  <li>\n    <p>\n      在大数据量的情况下，使用 UNION 和 UNION ALL 哪个性能更好，为什么？\n      提示：从操作原理和资源消耗方面考虑。\n    </p>\n  </li>\n  <li>\n    <p>\n      若要对 UNION 或 UNION ALL 连接后的结果集进行排序，应该把 ORDER BY 子句放在什么位置？\n      提示：结合 SQL 语句的执行顺序思考。\n    </p>\n  </li>\n  <li>\n    <p>\n      能否在 UNION 或 UNION ALL 中使用子查询？如果可以，请举例说明。\n      提示：考虑子查询在 SQL 中的使用场景。\n    </p>\n  </li>\n  <li>\n    <p>\n      当使用 UNION 或 UNION ALL 连接多个查询时，对查询的列数有什么要求？\n      提示：从结果集合并的角度去分析。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((数据库中 UNION 和 UNION ALL 的区别与作用))\n    作用\n      合并多个 SELECT 语句结果集\n      从多表或不同查询条件获取数据并组合\n    UNION\n      作用\n        合并结果集并自动去重\n        对结果集排序和去重\n      语法\n      示例\n      结果（去重）\n    UNION ALL\n      作用\n        合并结果集\n        不进行去重和排序\n      语法\n      示例\n      结果（保留重复行）\n    区别总结\n      去重处理\n        UNION 去重\n        UNION ALL 不去重\n      性能\n        UNION 性能低\n        UNION ALL 性能高（无重复行或无需去重时建议使用）",
+    "keynote": "数据库中 UNION 和 UNION ALL 用于合并多个 SELECT 语句结果集\n作用：从多表或不同查询条件获取数据并组合\nUNION：合并结果集，自动去重，对结果集排序和去重\nUNION ALL：合并结果集，不进行去重和排序\n区别：UNION 去重、性能低；UNION ALL 不去重、性能高（无重复行或无需去重时建议使用）",
+    "group_id": 4,
+    "kps": [
+      "基础理论"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "搜狐畅游",
+      "用友",
+      "华软未来",
+      "平安科技",
+      "美团",
+      "百度",
+      "滴滴",
+      "B站",
+      "快手"
+    ]
+  }
+}

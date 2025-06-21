@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "data": {
+    "id": 3305,
+    "name": "<p>MyBatis 中 Mapper 中的 SQL 语句可以重载吗?</p>",
+    "options": null,
+    "answer": "<p>在 MyBatis 中，Mapper 中的 SQL 语句是不能重载的。尽管在 Java 中可以通过方法重载来实现多个同名方法，但是在 MyBatis 的 Mapper 接口中，每一个 SQL 映射的 ID 是唯一的。</p>\n<p>如果你在同一个 Mapper 中定义多个同名的方法，那么 MyBatis 会因为找不到唯一的映射 ID 而抛出异常。为了避免这种情况，通常你可以通过以下方式处理：</p>\n<ol>\n  <li>\n    <p><strong>使用不同的方法名</strong>：给每个方法使用不同的名称以区分它们。</p>\n  </li>\n  <li>\n    <p><strong>使用不同的参数类型</strong>：虽然这种方式依然会导致方法名重复，但是可以利用 MyBatis 的参数映射功能，确保使用不同的参数类型。</p>\n  </li>\n  <li>\n    <p><strong>使用 XML 映射文件</strong>：在 XML 映射文件中，映射 ID 也是必须唯一的。可以使用命名空间来避免冲突。</p>\n  </li>\n  <li>\n    <p><strong>命名规范</strong>：为重载方法制定一个统一的命名规范，例如添加后缀来区分，不同的参数类型可以加上 <code>_withType1</code>, <code>_withType2</code> 之类的后缀。</p>\n  </li>\n</ol>\n<p>因此，在 MyBatis 中实现重载需要特别小心，确保每个 SQL 映射 ID 的唯一性。</p>",
+    "type": 6,
+    "level": 1,
+    "freq": 0,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：MyBatis中Mapper里的SQL语句能否重载？</li>\n  <li><strong>考察点</strong>：对MyBatis映射机制、Mapper接口方法与SQL语句关联规则的理解。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）MyBatis映射机制</h4>\n<p>MyBatis通过Mapper接口和XML映射文件（或注解）来关联Java方法和SQL语句。Mapper接口中的方法名和参数会与XML文件里的SQL语句或注解中的SQL建立对应关系。</p>\n<h4>（2）方法重载概念</h4>\n<p>在Java里，方法重载指的是在一个类中可以定义多个同名方法，但这些方法的参数列表（参数个数、类型、顺序）不同。</p>\n<h3>3. 解析</h3>\n<h4>（1）MyBatis中不能进行SQL语句重载</h4>\n<p>\n  MyBatis依据Mapper接口的方法名和命名空间来定位具体的SQL语句。在MyBatis里，Mapper接口方法名和SQL语句的映射是一一对应的，不支持根据方法参数列表的不同来区分同名的SQL语句。\n  也就是说，当定义两个同名的Mapper接口方法时，MyBatis无法确定具体要执行哪个SQL语句，因为它只根据方法名来匹配，不考虑参数列表的差异。\n</p>\n<h4>（2）MyBatis映射规则</h4>\n<p>MyBatis在解析Mapper接口和映射文件时，会把方法名和SQL语句的id进行绑定。即使方法的参数列表不同，只要方法名相同，MyBatis就会认为是同一个SQL映射，从而产生冲突。</p>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-java\">// Mapper接口\npublic interface UserMapper {\n    // 尝试定义两个同名但参数不同的方法\n    User selectUserById(int id);\n    User selectUserById(String id); // 这里会导致问题，MyBatis无法区分\n}\n\n// XML映射文件\n&#x3C;mapper namespace=\"com.example.mapper.UserMapper\">\n    &#x3C;select id=\"selectUserById\" resultType=\"com.example.entity.User\">\n        SELECT * FROM users WHERE id = #{id}\n    &#x3C;/select>\n    &#x3C;!-- 即使想为第二个方法写不同的SQL也无法正常映射 -->\n&#x3C;/mapper>\n</code></pre>\n<p>在上述代码中，<code>UserMapper</code>接口里有两个同名的<code>selectUserById</code>方法，MyBatis无法根据参数类型来区分这两个方法对应的SQL语句，会造成映射冲突。</p>\n<h3>5. 常见误区</h3>\n<h4>（1）认为可以像Java方法一样重载</h4>\n<ul>\n  <li>误区：受Java方法重载概念的影响，觉得MyBatis的Mapper方法也能根据参数列表不同进行重载。</li>\n  <li>纠正：要明确MyBatis的映射规则是基于方法名和命名空间的，不支持参数列表区分同名方法对应的SQL语句。</li>\n</ul>\n<h4>（2）忽视映射冲突问题</h4>\n<ul>\n  <li>误区：没有意识到同名方法会导致MyBatis无法正确映射SQL语句。</li>\n  <li>纠正：理解MyBatis的映射机制，明白方法名和SQL语句id的一一对应关系。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>在MyBatis中，Mapper里的SQL语句不可以重载。MyBatis根据Mapper接口的方法名和命名空间来定位SQL语句，不支持通过方法参数列表的差异来区分同名的SQL语句。当定义同名的Mapper接口方法时，MyBatis无法确定具体要执行哪个SQL语句，会产生映射冲突。</p>\n<p>因此，在编写Mapper接口和映射文件时，要保证每个方法名对应唯一的SQL语句，避免使用同名方法。</p>",
+    "more_ask": "<p>面试官可能会进一步问：</p>\n<ol>\n  <li>\n    <p><strong>请你解释一下 MyBatis 的 Mapper 接口与 XML 映射文件的关系？</strong><br>提示：探讨接口和 XML 的对应关系及其如何合作。</p>\n  </li>\n  <li>\n    <p><strong>MyBatis 中的动态 SQL 是如何实现的？请简要举例。</strong><br>提示：可以提到 <code>&#x3C;if></code>, <code>&#x3C;choose></code>, <code>&#x3C;foreach></code> 等标签的使用。</p>\n  </li>\n  <li>\n    <p><strong>什么是 MyBatis 的缓存机制？请简述一级缓存和二级缓存的区别。</strong><br>提示：关注缓存的作用和数据存储位置的差异。</p>\n  </li>\n  <li>\n    <p><strong>如何在 MyBatis 中进行事务管理？请列出几种方式。</strong><br>提示：涉及到 Spring 管理事务或 MyBatis 自身的事务管理方式。</p>\n  </li>\n  <li>\n    <p><strong>MyBatis 的映射器中可以使用哪些类型的参数传递？请列举并分析。</strong><br>提示：考虑基本数据类型、对象、Map 等不同类型的传递。</p>\n  </li>\n  <li>\n    <p><strong>请解释 MyBatis 中的 ResultMap 的作用和用法。</strong><br>提示：关注如何映射 SQL 结果到 Java 对象的方式。</p>\n  </li>\n  <li>\n    <p><strong>在 MyBatis 中，如何处理 N+1 查询问题？</strong><br>提示：讨论使用 <code>select</code> 和 <code>join</code> 来优化查询。</p>\n  </li>\n  <li>\n    <p><strong>Can you explain what SQL Injection is and how MyBatis protects against it?</strong><br>提示：涉及 prepared statements 和参数化查询。</p>\n  </li>\n  <li>\n    <p><strong>如何自定义 MyBatis 的插件？请简述步骤。</strong><br>提示：关注实现 Interceptor 接口和使用 <code>@Intercepts</code> 注解。</p>\n  </li>\n  <li>\n    <p><strong>在 MyBatis 中，执行 SQL 语句时，可以控制日志输出吗？</strong><br>提示：讨论日志框架整合和记录 SQL 执行情况的方法。</p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  MyBatis Mapper中的SQL语句不可重载\n    解决方法\n      使用不同的方法名\n      使用不同的参数类型\n      使用XML映射文件\n        利用命名空间避免冲突\n      命名规范\n        添加后缀区分\n          _withType1\n          _withType2",
+    "keynote": "- 在MyBatis中，Mapper里的SQL语句不能被重载。\n- 每个SQL映射ID必须唯一；否则，MyBatis将抛出异常。\n- 可以通过使用不同的方法名称来解决重复问题。\n- 利用不同类型的参数也能帮助区分同名方法。\n- XML映射文件要求映射ID唯一，可通过命名空间管理。\n- 推荐为相似功能但参数不同的方法添加特定后缀（如_withType1, _withType2）以明确区分。",
+    "group_id": 37,
+    "kps": [
+      "基本概念",
+      "接口绑定与Mapper接口"
+    ],
+    "years": null,
+    "corps": null
+  }
+}

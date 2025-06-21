@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "data": {
+    "id": 13383,
+    "name": "<p>在Go语言中，多个defer的执行顺序是怎样的</p>",
+    "options": null,
+    "answer": "<p>在Go语言里，多个defer语句的执行顺序是后进先出（LIFO），也就是逆序执行。</p>\n<p>当程序执行到defer语句时，并不会立即执行defer后的函数，而是将其压入一个栈中。当包含defer语句的函数执行完毕，或者遇到panic，又或者程序崩溃时，会从栈顶开始依次取出defer函数并执行。</p>\n<p>以下是一个简单的示例代码：</p>\n<pre><code class=\"language-go\">package main\n\nimport \"fmt\"\n\nfunc main() {\n    defer fmt.Println(\"defer 1\")\n    defer fmt.Println(\"defer 2\")\n    defer fmt.Println(\"defer 3\")\n    fmt.Println(\"main function\")\n}\n</code></pre>\n<p>在上述代码中，有3个defer语句。程序执行时，会先打印“main function”，接着按照后进先出的顺序执行defer函数，依次打印“defer 3”、“defer 2”、“defer 1”。</p>\n<p>运行该程序，输出结果如下：</p>\n<pre><code>main function\ndefer 3\ndefer 2\ndefer 1\n</code></pre>\n<p>这就清晰地展示了多个defer语句的执行顺序是后进先出。</p>",
+    "type": 6,
+    "level": 1,
+    "freq": 0.01830283,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：Go语言中多个defer的执行顺序是怎样的。</li>\n  <li><strong>考察点</strong>：对Go语言defer关键字特性的理解，包括defer的执行时机和顺序规则。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<ul>\n  <li><strong>defer的基本概念</strong>：defer语句用于注册一个函数，该函数会在当前函数执行结束时（包括正常返回或发生panic）被调用。它常用于资源释放、解锁等操作，确保这些操作在函数结束时一定会执行。</li>\n</ul>\n<h3>3. 解析</h3>\n<ul>\n  <li><strong>执行顺序规则</strong>：在Go语言中，多个defer语句的执行顺序是后进先出（LIFO），也就是最后声明的defer语句会最先执行，最先声明的defer语句最后执行。这是因为defer语句在执行时会将注册的函数压入一个栈中，当函数结束时，从栈顶依次弹出并执行这些函数。</li>\n  <li><strong>执行时机</strong>：defer语句注册的函数会在当前函数即将返回时执行，无论函数是正常返回还是因为panic而返回。</li>\n</ul>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-go\">package main\n\nimport \"fmt\"\n\nfunc main() {\n    defer fmt.Println(\"First defer\")\n    defer fmt.Println(\"Second defer\")\n    defer fmt.Println(\"Third defer\")\n    fmt.Println(\"Function body\")\n}\n</code></pre>\n<ul>\n  <li>代码解释：在这个例子中，首先会执行<code>fmt.Println(\"Function body\")</code>，输出<code>Function body</code>。然后按照defer的后进先出顺序执行，依次输出<code>Third defer</code>、<code>Second defer</code>、<code>First defer</code>。</li>\n</ul>\n<h3>5. 常见误区</h3>\n<ul>\n  <li><strong>认为是先进先出</strong>：错误地认为defer语句的执行顺序是按照声明的顺序依次执行，即先进先出（FIFO）。实际上是后进先出（LIFO）。</li>\n  <li><strong>混淆执行时机</strong>：没有正确理解defer语句是在函数即将返回时执行，可能会错误地认为在defer语句声明时就会执行。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>在Go语言中，多个defer的执行顺序是后进先出（LIFO）。当函数中有多个defer语句时，这些defer语句注册的函数会被压入一个栈中，在函数即将返回时，从栈顶开始依次弹出并执行这些函数。例如，最后声明的defer语句会最先执行，最先声明的defer语句最后执行。需要注意的是，defer语句注册的函数会在当前函数即将返回时执行，无论函数是正常返回还是因为panic而返回。</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      <strong>defer与匿名函数结合时变量捕获问题</strong>\n      提示：思考在defer中使用匿名函数，函数内引用外部变量，变量值在不同时刻的变化情况。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>defer在循环中的执行情况</strong>\n      提示：考虑在for循环里使用defer，每次循环defer的执行顺序和时机，以及循环变量的影响。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>defer在函数返回值赋值和返回过程中的作用</strong>\n      提示：分析有命名返回值和无命名返回值的函数中，defer对返回值的修改情况。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>defer在发生panic时的执行顺序</strong>\n      提示：结合panic和recover机制，思考defer在程序出现异常时的执行顺序和作用。\n    </p>\n  </li>\n  <li>\n    <p>\n      <strong>defer在不同作用域中的执行顺序</strong>\n      提示：比如在嵌套函数或者代码块中使用defer，分析不同作用域下defer的执行顺序。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((Go语言defer语句执行顺序))\n    执行规则\n      后进先出（LIFO）\n      逆序执行\n    执行机制\n      执行到defer不立即执行\n      压入栈中\n      函数执行完、遇panic或程序崩溃时从栈顶取函数执行\n    示例说明\n      先打印主函数内容\n      按后进先出顺序执行defer函数",
+    "keynote": "Go语言defer语句执行顺序：后进先出、逆序\n执行机制：执行到defer不立即执行，压入栈，函数结束、遇panic或崩溃时从栈顶取函数执行\n示例：先打印主函数内容，再按后进先出执行defer函数",
+    "group_id": 23,
+    "kps": [
+      "基本语法"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023
+    ],
+    "corps": [
+      "百度",
+      "明智慧远",
+      "阿里云",
+      "快手",
+      "深信服",
+      "CmsTop",
+      "腾讯",
+      "闪送科技",
+      "华顺信安"
+    ]
+  }
+}

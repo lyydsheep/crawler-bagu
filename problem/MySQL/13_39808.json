@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "data": {
+    "id": 39808,
+    "name": "<p>如何定位 MySQL 慢查询，explain 的字段有哪些，如何判断是否走了索引以及走了哪些索引</p>",
+    "options": null,
+    "answer": "<h3>定位 MySQL 慢查询</h3>\n<h4>开启慢查询日志</h4>\n<p>慢查询日志可以记录执行时间超过指定阈值的 SQL 语句，通过分析这些日志能定位慢查询。</p>\n<ol>\n  <li><strong>查看慢查询日志相关参数</strong>\n    <pre><code class=\"language-sql\">SHOW VARIABLES LIKE '%slow_query_log%';\nSHOW VARIABLES LIKE 'long_query_time';\n</code></pre>\n    <ul>\n      <li><code>slow_query_log</code>：表示是否开启慢查询日志，<code>ON</code> 为开启，<code>OFF</code> 为关闭。</li>\n      <li><code>long_query_time</code>：表示执行时间超过该值的 SQL 语句会被记录到慢查询日志中，单位为秒，默认值是 10 秒。</li>\n    </ul>\n  </li>\n  <li><strong>开启慢查询日志并设置阈值</strong>\n    <pre><code class=\"language-sql\">SET GLOBAL slow_query_log = 'ON';\nSET GLOBAL long_query_time = 1;\n</code></pre>上述语句将慢查询日志开启，并将执行时间阈值设置为 1 秒。不过这种方式是临时的，数据库重启后会恢复默认值。若要永久生效，需修改 MySQL 配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>）。\n  </li>\n  <li><strong>查看慢查询日志文件位置</strong>\n    <pre><code class=\"language-sql\">SHOW VARIABLES LIKE 'slow_query_log_file';\n</code></pre>找到日志文件后，可使用 <code>mysqldumpslow</code> 工具分析日志，例如：\n    <pre><code class=\"language-bash\">mysqldumpslow -s t -t 10 /var/log/mysql/mysql-slow.log\n</code></pre>该命令会按照查询时间排序，显示前 10 条慢查询语句。\n  </li>\n</ol>\n<h4>使用性能_schema 系统库</h4>\n<p><code>performance_schema</code> 是 MySQL 5.5 及以上版本提供的一个用于监控服务器性能的系统库。</p>\n<pre><code class=\"language-sql\">SELECT query_sample_text, SUM_TIMER_WAIT, COUNT_STAR\nFROM performance_schema.events_statements_summary_by_digest\nORDER BY SUM_TIMER_WAIT DESC\nLIMIT 10;\n</code></pre>\n<p>上述查询会从 <code>performance_schema</code> 中找出执行时间总和最长的前 10 条 SQL 语句。</p>\n<h3>explain 的字段及含义</h3>\n<p>使用 <code>EXPLAIN</code> 关键字可以分析 SQL 语句的执行计划，其常见字段如下：</p>\n<ol>\n  <li><strong>id</strong>：查询的序列号，是一组数字，表示查询中执行 <code>SELECT</code> 子句或操作表的顺序。<code>id</code> 值越大，越先执行；<code>id</code> 值相同，则从上往下依次执行；<code>id</code> 为 <code>NULL</code> 时最后执行。</li>\n  <li><strong>select_type</strong>：表示查询的类型，常见取值有：\n    <ul>\n      <li><code>SIMPLE</code>：简单查询，不包含子查询或 <code>UNION</code>。</li>\n      <li><code>PRIMARY</code>：主查询，包含子查询时，最外层的查询为 <code>PRIMARY</code>。</li>\n      <li><code>SUBQUERY</code>：子查询。</li>\n      <li><code>UNION</code>：<code>UNION</code> 操作中的第二个或后面的查询。</li>\n    </ul>\n  </li>\n  <li><strong>table</strong>：表示当前查询操作的表名。</li>\n  <li><strong>type</strong>：表示连接类型，反映了查询使用索引的情况，从好到坏的连接类型依次为：\n    <ul>\n      <li><code>system</code>：表中只有一行数据，是 <code>const</code> 类型的特例。</li>\n      <li><code>const</code>：通过索引一次就找到数据，通常用于 <code>PRIMARY KEY</code> 或 <code>UNIQUE</code> 索引的等值查询。</li>\n      <li><code>eq_ref</code>：唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配，常见于 <code>JOIN</code> 操作。</li>\n      <li><code>ref</code>：非唯一性索引扫描，返回匹配某个单独值的所有行。</li>\n      <li><code>range</code>：只检索给定范围的行，使用一个索引来选择行，常见于 <code>WHERE</code> 子句中的 <code>BETWEEN</code>、<code>></code>、<code>&#x3C;</code> 等操作。</li>\n      <li><code>index</code>：全索引扫描，遍历整个索引来查找匹配的行。</li>\n      <li><code>ALL</code>：全表扫描，性能最差。</li>\n    </ul>\n  </li>\n  <li><strong>possible_keys</strong>：显示可能应用在这张表上的索引，一个或多个。但不一定实际使用。</li>\n  <li><strong>key</strong>：实际使用的索引，如果为 <code>NULL</code>，则表示没有使用索引。</li>\n  <li><strong>key_len</strong>：表示索引使用的字节数，可通过该值判断索引的使用情况，值越大表示使用的索引越精确。</li>\n  <li><strong>ref</strong>：表示哪些列或常量被用于查找索引列上的值。</li>\n  <li><strong>rows</strong>：MySQL 认为要找到所需的记录需要读取的行数，该值是一个预估值。</li>\n  <li><strong>Extra</strong>：包含不适合在其他列中显示但十分重要的额外信息，常见取值有：\n    <ul>\n      <li><code>Using index</code>：表示使用了覆盖索引，即查询的列刚好是索引列，不需要回表查询。</li>\n      <li><code>Using where</code>：表示使用了 <code>WHERE</code> 子句进行过滤。</li>\n      <li><code>Using temporary</code>：表示使用了临时表来处理查询结果，常见于 <code>GROUP BY</code> 和 <code>ORDER BY</code> 操作。</li>\n      <li><code>Using filesort</code>：表示使用了文件排序，性能较差，通常需要优化索引。</li>\n    </ul>\n  </li>\n</ol>\n<h3>判断是否走了索引以及走了哪些索引</h3>\n<h4>判断是否走了索引</h4>\n<ul>\n  <li><strong>查看 <code>key</code> 字段</strong>：如果 <code>key</code> 字段的值不为 <code>NULL</code>，则表示使用了索引；若为 <code>NULL</code>，则表示没有使用索引。</li>\n  <li><strong>结合 <code>type</code> 字段</strong>：如果 <code>type</code> 为 <code>system</code>、<code>const</code>、<code>eq_ref</code>、<code>ref</code>、<code>range</code> 等，通常表示使用了索引；若为 <code>ALL</code>，则表示全表扫描，未使用索引；若为 <code>index</code>，表示使用了全索引扫描。</li>\n</ul>\n<h4>判断走了哪些索引</h4>\n<ul>\n  <li><strong>查看 <code>key</code> 字段</strong>：<code>key</code> 字段显示的就是实际使用的索引名称。</li>\n  <li><strong>结合 <code>possible_keys</code> 字段</strong>：<code>possible_keys</code> 显示了可能使用的索引，而 <code>key</code> 显示了实际使用的索引，通过对比这两个字段，可以了解最终选择了哪些可能的索引。</li>\n</ul>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.01426113,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：一是如何定位 MySQL 慢查询；二是 explain 的字段有哪些；三是如何判断是否走了索引以及走了哪些索引。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>对 MySQL 慢查询定位方法的掌握。</li>\n      <li>对 explain 语句各字段含义的理解。</li>\n      <li>判断索引使用情况的能力。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）慢查询</h4>\n<p>慢查询指执行时间超过设定阈值的 SQL 语句，会影响数据库性能，需要定位并优化。</p>\n<h4>（2）explain</h4>\n<p>explain 是 MySQL 提供的用于分析 SQL 语句执行计划的工具，能展示查询如何执行、使用了哪些索引等信息。</p>\n<h4>（3）索引</h4>\n<p>索引是数据库中用于提高查询效率的数据结构，合理使用索引可加快查询速度。</p>\n<h3>3. 解析</h3>\n<h4>（1）定位 MySQL 慢查询</h4>\n<ul>\n  <li><strong>开启慢查询日志</strong>：通过修改 MySQL 配置文件（如 my.cnf），设置 <code>slow_query_log = 1</code> 开启慢查询日志，<code>long_query_time</code> 设定慢查询的时间阈值（单位：秒），<code>slow_query_log_file</code> 指定慢查询日志文件路径。修改后重启 MySQL 服务使配置生效。</li>\n  <li><strong>查看慢查询日志</strong>：使用文本编辑器或相关工具打开慢查询日志文件，可看到执行时间超过阈值的 SQL 语句。</li>\n  <li><strong>使用性能_schema 库</strong>：MySQL 的性能_schema 库记录了数据库的性能信息，可通过查询 <code>performance_schema.events_statements_summary_by_digest</code> 表获取慢查询信息。例如：</li>\n</ul>\n<pre><code class=\"language-sql\">SELECT digest_text, sum_timer_wait / 1000000000000 AS total_seconds, count_star\nFROM performance_schema.events_statements_summary_by_digest\nWHERE sum_timer_wait > 1000000000000  -- 执行时间超过 1 秒\nORDER BY sum_timer_wait DESC;\n</code></pre>\n<h4>（2）explain 的字段</h4>\n<ul>\n  <li><strong>id</strong>：查询的序列号，标识查询中各个子查询的执行顺序，id 值越大越先执行。</li>\n  <li><strong>select_type</strong>：查询类型，常见的有 SIMPLE（简单查询）、PRIMARY（主查询）、SUBQUERY（子查询）等。</li>\n  <li><strong>table</strong>：查询涉及的表名。</li>\n  <li><strong>type</strong>：连接类型，反映了查询使用索引的情况，从好到差依次为 system > const > eq_ref > ref > range > index > ALL。</li>\n  <li><strong>possible_keys</strong>：可能使用的索引。</li>\n  <li><strong>key</strong>：实际使用的索引。</li>\n  <li><strong>key_len</strong>：使用的索引长度。</li>\n  <li><strong>ref</strong>：哪些列或常量被用于查找索引列上的值。</li>\n  <li><strong>rows</strong>：MySQL 估计要读取的行数。</li>\n  <li><strong>Extra</strong>：额外信息，如 Using index（使用覆盖索引）、Using where（使用了 where 子句）等。</li>\n</ul>\n<h4>（3）判断是否走了索引以及走了哪些索引</h4>\n<ul>\n  <li><strong>判断是否走了索引</strong>\n    <ul>\n      <li>查看 <code>type</code> 字段，如果值不是 ALL，说明使用了索引；如果是 ALL，则表示全表扫描，未使用索引。</li>\n      <li>查看 <code>key</code> 字段，如果该字段不为 NULL，说明使用了索引。</li>\n      <li>查看 <code>Extra</code> 字段，如果包含 Using index 或 Using index condition 等信息，也表明使用了索引。</li>\n    </ul>\n  </li>\n  <li><strong>判断走了哪些索引</strong>\n    <ul>\n      <li>查看 <code>key</code> 字段，该字段显示了实际使用的索引名称。</li>\n      <li>结合 <code>possible_keys</code> 字段，它列出了可能使用的索引，与 <code>key</code> 字段对比可了解最终选择的索引。</li>\n    </ul>\n  </li>\n</ul>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-sql\">-- 开启慢查询日志\nSET GLOBAL slow_query_log = 1;\nSET GLOBAL long_query_time = 1;\n\n-- 分析 SQL 语句\nEXPLAIN SELECT * FROM users WHERE age > 20;\n</code></pre>\n<p>在上述示例中，通过 <code>EXPLAIN</code> 分析查询语句，根据输出的 <code>type</code>、<code>key</code> 等字段判断是否使用了索引以及使用了哪些索引。</p>\n<h3>5. 常见误区</h3>\n<h4>（1）未正确开启慢查询日志</h4>\n<ul>\n  <li>误区：未修改配置文件或未重启 MySQL 服务，导致慢查询日志未开启。</li>\n  <li>纠正：确保修改配置文件后重启 MySQL 服务，或使用 <code>SET GLOBAL</code> 语句动态开启慢查询日志。</li>\n</ul>\n<h4>（2）对 explain 字段理解不准确</h4>\n<ul>\n  <li>误区：错误解读 <code>type</code>、<code>key</code> 等字段的含义，导致对索引使用情况判断错误。</li>\n  <li>纠正：深入学习 explain 各字段的含义，结合实际查询结果进行分析。</li>\n</ul>\n<h4>（3）忽略 Extra 字段信息</h4>\n<ul>\n  <li>误区：只关注 <code>type</code> 和 <code>key</code> 字段，忽略了 <code>Extra</code> 字段中关于索引使用的额外信息。</li>\n  <li>纠正：全面查看 explain 输出的所有字段，特别是 <code>Extra</code> 字段，获取更准确的索引使用信息。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>定位 MySQL 慢查询可通过开启慢查询日志，修改配置文件中的 <code>slow_query_log</code>、<code>long_query_time</code> 和 <code>slow_query_log_file</code> 并重启服务，之后查看慢查询日志文件；也可使用性能_schema 库，查询 <code>performance_schema.events_statements_summary_by_digest</code> 表获取慢查询信息。</p>\n<p>explain 的字段主要有 id、select_type、table、type、possible_keys、key、key_len、ref、rows、Extra 等。</p>\n<p>判断是否走了索引可查看 <code>type</code> 字段，若不为 ALL 则使用了索引；查看 <code>key</code> 字段，不为 NULL 表示使用了索引；查看 <code>Extra</code> 字段，包含 Using index 等信息也表明使用了索引。判断走了哪些索引可查看 <code>key</code> 字段，其显示实际使用的索引名称，结合 <code>possible_keys</code> 字段可了解最终选择的索引。</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      除了 <code>explain</code>，MySQL 还有哪些工具或方法可以辅助分析慢查询？\n      提示：考虑 MySQL 自带的日志和一些第三方工具。\n    </p>\n  </li>\n  <li>\n    <p>\n      <code>explain</code> 结果中 <code>type</code> 字段不同值的性能排序是怎样的，为什么会有这样的排序？\n      提示：结合不同 <code>type</code> 值代表的查询类型和数据扫描方式思考。\n    </p>\n  </li>\n  <li>\n    <p>\n      当 <code>explain</code> 显示走了索引，但查询仍然很慢，可能有哪些原因？\n      提示：从索引本身、数据分布、服务器资源等方面考虑。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何优化一个使用了多个表连接且部分表未走索引的慢查询？\n      提示：可以从创建合适索引、调整查询语句结构等方面入手。\n    </p>\n  </li>\n  <li>\n    <p>\n      对于复合索引，<code>explain</code> 如何判断是否使用了索引的全部列，未全部使用会有什么影响？\n      提示：关注 <code>explain</code> 结果中的 <code>key_len</code> 字段。\n    </p>\n  </li>\n  <li>\n    <p>\n      在 MySQL 8.0 中，<code>explain</code> 新增了哪些特性或字段，这些新增内容对分析查询有什么帮助？\n      提示：查阅 MySQL 8.0 的官方文档了解新增特性。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何通过 <code>explain</code> 结果判断是否存在全表扫描，全表扫描在什么情况下是合理的？\n      提示：根据 <code>type</code> 字段的值判断全表扫描，考虑数据量和查询需求。\n    </p>\n  </li>\n  <li>\n    <p>\n      当查询中使用了函数，<code>explain</code> 显示未走索引，如何解决这个问题？\n      提示：思考如何避免函数对索引的影响。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((定位 MySQL 慢查询及相关分析))\n    定位 MySQL 慢查询\n      开启慢查询日志\n        查看慢查询日志相关参数\n          slow_query_log\n          long_query_time\n        开启慢查询日志并设置阈值\n        查看慢查询日志文件位置\n      使用性能_schema 系统库\n    explain 的字段及含义\n      id\n      select_type\n        SIMPLE\n        PRIMARY\n        SUBQUERY\n        UNION\n      table\n      type\n        system\n        const\n        eq_ref\n        ref\n        range\n        index\n        ALL\n      possible_keys\n      key\n      key_len\n      ref\n      rows\n      Extra\n        Using index\n        Using where\n        Using temporary\n        Using filesort\n    判断是否走了索引以及走了哪些索引\n      判断是否走了索引\n        查看 key 字段\n        结合 type 字段\n      判断走了哪些索引\n        查看 key 字段\n        结合 possible_keys 字段",
+    "keynote": "定位 MySQL 慢查询：\n- 开启慢查询日志：查看相关参数（slow_query_log、long_query_time），开启并设阈值（临时或修改配置文件），查看日志文件位置并用 mysqldumpslow 分析\n- 使用性能_schema 系统库查询执行时间长的 SQL\n\nexplain 字段及含义：id、select_type（SIMPLE、PRIMARY 等）、table、type（system 到 ALL）、possible_keys、key、key_len、ref、rows、Extra（Using index 等）\n\n判断索引情况：\n- 判断是否走索引：看 key 字段，结合 type 字段\n- 判断走哪些索引：看 key 字段，结合 possible_keys 字段",
+    "group_id": 13,
+    "kps": [
+      "性能监控与优化",
+      "索引与查询优化"
+    ],
+    "years": [
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "小米",
+      "腾讯音乐",
+      "蔚来",
+      "阿里云",
+      "美团",
+      "龙湖集团",
+      "哈啰出行",
+      "京东",
+      "Momenta",
+      "字节飞书",
+      "腾讯",
+      "高德地图",
+      "阿里巴巴",
+      "百度",
+      "西安小厂",
+      "快手",
+      "OPPO",
+      "讯飞AI工程研究院",
+      "好未来",
+      "满帮集团",
+      "滴滴",
+      "顺丰",
+      "大华",
+      "B站",
+      "用友",
+      "恒生电子",
+      "欢聚集团",
+      "微众银行",
+      "唯品会",
+      "同程旅行",
+      "金山",
+      "中国农业银行",
+      "华为",
+      "字节抖音",
+      "字节懂车帝"
+    ]
+  }
+}

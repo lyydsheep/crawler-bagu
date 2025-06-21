@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": {
+    "id": 17579,
+    "name": "<p>请描述联合索引的形式以及为什么要满足最左匹配原则</p>",
+    "options": null,
+    "answer": "<h3>联合索引的形式</h3>\n<p>联合索引，也被叫做复合索引，是指在表的多个列上创建的索引。其创建语法如下：</p>\n<pre><code class=\"language-sql\">CREATE INDEX index_name ON table_name (column1, column2, ..., columnN);\n</code></pre>\n<p>这里的<code>index_name</code>是索引的名称，<code>table_name</code>是要创建索引的表名，<code>column1, column2, ..., columnN</code> 是参与联合索引的列，这些列按照指定的顺序组合在一起形成一个索引。</p>\n<p>例如，在一个<code>users</code>表中，为<code>last_name</code>、<code>first_name</code>和<code>age</code>列创建联合索引：</p>\n<pre><code class=\"language-sql\">CREATE INDEX idx_last_first_age ON users (last_name, first_name, age);\n</code></pre>\n<h3>满足最左匹配原则的原因</h3>\n<p>最左匹配原则指的是在使用联合索引进行查询时，MySQL 会按照索引中列的顺序，从最左边的列开始依次匹配，只有当最左边的列被使用时，索引才会被有效利用。以下是需要满足最左匹配原则的原因：</p>\n<h4>索引的存储结构</h4>\n<p>MySQL 中，联合索引通常使用 B+ 树来存储。在 B+ 树中，索引键是按照索引定义中列的顺序进行排序的。以刚才创建的<code>idx_last_first_age</code>索引为例，B+ 树首先按照<code>last_name</code>排序，当<code>last_name</code>相同时，再按照<code>first_name</code>排序，若<code>first_name</code>也相同，则按照<code>age</code>排序。</p>\n<p>当执行查询时，如果查询条件中没有包含最左边的列<code>last_name</code>，MySQL 无法根据 B+ 树的排序规则快速定位到符合条件的记录。因为 B+ 树的搜索是从根节点开始，依据索引列的顺序进行比较和查找的，缺少最左列就无法确定搜索的起始位置。</p>\n<h4>索引的使用方式</h4>\n<p>在执行查询时，MySQL 优化器会根据查询条件和索引的结构来决定是否使用索引。如果查询条件不满足最左匹配原则，优化器可能会认为使用索引的成本比全表扫描更高，从而放弃使用索引。</p>\n<p>例如，对于以下查询：</p>\n<pre><code class=\"language-sql\">SELECT * FROM users WHERE first_name = 'John' AND age = 25;\n</code></pre>\n<p>由于查询条件中没有包含联合索引的最左列<code>last_name</code>，MySQL 无法直接利用<code>idx_last_first_age</code>索引进行快速查找，可能会选择全表扫描。</p>\n<p>而如果查询满足最左匹配原则，如：</p>\n<pre><code class=\"language-sql\">SELECT * FROM users WHERE last_name = 'Smith' AND first_name = 'John' AND age = 25;\n</code></pre>\n<p>MySQL 可以根据<code>last_name</code>定位到大致的范围，再在这个范围内根据<code>first_name</code>进一步筛选，最后根据<code>age</code>确定最终的记录，从而有效利用联合索引提高查询效率。</p>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.004671748,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：描述联合索引的形式以及解释为何要满足最左匹配原则。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>联合索引的定义和形式。</li>\n      <li>最左匹配原则的原理。</li>\n      <li>联合索引在数据库查询优化中的作用。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）索引的作用</h4>\n<ul>\n  <li>索引是数据库中用于提高查询效率的数据结构。它可以帮助数据库快速定位到符合查询条件的数据，减少全表扫描的开销。</li>\n</ul>\n<h4>（2）联合索引的概念</h4>\n<ul>\n  <li>联合索引是指在多个列上创建的索引，它将多个列的值组合在一起作为索引键。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）联合索引的形式</h4>\n<ul>\n  <li>联合索引可以在创建表时定义，也可以在已有的表上添加。语法如下：</li>\n</ul>\n<pre><code class=\"language-sql\">-- 创建表时定义联合索引\nCREATE TABLE table_name (\n    column1 datatype,\n    column2 datatype,\n    column3 datatype,\n    INDEX idx_name (column1, column2, column3)\n);\n\n-- 在已有的表上添加联合索引\nCREATE INDEX idx_name ON table_name (column1, column2, column3);\n</code></pre>\n<ul>\n  <li>这里的<code>idx_name</code>是联合索引的名称，<code>column1</code>、<code>column2</code>、<code>column3</code>是组成联合索引的列。联合索引会按照这些列的顺序依次排序，形成一个有序的数据结构。</li>\n</ul>\n<h4>（2）最左匹配原则的原理</h4>\n<ul>\n  <li>联合索引的存储结构是按照索引列的顺序依次排序的。例如，对于联合索引<code>(column1, column2, column3)</code>，索引首先按照<code>column1</code>的值进行排序，当<code>column1</code>的值相同时，再按照<code>column2</code>的值排序，以此类推。</li>\n  <li>当进行查询时，数据库会从联合索引的最左边的列开始匹配。如果查询条件中没有包含最左边的列，数据库无法利用联合索引进行快速查找。因为索引是按照最左列排序的，没有最左列的信息，就无法确定数据在索引中的大致位置。</li>\n  <li>例如，对于联合索引<code>(col1, col2, col3)</code>，以下查询可以使用该联合索引：</li>\n</ul>\n<pre><code class=\"language-sql\">SELECT * FROM table_name WHERE col1 = 'value1' AND col2 = 'value2';\nSELECT * FROM table_name WHERE col1 = 'value1';\n</code></pre>\n<ul>\n  <li>而以下查询无法使用该联合索引：</li>\n</ul>\n<pre><code class=\"language-sql\">SELECT * FROM table_name WHERE col2 = 'value2';\nSELECT * FROM table_name WHERE col3 = 'value3';\n</code></pre>\n<h4>（3）最左匹配原则的意义</h4>\n<ul>\n  <li>最左匹配原则可以确保数据库能够充分利用联合索引的有序结构，提高查询效率。如果不满足最左匹配原则，数据库可能需要进行全表扫描，从而增加查询的时间开销。</li>\n</ul>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-sql\">-- 创建表并添加联合索引\nCREATE TABLE users (\n    id INT,\n    first_name VARCHAR(50),\n    last_name VARCHAR(50),\n    age INT,\n    INDEX idx_name (first_name, last_name, age)\n);\n\n-- 可以使用联合索引的查询\nSELECT * FROM users WHERE first_name = 'John' AND last_name = 'Doe';\nSELECT * FROM users WHERE first_name = 'John';\n\n-- 无法使用联合索引的查询\nSELECT * FROM users WHERE last_name = 'Doe';\nSELECT * FROM users WHERE age = 30;\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）认为联合索引可以随意使用</h4>\n<ul>\n  <li>误区：认为只要创建了联合索引，无论查询条件如何，都可以使用该索引。</li>\n  <li>纠正：必须满足最左匹配原则，数据库才能利用联合索引进行快速查询。</li>\n</ul>\n<h4>（2）忽略联合索引列的顺序</h4>\n<ul>\n  <li>误区：在创建联合索引时，不考虑列的顺序，随意组合列。</li>\n  <li>纠正：联合索引列的顺序非常重要，应该根据实际的查询需求，将最常作为查询条件的列放在最左边。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>联合索引是在多个列上创建的索引，其形式可以在创建表时定义，如<code>CREATE TABLE table_name (column1 datatype, column2 datatype, INDEX idx_name (column1, column2));</code>，也可以在已有表上添加，如<code>CREATE INDEX idx_name ON table_name (column1, column2);</code>。</p>\n<p>要满足最左匹配原则是因为联合索引的存储结构是按照索引列的顺序依次排序的。数据库在查询时从联合索引的最左边的列开始匹配，若查询条件中没有包含最左边的列，就无法利用联合索引的有序结构快速定位数据，可能导致全表扫描，增加查询开销。所以，为了让数据库充分利用联合索引提高查询效率，必须满足最左匹配原则。同时，在创建联合索引时，要根据实际查询需求合理安排列的顺序，将最常作为查询条件的列放在最左边。</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      联合索引在查询优化器中的处理机制是怎样的？\n      提示：思考查询优化器如何评估使用联合索引，涉及成本估算、索引扫描方式等方面。\n    </p>\n  </li>\n  <li>\n    <p>\n      当联合索引部分列使用范围查询时，最左匹配原则会有什么变化？\n      提示：考虑范围查询对索引后续列使用的影响，以及查询优化器的选择。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何判断一个联合索引是否真正被使用了？\n      提示：可以从数据库提供的工具和命令入手，如执行计划等。\n    </p>\n  </li>\n  <li>\n    <p>\n      联合索引的列顺序对性能有怎样的影响？请举例说明。\n      提示：结合不同的查询场景，分析不同列顺序下索引的使用效率。\n    </p>\n  </li>\n  <li>\n    <p>\n      在高并发场景下，联合索引的维护成本和使用效果会有什么变化？\n      提示：考虑并发操作对索引维护的影响，以及在高并发下索引对查询性能的提升情况。\n    </p>\n  </li>\n  <li>\n    <p>\n      对于已经存在的联合索引，如果业务需求变更，如何进行优化调整？\n      提示：思考是否需要新增、修改或删除索引，以及调整过程中的注意事项。\n    </p>\n  </li>\n  <li>\n    <p>\n      联合索引和覆盖索引有什么关系，如何利用联合索引实现覆盖索引？\n      提示：明确覆盖索引的概念，分析联合索引的列如何满足覆盖索引的条件。\n    </p>\n  </li>\n  <li>\n    <p>\n      当联合索引的列包含函数或表达式时，最左匹配原则还适用吗？\n      提示：考虑函数或表达式对索引匹配的影响，以及数据库的处理方式。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((联合索引))\n    联合索引的形式\n      定义：在表的多个列上创建的索引\n      创建语法\n        语法格式：CREATE INDEX index_name ON table_name (column1, column2, ..., columnN)\n        示例：CREATE INDEX idx_last_first_age ON users (last_name, first_name, age)\n    满足最左匹配原则的原因\n      索引的存储结构\n        存储方式：MySQL中联合索引通常用B+树存储\n        排序规则：按索引定义中列的顺序排序\n        影响：无最左列无法根据排序规则快速定位记录\n      索引的使用方式\n        优化器决策：根据查询条件和索引结构决定是否用索引\n        不满足原则示例：SELECT * FROM users WHERE first_name = 'John' AND age = 25\n        满足原则示例：SELECT * FROM users WHERE last_name = 'Smith' AND first_name = 'John' AND age = 25",
+    "keynote": "联合索引定义：在表的多个列上创建的索引\n创建语法：CREATE INDEX index_name ON table_name (column1, column2, ..., columnN)\n最左匹配原则：MySQL按索引列顺序从最左列开始匹配，最左列被使用索引才有效\n索引存储结构：用B+树存储，按索引定义列顺序排序，无最左列无法快速定位记录\n索引使用方式：优化器根据查询条件和索引结构决定是否用索引，不满足原则可能全表扫描，满足则提高查询效率",
+    "group_id": 13,
+    "kps": [
+      "索引与查询优化"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "百度",
+      "字节跳动",
+      "飞猪",
+      "B站",
+      "美团",
+      "快手",
+      "度小满",
+      "满帮集团",
+      "CVTE视源股份",
+      "饿了么"
+    ]
+  }
+}

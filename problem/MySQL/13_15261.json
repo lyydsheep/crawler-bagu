@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "data": {
+    "id": 15261,
+    "name": "<p>MySQL默认隔离级别是什么</p>",
+    "options": null,
+    "answer": "<h3>参考答案</h3>\n<p>MySQL 默认的隔离级别是可重复读（REPEATABLE READ）。</p>\n<h4>详细解释</h4>\n<ul>\n  <li><strong>查看默认隔离级别</strong>：在 MySQL 中，可以通过以下命令查看当前会话或全局的事务隔离级别。\n    <ul>\n      <li>查看全局事务隔离级别：</li>\n    </ul>\n  </li>\n</ul>\n<pre><code class=\"language-sql\">SHOW GLOBAL VARIABLES LIKE 'tx_isolation';\n-- 在 MySQL 8.0 及以后版本使用\nSHOW GLOBAL VARIABLES LIKE 'transaction_isolation'; \n</code></pre>\n<pre><code>- 查看当前会话的事务隔离级别：\n</code></pre>\n<pre><code class=\"language-sql\">SHOW SESSION VARIABLES LIKE 'tx_isolation';\n-- 在 MySQL 8.0 及以后版本使用\nSHOW SESSION VARIABLES LIKE 'transaction_isolation'; \n</code></pre>\n<p>在默认情况下，执行上述命令会返回 <code>REPEATABLE-READ</code>，表明 MySQL 默认采用可重复读隔离级别。</p>\n<ul>\n  <li>\n    <p><strong>可重复读隔离级别的特点</strong>：可重复读隔离级别保证了在同一个事务中多次读取同样的数据结果是一致的。也就是说，在一个事务执行期间，即使其他事务对数据进行了修改并提交，当前事务中再次读取该数据时，仍然会读到事务开始时的数据版本，避免了不可重复读的问题。不过，可重复读隔离级别并不能完全避免幻读问题，但 MySQL 的 InnoDB 存储引擎通过使用间隙锁（Gap Lock）和临键锁（Next-Key Lock）机制，在一定程度上解决了幻读问题。</p>\n  </li>\n  <li>\n    <p>\n      <strong>示例说明</strong>：\n      假设有一个 <code>users</code> 表，包含 <code>id</code> 和 <code>name</code> 两列，以下是一个简单的示例来展示可重复读隔离级别的效果。\n    </p>\n  </li>\n</ul>\n<pre><code class=\"language-sql\">-- 开启事务\nSTART TRANSACTION;\n-- 第一次读取数据\nSELECT * FROM users WHERE id = 1;\n-- 此时另一个事务可能会对 id 为 1 的记录进行修改并提交\n-- 再次读取数据\nSELECT * FROM users WHERE id = 1;\n-- 两次读取的结果是一样的\n-- 提交事务\nCOMMIT;\n</code></pre>\n<p>在上述示例中，由于使用了可重复读隔离级别，即使在两次 <code>SELECT</code> 语句之间有其他事务修改了 <code>id</code> 为 1 的记录，当前事务中两次读取的结果仍然是相同的。</p>",
+    "type": 6,
+    "level": 1,
+    "freq": 0.005655274,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：MySQL默认隔离级别是什么。</li>\n  <li><strong>考察点</strong>：对MySQL事务隔离级别概念的了解，以及对MySQL默认配置的掌握。</li>\n</ul>\n<h3>2. 背景知识</h3>\n<h4>（1）事务隔离级别</h4>\n<ul>\n  <li>事务隔离级别是数据库处理并发事务时的一种机制，用于控制不同事务之间的可见性和相互影响程度。常见的事务隔离级别有读未提交（READ UNCOMMITTED）、读已提交（READ COMMITTED）、可重复读（REPEATABLE READ）和串行化（SERIALIZABLE）。</li>\n  <li>不同的隔离级别在并发性能和数据一致性上有不同的表现。读未提交并发性能最高，但数据一致性最差；串行化数据一致性最高，但并发性能最差。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）MySQL默认隔离级别</h4>\n<p>MySQL的默认隔离级别是可重复读（REPEATABLE READ）。在这个隔离级别下，一个事务在执行过程中多次读取同一数据时，会保证读取到的数据是一致的，即不会出现读取到其他事务未提交的数据（避免了脏读），也不会出现读取到其他事务提交后的数据变化（避免了不可重复读）。不过，可重复读隔离级别不能完全避免幻读问题。</p>\n<h4>（2）查看和修改默认隔离级别</h4>\n<ul>\n  <li>可以通过以下SQL语句查看当前会话的隔离级别：</li>\n</ul>\n<pre><code class=\"language-sql\">SELECT @@tx_isolation;\n</code></pre>\n<ul>\n  <li>可以通过以下SQL语句修改当前会话的隔离级别，例如将隔离级别修改为读已提交：</li>\n</ul>\n<pre><code class=\"language-sql\">SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;\n</code></pre>\n<h3>4. 示例代码</h3>\n<pre><code class=\"language-sql\">-- 查看当前会话的隔离级别\nSELECT @@tx_isolation;\n\n-- 修改当前会话的隔离级别为读已提交\nSET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;\n\n-- 再次查看当前会话的隔离级别\nSELECT @@tx_isolation;\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）混淆不同隔离级别</h4>\n<ul>\n  <li>误区：将读未提交、读已提交、可重复读和串行化的概念和特点混淆，不能准确区分它们之间的差异。</li>\n  <li>纠正：需要深入理解每个隔离级别在并发控制和数据一致性方面的表现，通过具体的示例来加深记忆。</li>\n</ul>\n<h4>（2）不清楚默认隔离级别</h4>\n<ul>\n  <li>误区：不知道MySQL的默认隔离级别是可重复读，或者错误地认为是其他隔离级别。</li>\n  <li>纠正：牢记MySQL的默认隔离级别，并了解不同隔离级别的适用场景。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>MySQL的默认隔离级别是可重复读（REPEATABLE READ）。在可重复读隔离级别下，一个事务在执行过程中多次读取同一数据时，能保证读取到的数据是一致的，避免了脏读和不可重复读问题，但不能完全避免幻读。可以使用<code>SELECT @@tx_isolation;</code>查看当前会话的隔离级别，使用<code>SET SESSION TRANSACTION ISOLATION LEVEL [隔离级别名称];</code>修改当前会话的隔离级别。</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      请阐述在 MySQL 默认隔离级别下，如何避免幻读问题？\n      提示：考虑使用额外的锁机制或特定的 SQL 语句来控制并发操作。\n    </p>\n  </li>\n  <li>\n    <p>\n      当数据库并发事务较多时，MySQL 默认隔离级别会对性能产生怎样的影响？\n      提示：从锁的使用、事务等待等方面分析对性能的影响。\n    </p>\n  </li>\n  <li>\n    <p>\n      请说明在 MySQL 默认隔离级别下，事务的可见性规则是怎样的？\n      提示：结合已提交读、可重复读等概念说明不同事务对数据的可见情况。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何在 MySQL 中修改默认隔离级别，修改后会有什么潜在风险？\n      提示：了解修改隔离级别的 SQL 语句，从并发问题等方面考虑潜在风险。\n    </p>\n  </li>\n  <li>\n    <p>\n      举例说明在 MySQL 默认隔离级别下，可能出现的并发问题场景。\n      提示：结合脏读、不可重复读、幻读等概念构造具体场景。\n    </p>\n  </li>\n  <li>\n    <p>\n      MySQL 默认隔离级别在主从复制环境中会有什么特殊表现？\n      提示：考虑主从复制的原理和数据同步过程。\n    </p>\n  </li>\n  <li>\n    <p>\n      在 MySQL 默认隔离级别下，如何优化长事务的性能？\n      提示：从减少锁持有时间、优化查询等方面思考。\n    </p>\n  </li>\n  <li>\n    <p>\n      请解释 MySQL 默认隔离级别与 MVCC（多版本并发控制）之间的关系。\n      提示：说明 MVCC 如何在默认隔离级别下实现并发控制。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((MySQL 默认隔离级别))\n    参考答案\n      可重复读（REPEATABLE READ）\n    详细解释\n      查看默认隔离级别\n        全局事务隔离级别\n        当前会话事务隔离级别\n      可重复读隔离级别的特点\n        同一事务多次读数据结果一致\n        避免不可重复读\n        一定程度解决幻读（InnoDB 引擎）\n      示例说明\n        开启事务\n        两次读取数据结果相同\n        提交事务",
+    "keynote": "MySQL 默认隔离级别：可重复读（REPEATABLE READ）\n查看默认隔离级别：全局和当前会话，不同版本命令有别\n可重复读特点：同一事务读数据结果一致，避不可重复读，InnoDB 一定程度解幻读\n示例：开启事务，两次读数据结果相同后提交事务",
+    "group_id": 13,
+    "kps": [
+      "基础概念"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "杭州智晟未来信息科技",
+      "中国移动",
+      "美团",
+      "武汉某小厂",
+      "杭州数梦工场",
+      "北大信研院",
+      "阿里菜鸟",
+      "快手",
+      "好未来",
+      "拼多多",
+      "网易",
+      "金山",
+      "字节跳动",
+      "百度"
+    ]
+  }
+}

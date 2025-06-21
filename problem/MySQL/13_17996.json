@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "data": {
+    "id": 17996,
+    "name": "<p>如果 MySQL 查询压力大，应该怎么做</p>",
+    "options": null,
+    "answer": "<p>当 MySQL 查询压力大时，可以从以下多个方面进行优化：</p>\n<h3>数据库设计层面</h3>\n<ul>\n  <li><strong>合理设计表结构</strong>\n    <ul>\n      <li>遵循数据库设计范式，减少数据冗余，避免数据不一致问题。例如在设计电商数据库时，将商品信息和订单信息分开存储，避免在订单表中重复存储商品的详细信息。</li>\n      <li>适当反范式化，在一些对查询性能要求极高的场景下，为了减少表连接操作，可以适当增加一些冗余字段。比如在用户订单表中，为了快速获取用户的姓名，可将用户姓名冗余存储在订单表中。</li>\n    </ul>\n  </li>\n  <li><strong>优化索引</strong>\n    <ul>\n      <li>分析查询语句，为经常用于 WHERE 子句、JOIN 条件和 ORDER BY 子句的列创建索引。例如，对于一个查询语句 <code>SELECT * FROM users WHERE age > 18 AND gender = 'male' ORDER BY create_time;</code>，可以在 <code>age</code>、<code>gender</code> 和 <code>create_time</code> 列上创建复合索引。</li>\n      <li>避免创建过多索引，因为索引会占用额外的磁盘空间，并且在数据插入、更新和删除时会增加维护索引的开销。定期清理不再使用的索引。</li>\n    </ul>\n  </li>\n</ul>\n<h3>查询语句优化</h3>\n<ul>\n  <li><strong>优化查询逻辑</strong>\n    <ul>\n      <li>避免使用 SELECT *，只查询需要的列，减少数据传输量。例如，只需要用户的姓名和年龄时，使用 <code>SELECT name, age FROM users;</code> 而不是 <code>SELECT * FROM users;</code>。</li>\n      <li>减少子查询，尽量使用 JOIN 语句替代子查询，因为 JOIN 语句的执行效率通常更高。例如，将 <code>SELECT * FROM orders WHERE user_id IN (SELECT id FROM users WHERE age > 18);</code> 优化为 <code>SELECT o.* FROM orders o JOIN users u ON o.user_id = u.id WHERE u.age > 18;</code>。</li>\n    </ul>\n  </li>\n  <li><strong>分页优化</strong>\n    <ul>\n      <li>对于大数据量的分页查询，使用覆盖索引和记录上次查询的最大 ID 等方式来避免全表扫描。例如，在查询第 10000 页的数据时，使用 <code>SELECT * FROM users WHERE id > 100000 LIMIT 10;</code> 而不是 <code>SELECT * FROM users LIMIT 100000, 10;</code>。</li>\n    </ul>\n  </li>\n</ul>\n<h3>数据库配置优化</h3>\n<ul>\n  <li><strong>调整参数</strong>\n    <ul>\n      <li>增大 <code>innodb_buffer_pool_size</code> 参数，该参数用于设置 InnoDB 存储引擎的缓冲池大小，增大该参数可以减少磁盘 I/O 操作，提高查询性能。例如，将其设置为物理内存的 70% - 80%。</li>\n      <li>调整 <code>max_connections</code> 参数，根据服务器的硬件资源和实际业务需求，合理设置最大连接数，避免过多的连接导致服务器资源耗尽。</li>\n    </ul>\n  </li>\n  <li><strong>优化日志配置</strong>\n    <ul>\n      <li>对于一些对数据安全性要求不是特别高的场景，可以将 <code>sync_binlog</code> 参数设置为大于 1 的值，减少二进制日志的同步次数，提高写入性能。</li>\n      <li>合理配置慢查询日志，将 <code>slow_query_log</code> 开启，并设置合适的 <code>long_query_time</code>，以便及时发现和优化慢查询语句。</li>\n    </ul>\n  </li>\n</ul>\n<h3>数据库架构优化</h3>\n<ul>\n  <li><strong>读写分离</strong>\n    <ul>\n      <li>搭建主从复制架构，将读操作分发到从库，写操作集中在主库。这样可以减轻主库的查询压力，提高系统的并发处理能力。例如，在电商系统中，用户的商品浏览、订单查询等读操作可以在从库上执行，而商品上架、订单创建等写操作在主库上执行。</li>\n    </ul>\n  </li>\n  <li><strong>分库分表</strong>\n    <ul>\n      <li>垂直分表：将一个大表按照列进行拆分，将经常一起查询的列放在一个表中，不常用的列放在另一个表中。例如，将用户表中的基本信息和扩展信息分开存储。</li>\n      <li>水平分表：根据一定的规则（如按照时间、ID 范围等）将一个大表的数据分散到多个小表中。例如，将订单表按照订单创建时间进行分表，每个月的数据存储在一个单独的表中。</li>\n      <li>分库：将不同业务模块的数据存储在不同的数据库中，降低单个数据库的负载。例如，将电商系统的用户数据库、商品数据库和订单数据库分开。</li>\n    </ul>\n  </li>\n</ul>\n<h3>硬件优化</h3>\n<ul>\n  <li><strong>升级硬件</strong>\n    <ul>\n      <li>增加服务器的内存，提高数据库的缓存能力，减少磁盘 I/O 操作。</li>\n      <li>更换高速磁盘，如使用 SSD 磁盘代替传统的 HDD 磁盘，提高数据读写速度。</li>\n      <li>增加 CPU 核心数，提高数据库的并发处理能力。</li>\n    </ul>\n  </li>\n</ul>\n<h3>缓存机制</h3>\n<ul>\n  <li><strong>使用 Redis 等缓存</strong>\n    <ul>\n      <li>将经常查询的数据缓存到 Redis 中，当有查询请求时，先从 Redis 中获取数据，如果缓存中不存在，再从 MySQL 中查询，并将查询结果存入 Redis。例如，在电商系统中，将热门商品的信息缓存到 Redis 中，减少对 MySQL 的查询压力。</li>\n      <li>设置合理的缓存过期时间，避免缓存数据过期后仍然被使用。</li>\n    </ul>\n  </li>\n</ul>",
+    "type": 6,
+    "level": 2,
+    "freq": 0.008605852,
+    "analysis": "<h3>1. 题目核心</h3>\n<ul>\n  <li><strong>问题</strong>：当 MySQL 查询压力大时应采取的措施。</li>\n  <li><strong>考察点</strong>：\n    <ul>\n      <li>对 MySQL 性能优化方法的掌握。</li>\n      <li>数据库架构设计和调优的能力。</li>\n      <li>索引优化、查询优化、配置优化等方面的知识。</li>\n    </ul>\n  </li>\n</ul>\n<h3>2. 背景知识</h3>\n<ul>\n  <li><strong>查询压力大的影响</strong>：会导致响应时间变长、系统吞吐量下降，甚至可能使数据库服务崩溃。</li>\n  <li><strong>常见原因</strong>：查询语句不合理、索引缺失或不合理、数据库配置不匹配、硬件资源不足等。</li>\n</ul>\n<h3>3. 解析</h3>\n<h4>（1）查询优化</h4>\n<ul>\n  <li><strong>分析慢查询</strong>：使用 MySQL 的慢查询日志，找出执行时间长的查询语句。通过 <code>EXPLAIN</code> 关键字分析查询语句的执行计划，查看是否使用了索引、扫描的行数等信息，根据分析结果优化查询语句。</li>\n  <li><strong>优化查询逻辑</strong>：避免使用复杂的子查询，尽量将其转换为 <code>JOIN</code> 操作；减少不必要的 <code>SELECT *</code>，只查询需要的列；合理使用 <code>LIMIT</code> 限制返回的行数。</li>\n</ul>\n<h4>（2）索引优化</h4>\n<ul>\n  <li><strong>创建合适的索引</strong>：根据查询条件和排序规则，为经常使用的列创建索引。例如，对于经常用于 <code>WHERE</code> 子句、<code>JOIN</code> 条件和 <code>ORDER BY</code> 子句的列创建索引。</li>\n  <li><strong>避免过多索引</strong>：过多的索引会增加写操作的开销，并且占用更多的磁盘空间。定期检查并删除不必要的索引。</li>\n</ul>\n<h4>（3）数据库配置优化</h4>\n<ul>\n  <li><strong>调整参数</strong>：根据服务器的硬件资源和业务需求，调整 MySQL 的配置参数。例如，增大 <code>innodb_buffer_pool_size</code> 以提高缓存命中率，调整 <code>max_connections</code> 控制并发连接数。</li>\n  <li><strong>优化存储引擎</strong>：根据业务特点选择合适的存储引擎，如 <code>InnoDB</code> 适合事务处理，<code>MyISAM</code> 适合读多写少的场景。</li>\n</ul>\n<h4>（4）硬件优化</h4>\n<ul>\n  <li><strong>增加内存</strong>：足够的内存可以提高 MySQL 的缓存命中率，减少磁盘 I/O 操作。</li>\n  <li><strong>使用高速存储设备</strong>：如 SSD 硬盘，其读写速度比传统的 HDD 硬盘快很多，可以显著提高数据库的性能。</li>\n  <li><strong>升级 CPU</strong>：对于复杂的查询和高并发场景，性能更好的 CPU 可以提高查询处理速度。</li>\n</ul>\n<h4>（5）架构优化</h4>\n<ul>\n  <li><strong>读写分离</strong>：将读操作和写操作分离到不同的数据库服务器上，减轻主库的压力。可以使用 MySQL 自带的复制功能实现主从复制。</li>\n  <li><strong>分库分表</strong>：当数据量过大时，将数据库和表进行水平或垂直拆分，减少单个数据库和表的数据量，提高查询性能。</li>\n  <li><strong>使用缓存</strong>：在应用层使用缓存技术，如 Redis，缓存经常查询的数据，减少对数据库的访问。</li>\n</ul>\n<h3>4. 示例代码</h3>\n<h4>分析慢查询</h4>\n<pre><code class=\"language-sql\">-- 开启慢查询日志\nSET GLOBAL slow_query_log = 'ON';\nSET GLOBAL long_query_time = 1; -- 设置慢查询时间阈值为 1 秒\n\n-- 分析查询语句\nEXPLAIN SELECT * FROM users WHERE age > 20;\n</code></pre>\n<h4>创建索引</h4>\n<pre><code class=\"language-sql\">-- 为 users 表的 age 列创建索引\nCREATE INDEX idx_age ON users (age);\n</code></pre>\n<h3>5. 常见误区</h3>\n<h4>（1）盲目创建索引</h4>\n<ul>\n  <li>误区：认为创建的索引越多越好，不考虑索引的维护成本和对写操作的影响。</li>\n  <li>纠正：根据实际的查询需求创建索引，定期评估和清理不必要的索引。</li>\n</ul>\n<h4>（2）忽视查询优化</h4>\n<ul>\n  <li>误区：只关注索引和硬件优化，而不重视查询语句本身的优化。</li>\n  <li>纠正：先对查询语句进行优化，确保其逻辑合理，再考虑其他优化措施。</li>\n</ul>\n<h4>（3）过度依赖硬件升级</h4>\n<ul>\n  <li>误区：认为只要不断升级硬件就能解决查询压力大的问题，而不进行数据库层面的优化。</li>\n  <li>纠正：硬件升级是一种解决方案，但应先从数据库本身的优化入手，如查询优化、索引优化等，再考虑硬件升级。</li>\n</ul>\n<h3>6. 总结回答</h3>\n<p>“当 MySQL 查询压力大时，可以从以下几个方面进行优化：</p>\n<ol>\n  <li><strong>查询优化</strong>：通过慢查询日志找出执行时间长的查询语句，使用 <code>EXPLAIN</code> 分析执行计划，优化查询逻辑，避免复杂子查询，减少 <code>SELECT *</code> 的使用。</li>\n  <li><strong>索引优化</strong>：根据查询条件和排序规则创建合适的索引，避免过多索引，定期清理不必要的索引。</li>\n  <li><strong>数据库配置优化</strong>：调整 MySQL 的配置参数，如 <code>innodb_buffer_pool_size</code>、<code>max_connections</code> 等，选择合适的存储引擎。</li>\n  <li><strong>硬件优化</strong>：增加内存、使用高速存储设备、升级 CPU 等，提高数据库的性能。</li>\n  <li><strong>架构优化</strong>：采用读写分离、分库分表、使用缓存等技术，减轻数据库的压力。</li>\n</ol>\n<p>需要注意的是，在进行优化时，应避免盲目创建索引、忽视查询优化和过度依赖硬件升级等误区。”</p>",
+    "more_ask": "<ol>\n  <li>\n    <p>\n      对于读写分离架构，如何保证从库数据的一致性？\n      提示：考虑数据同步机制、延迟监控和处理方法。\n    </p>\n  </li>\n  <li>\n    <p>\n      当使用缓存时，如何处理缓存穿透、缓存击穿和缓存雪崩问题？\n      提示：分别从这三种缓存异常情况的特点去思考应对策略。\n    </p>\n  </li>\n  <li>\n    <p>\n      数据库分库分表后，如何处理跨库跨表的查询？\n      提示：思考全局表、分布式查询算法等方面。\n    </p>\n  </li>\n  <li>\n    <p>\n      优化 SQL 查询时，如何分析 SQL 语句的性能瓶颈？\n      提示：借助数据库提供的分析工具和指标。\n    </p>\n  </li>\n  <li>\n    <p>\n      对于索引优化，如何判断一个索引是否有效？\n      提示：从索引的使用频率、对查询性能的提升等方面考虑。\n    </p>\n  </li>\n  <li>\n    <p>\n      在主从复制环境中，主库和从库的配置参数有哪些需要特别注意的差异？\n      提示：关注与复制、性能相关的参数。\n    </p>\n  </li>\n  <li>\n    <p>\n      采用垂直分表后，如何处理关联查询？\n      提示：思考应用层和数据库层的不同处理方式。\n    </p>\n  </li>\n  <li>\n    <p>\n      当数据库查询压力大时，如何评估是否需要升级硬件？\n      提示：结合数据库性能指标和业务需求来判断。\n    </p>\n  </li>\n  <li>\n    <p>\n      对于查询缓存，在什么场景下适合开启，什么场景下不适合？\n      提示：考虑数据的更新频率和查询的重复性。\n    </p>\n  </li>\n  <li>\n    <p>\n      如何监控 MySQL 数据库的性能，以便及时发现查询压力问题？\n      提示：了解 MySQL 自带的监控工具和第三方监控方案。\n    </p>\n  </li>\n</ol>",
+    "mindmap": "mindmap\n  root((MySQL查询压力大的优化方面))\n    数据库设计层面\n      合理设计表结构\n        遵循数据库设计范式\n        适当反范式化\n      优化索引\n        为常用列创建索引\n        避免过多索引\n    查询语句优化\n      优化查询逻辑\n        避免SELECT *\n        减少子查询\n      分页优化\n        用覆盖索引和记录最大ID\n    数据库配置优化\n      调整参数\n        增大innodb_buffer_pool_size\n        调整max_connections\n      优化日志配置\n        设置sync_binlog大于1\n        配置慢查询日志\n    数据库架构优化\n      读写分离\n        搭建主从复制架构\n      分库分表\n        垂直分表\n        水平分表\n        分库\n    硬件优化\n      升级硬件\n        增加内存\n        更换高速磁盘\n        增加CPU核心数\n    缓存机制\n      使用Redis等缓存\n        缓存经常查询的数据\n        设置合理缓存过期时间",
+    "keynote": "数据库设计层面：合理设计表结构（遵循范式、适当反范式化）；优化索引（为常用列创建、避免过多）\n查询语句优化：优化查询逻辑（避免SELECT *、减少子查询）；分页优化（用覆盖索引和记录最大ID）\n数据库配置优化：调整参数（增大innodb_buffer_pool_size、调整max_connections）；优化日志配置（设置sync_binlog大于1、配置慢查询日志）\n数据库架构优化：读写分离（搭建主从复制架构）；分库分表（垂直分表、水平分表、分库）\n硬件优化：升级硬件（增加内存、更换高速磁盘、增加CPU核心数）\n缓存机制：使用Redis等缓存（缓存经常查询的数据、设置合理过期时间）",
+    "group_id": 13,
+    "kps": [
+      "性能监控与优化",
+      "索引与查询优化"
+    ],
+    "years": [
+      2025,
+      2024,
+      2023,
+      2022
+    ],
+    "corps": [
+      "百度",
+      "华为",
+      "58同城",
+      "玄武云",
+      "腾讯",
+      "真景科技",
+      "叠拓信息技术（成都）",
+      "快手",
+      "阿里大文娱",
+      "浪潮通信",
+      "美团",
+      "百度文库",
+      "京东",
+      "联影集团",
+      "Shopee虾皮",
+      "招银网络科技",
+      "B站",
+      "饿了么",
+      "滴滴",
+      "中国移动",
+      "美团到家",
+      "实在智能"
+    ]
+  }
+}
